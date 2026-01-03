@@ -7,7 +7,6 @@ import {
   renderToReadableStream,
 } from "@vitejs/plugin-rsc/rsc";
 import type { ReactFormState } from "react-dom/client";
-import type * as ssr from "@/framework/entry.ssr.tsx";
 import {
   parseRequest,
   type ReturnValue,
@@ -16,7 +15,6 @@ import {
 } from "rsc-protocol";
 import { isNotFoundErrorLike } from "react-app";
 import { captureException } from "@sentry/deno";
-import type { NonceContext } from "router/csp";
 import { URLResolver } from "route-kit";
 import language from "@/language.json" with { type: "json" };
 import { i18n as i18nConfig } from "~config";
@@ -25,19 +23,13 @@ import { injectRSCPayload } from "rsc-html-stream/server";
 import { HTMLInjectionStream } from "html-stream";
 import { source } from "@/lib/source.ts";
 import { PUBLIC } from "~env";
-import AppShell from "../routes/app_shell.tsx";
-import routes from "../routes/route.ts";
-import type { MiddlewareObject } from "router";
+import AppShell from "@/routes/app_shell.tsx";
+import routes from "@/routes/route.ts";
+import type { HanderContext } from "./type.ts";
 
 const resolver = /* /@__PURE__/ */ new URLResolver(routes);
 
-export interface HanderContext extends Partial<NonceContext> {
-  renderHtmlStream: typeof ssr["renderHtmlStream"];
-  noJs?: boolean;
-  bootstrapScriptContent: string;
-}
-
-export async function handler(
+export default async function handler(
   request: Request,
   context: HanderContext,
 ): Promise<Response> {
@@ -158,26 +150,4 @@ export async function handler(
     .pipeThrough(injectRSCPayload(rscStream2, { nonce }));
 
   return new Response(finalStream, { status, headers });
-}
-
-export class App implements MiddlewareObject<NonceContext> {
-  constructor(
-    public bootstrapScriptContent: string,
-    public renderHtmlStream: HanderContext["renderHtmlStream"],
-  ) {
-  }
-
-  handle(
-    request: Request,
-    ctx: Partial<NonceContext>,
-  ): Response | Promise<Response> {
-    const context = {
-      nonce: ctx.nonce,
-      bootstrapScriptContent: this.bootstrapScriptContent,
-      renderHtmlStream: this.renderHtmlStream,
-      noJs: import.meta.env.DEV,
-    } satisfies HanderContext;
-
-    return handler(request, context);
-  }
 }

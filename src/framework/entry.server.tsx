@@ -6,7 +6,7 @@ import resourceRouter from "@/routers/resource.ts";
 import baseRouter from "@/routers/base.ts";
 import { fromFileUrl } from "@std/path";
 import StaticDir from "router/static-dir";
-import { App } from "@/handlers/app.tsx";
+import App from "@/handlers/app//middleware.ts";
 
 init(sentry);
 
