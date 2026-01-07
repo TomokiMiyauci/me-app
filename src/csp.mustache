@@ -1,5 +1,5 @@
 default-src 'none';
-script-src 'nonce-{{{nonce}}}' 'unsafe-eval' 'self';
+script-src 'nonce-{{{nonce}}}' 'unsafe-eval' 'self' *.googletagmanager.com;
 style-src 'self' 'unsafe-inline' https:;
 img-src https: data: 'self';
 report-uri {{{endpoint}}};
