@@ -1,3 +1,21 @@
+# [1.12.0](https://github.com/TomokiMiyauci/me-new/compare/1.11.0...1.12.0) (2026-01-08)
+
+
+### Bug Fixes
+
+* **router:** fix to router handle method ([9c88808](https://github.com/TomokiMiyauci/me-new/commit/9c8880856da9ecd136ce5eb151cdfedf898f774e))
+
+
+### Features
+
+* add google analytics ([18271aa](https://github.com/TomokiMiyauci/me-new/commit/18271aaa5116518b90fb44043ce7befbeeb8546c))
+* **router:** add callable context type, split next type ([8054eb7](https://github.com/TomokiMiyauci/me-new/commit/8054eb7200efda781803e619da40bc0e8894b4fd))
+* **router:** add routes as public api ([62ca96f](https://github.com/TomokiMiyauci/me-new/commit/62ca96f767ba10808c394a0749072aad4c2c8bbc))
+* **router:** change constructor to accept routes ([1e67fe1](https://github.com/TomokiMiyauci/me-new/commit/1e67fe16cba8401e26b243d13374514fc524aec9))
+* **router:** change handler object interface ([20ef490](https://github.com/TomokiMiyauci/me-new/commit/20ef490a3b77876fac4ceabf4fb819382827391e))
+* **router:** change router to immutable ([16cf6af](https://github.com/TomokiMiyauci/me-new/commit/16cf6af0c19caf200f46e7db855554a7d8eb3421))
+* **router:** export router related types ([1162377](https://github.com/TomokiMiyauci/me-new/commit/116237781b1372bd45b58bd25dc4e9821bbeb86b))
+
 # [1.11.0](https://github.com/TomokiMiyauci/me-new/compare/1.10.0...1.11.0) (2026-01-01)
 
 
