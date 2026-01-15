@@ -97,7 +97,10 @@ export default async function Post(
           body={postPage.bodyRaw && <BodyRaw fragment={postPage.bodyRaw} />}
           image={postPage.coverImage && (
             <figure>
-              <Picture clasName="w-full" fragment={postPage.coverImage} />
+              <Picture
+                clasName="w-full aspect-video object-fit"
+                fragment={postPage.coverImage}
+              />
             </figure>
           )}
         />
