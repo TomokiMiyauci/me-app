@@ -6,6 +6,7 @@ import type { JSX } from "react";
 import CodeBlock, { type CodeBlockFragment } from "./code/code_block.tsx";
 import { PortableText } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
+import Picture from "./picture/picture.tsx";
 
 function Code(
   props: PortableTextTypeComponentProps<CodeBlockFragment>,
@@ -13,8 +14,13 @@ function Code(
   return <CodeBlock fragment={props.value} />;
 }
 
+const types = {
+  code: Code,
+  picture: Picture,
+} satisfies PortableTextReactComponents["types"];
+
 const component = {
-  types: { code: Code },
+  types,
 } satisfies Partial<PortableTextReactComponents>;
 
 export interface BodyRawProps {
