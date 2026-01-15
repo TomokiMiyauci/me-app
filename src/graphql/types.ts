@@ -69,7 +69,7 @@ export type Block = {
   style?: Maybe<Scalars['String']['output']>;
 };
 
-export type BlockOrCodeOrImage = Block | Code | Image;
+export type BlockOrCodeOrPicture = Block | Code | Picture;
 
 export type Blog = Document & {
   __typename?: 'Blog';
@@ -596,6 +596,7 @@ export type Picture = Document & {
   _updatedAt?: Maybe<Scalars['DateTime']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   image?: Maybe<Image>;
+  title?: Maybe<Scalars['String']['output']>;
 };
 
 export type PictureFilter = {
@@ -609,6 +610,7 @@ export type PictureFilter = {
   _updatedAt?: InputMaybe<DatetimeFilter>;
   description?: InputMaybe<StringFilter>;
   image?: InputMaybe<ImageFilter>;
+  title?: InputMaybe<StringFilter>;
 };
 
 export type PictureSorting = {
@@ -620,6 +622,7 @@ export type PictureSorting = {
   _updatedAt?: InputMaybe<SortOrder>;
   description?: InputMaybe<SortOrder>;
   image?: InputMaybe<ImageSorting>;
+  title?: InputMaybe<SortOrder>;
 };
 
 export type Post = Document & {

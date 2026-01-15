@@ -49,7 +49,10 @@ function fragmentToArticleSummaryProps(
     img: coverImage &&
       (
         <figure>
-          <Picture clasName="w-full" fragment={coverImage} />
+          <Picture
+            clasName="w-full aspect-video object-fit"
+            fragment={coverImage}
+          />
         </figure>
       ),
   } satisfies ArticleSummaryProps;

@@ -2,7 +2,6 @@ import type { JSX } from "react";
 import type { PictureFragment } from "./picture.graphql.ts";
 import { Img, type SanityImageObject } from "@biggleszx/react-sanity-image";
 import client from "@/lib/sanity_client.ts";
-import clsx from "clsx";
 import type { SanityAsset } from "@sanity/image-url";
 
 export interface PictureProps {
@@ -23,7 +22,7 @@ export default function Picture(props: PictureProps): JSX.Element {
 
   return (
     <Img
-      className={clsx("aspect-video object-cover", clasName)}
+      className={clasName}
       alt={description ?? undefined}
       client={client}
       image={image}

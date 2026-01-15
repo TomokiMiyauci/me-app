@@ -71,7 +71,10 @@ export default async function Home(props: AppProps): Promise<JSX.Element> {
                   <div className="card bg-base-100 shadow-sm max-w-96">
                     {blog?.coverImage && (
                       <figure>
-                        <Picture clasName="w-full" fragment={blog.coverImage} />
+                        <Picture
+                          clasName="w-full aspect-video object-fit"
+                          fragment={blog.coverImage}
+                        />
                       </figure>
                     )}
                     <div className="card-body">
