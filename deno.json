@@ -95,8 +95,7 @@
     "src/packages/graphql_client",
     "src/packages/web_cache",
     "src/packages/react_meta",
-    "src/packages/isx",
-    "src/packages/react_shiki"
+    "src/packages/isx"
   ],
   "lint": {
     "rules": {
