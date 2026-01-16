@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/TomokiMiyauci/me-new/compare/1.12.0...1.13.0) (2026-01-16)
+
+
+### Features
+
+* render picture in body ([6c73bce](https://github.com/TomokiMiyauci/me-new/commit/6c73bcee908e0abbbea6f06f4d6f868f2f899cb1))
+
 # [1.12.0](https://github.com/TomokiMiyauci/me-new/compare/1.11.0...1.12.0) (2026-01-08)
 
 
