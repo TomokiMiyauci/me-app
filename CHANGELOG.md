@@ -1,3 +1,11 @@
+# [1.14.0](https://github.com/TomokiMiyauci/me-new/compare/1.13.0...1.14.0) (2026-01-19)
+
+
+### Features
+
+* add code block component ([4b5811b](https://github.com/TomokiMiyauci/me-new/commit/4b5811b66a6e685fb74cfe493aa06e88d95066c4))
+* add custom table renderer ([c6c928b](https://github.com/TomokiMiyauci/me-new/commit/c6c928bfa541463539dad16c18c1775b5040faa4))
+
 # [1.13.0](https://github.com/TomokiMiyauci/me-new/compare/1.12.0...1.13.0) (2026-01-16)
 
 
