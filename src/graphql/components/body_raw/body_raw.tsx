@@ -3,20 +3,33 @@ import type {
   PortableTextTypeComponentProps,
 } from "@portabletext/react";
 import type { JSX } from "react";
-import CodeBlock, { type CodeBlockFragment } from "./code/code_block.tsx";
+import type { Code as CodeType } from "@/graphql/types.ts";
+import { CodeBlock, ShikiHighlighter } from "~component";
 import { PortableText } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
 import Picture from "./picture/picture.tsx";
+import Table from "./table/table.tsx";
 
 function Code(
-  props: PortableTextTypeComponentProps<CodeBlockFragment>,
+  props: PortableTextTypeComponentProps<CodeType>,
 ): JSX.Element {
-  return <CodeBlock fragment={props.value} />;
+  const { code, language, filename } = props.value;
+
+  return (
+    <CodeBlock
+      fileName={filename ?? undefined}
+      code={code ?? ""}
+      language={language ?? undefined}
+      highlighter={new ShikiHighlighter()}
+      className="not-prose"
+    />
+  );
 }
 
 const types = {
   code: Code,
   picture: Picture,
+  table: Table,
 } satisfies PortableTextReactComponents["types"];
 
 const component = {

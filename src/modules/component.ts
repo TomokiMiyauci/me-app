@@ -14,3 +14,5 @@ export {
   default as Header,
   type HeaderProps,
 } from "../components/header/header.tsx";
+export { default as CodeBlock } from "../components/code_block/code_block.tsx";
+export { default as ShikiHighlighter } from "../components/code_block/higlighters/shiki.ts";

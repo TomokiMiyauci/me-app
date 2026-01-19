@@ -5,7 +5,7 @@ import type {
   Picture as PictureRaw,
 } from "@/graphql/types.ts";
 import Picture from "@/graphql/components/picture/picture.tsx";
-import type { PictureFragment } from "@/graphql/components//picture/picture.graphql.ts";
+import type { PictureFragment } from "@/graphql/components/picture/picture.graphql.ts";
 import { parseImageRef } from "./util.ts";
 
 interface DocumentReference {
@@ -17,8 +17,11 @@ interface ImageReference extends Pick<ImageRaw, "_type"> {
   asset?: DocumentReference;
 }
 
-interface PictureReference
-  extends Pick<PictureRaw, "description" | "title" | "_type" | "_key"> {
+interface PictureReference extends
+  Pick<
+    PictureRaw,
+    "description" | "title" | "_type" | "_key"
+  > {
   image?: ImageReference;
 }
 
