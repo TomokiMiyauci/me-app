@@ -69,7 +69,7 @@ export type Block = {
   style?: Maybe<Scalars['String']['output']>;
 };
 
-export type BlockOrCodeOrPicture = Block | Code | Picture;
+export type BlockOrCodeOrPictureOrTable = Block | Code | Picture | Table;
 
 export type Blog = Document & {
   __typename?: 'Blog';
@@ -581,6 +581,44 @@ export type LegalDocumentSorting = {
   type?: InputMaybe<SortOrder>;
 };
 
+export type MediaTag = Document & {
+  __typename?: 'MediaTag';
+  /** Date the document was created */
+  _createdAt?: Maybe<Scalars['DateTime']['output']>;
+  /** Document ID */
+  _id?: Maybe<Scalars['ID']['output']>;
+  _key?: Maybe<Scalars['String']['output']>;
+  /** Current document revision */
+  _rev?: Maybe<Scalars['String']['output']>;
+  /** Document type */
+  _type?: Maybe<Scalars['String']['output']>;
+  /** Date the document was last modified */
+  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  name?: Maybe<Slug>;
+};
+
+export type MediaTagFilter = {
+  /** Apply filters on document level */
+  _?: InputMaybe<Sanity_DocumentFilter>;
+  _createdAt?: InputMaybe<DatetimeFilter>;
+  _id?: InputMaybe<IdFilter>;
+  _key?: InputMaybe<StringFilter>;
+  _rev?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+  _updatedAt?: InputMaybe<DatetimeFilter>;
+  name?: InputMaybe<SlugFilter>;
+};
+
+export type MediaTagSorting = {
+  _createdAt?: InputMaybe<SortOrder>;
+  _id?: InputMaybe<SortOrder>;
+  _key?: InputMaybe<SortOrder>;
+  _rev?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+  _updatedAt?: InputMaybe<SortOrder>;
+  name?: InputMaybe<SlugSorting>;
+};
+
 export type Picture = Document & {
   __typename?: 'Picture';
   /** Date the document was created */
@@ -737,6 +775,7 @@ export type RootQuery = {
   Document?: Maybe<Document>;
   Home?: Maybe<Home>;
   LegalDocument?: Maybe<LegalDocument>;
+  MediaTag?: Maybe<MediaTag>;
   Picture?: Maybe<Picture>;
   Post?: Maybe<Post>;
   Redirect?: Maybe<Redirect>;
@@ -750,6 +789,7 @@ export type RootQuery = {
   allDocument: Array<Document>;
   allHome: Array<Home>;
   allLegalDocument: Array<LegalDocument>;
+  allMediaTag: Array<MediaTag>;
   allPicture: Array<Picture>;
   allPost: Array<Post>;
   allRedirect: Array<Redirect>;
@@ -786,6 +826,11 @@ export type RootQueryHomeArgs = {
 
 
 export type RootQueryLegalDocumentArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type RootQueryMediaTagArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -870,6 +915,14 @@ export type RootQueryAllLegalDocumentArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   sort?: InputMaybe<Array<LegalDocumentSorting>>;
   where?: InputMaybe<LegalDocumentFilter>;
+};
+
+
+export type RootQueryAllMediaTagArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  sort?: InputMaybe<Array<MediaTagSorting>>;
+  where?: InputMaybe<MediaTagFilter>;
 };
 
 
@@ -1205,6 +1258,7 @@ export type SanityImageMetadata = {
   location?: Maybe<Geopoint>;
   lqip?: Maybe<Scalars['String']['output']>;
   palette?: Maybe<SanityImagePalette>;
+  thumbHash?: Maybe<Scalars['String']['output']>;
 };
 
 export type SanityImageMetadataFilter = {
@@ -1217,6 +1271,7 @@ export type SanityImageMetadataFilter = {
   location?: InputMaybe<GeopointFilter>;
   lqip?: InputMaybe<StringFilter>;
   palette?: InputMaybe<SanityImagePaletteFilter>;
+  thumbHash?: InputMaybe<StringFilter>;
 };
 
 export type SanityImageMetadataSorting = {
@@ -1229,6 +1284,7 @@ export type SanityImageMetadataSorting = {
   location?: InputMaybe<GeopointSorting>;
   lqip?: InputMaybe<SortOrder>;
   palette?: InputMaybe<SanityImagePaletteSorting>;
+  thumbHash?: InputMaybe<SortOrder>;
 };
 
 export type SanityImagePalette = {
@@ -1351,6 +1407,40 @@ export type StringFilter = {
   /** Checks if the value is not equal to the given input. */
   neq?: InputMaybe<Scalars['String']['input']>;
   nin?: InputMaybe<Array<Scalars['String']['input']>>;
+};
+
+export type Table = {
+  __typename?: 'Table';
+  _key?: Maybe<Scalars['String']['output']>;
+  _type?: Maybe<Scalars['String']['output']>;
+  rows?: Maybe<Array<Maybe<TableRow>>>;
+};
+
+export type TableFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+};
+
+export type TableRow = {
+  __typename?: 'TableRow';
+  _key?: Maybe<Scalars['String']['output']>;
+  _type?: Maybe<Scalars['String']['output']>;
+  cells?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+};
+
+export type TableRowFilter = {
+  _key?: InputMaybe<StringFilter>;
+  _type?: InputMaybe<StringFilter>;
+};
+
+export type TableRowSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
+};
+
+export type TableSorting = {
+  _key?: InputMaybe<SortOrder>;
+  _type?: InputMaybe<SortOrder>;
 };
 
 export type Tag = Document & {

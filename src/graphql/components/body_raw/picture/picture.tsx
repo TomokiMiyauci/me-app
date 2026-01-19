@@ -4,8 +4,8 @@ import type {
   Image as ImageRaw,
   Picture as PictureRaw,
 } from "@/graphql/types.ts";
-import Picture from "@/graphql/components/picture/picture.tsx";
-import type { PictureFragment } from "@/graphql/components//picture/picture.graphql.ts";
+import Picture from "../../picture/picture.tsx";
+import type { PictureFragment } from "../../picture/picture.graphql.ts";
 import { parseImageRef } from "./util.ts";
 
 interface DocumentReference {

@@ -8,6 +8,7 @@ import { CodeBlock, ShikiHighlighter } from "~component";
 import { PortableText } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
 import Picture from "./picture/picture.tsx";
+import Table from "./table/table.tsx";
 
 function Code(
   props: PortableTextTypeComponentProps<CodeType>,
@@ -28,6 +29,7 @@ function Code(
 const types = {
   code: Code,
   picture: Picture,
+  table: Table,
 } satisfies PortableTextReactComponents["types"];
 
 const component = {
