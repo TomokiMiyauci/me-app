@@ -3,9 +3,14 @@ import type { JSX, PropsWithChildren } from "react";
 import type { AppProps } from "@/lib/app.tsx";
 import { Ogp } from "react-ogp";
 import logo from "@/assets/logo.svg?url";
+import { PUBLISHER_ID } from "~env";
 
-export default function Html(props: PropsWithChildren<AppProps>): JSX.Element {
-  const { children, lang, i18n } = props;
+interface HtmlProps extends AppProps {
+  nonce: string | undefined;
+}
+
+export default function Html(props: PropsWithChildren<HtmlProps>): JSX.Element {
+  const { children, lang, i18n, nonce } = props;
   const { t } = i18n;
 
   return (
@@ -26,6 +31,14 @@ export default function Html(props: PropsWithChildren<AppProps>): JSX.Element {
         />
 
         <Ogp siteName={t("site.name")} />
+        {PUBLISHER_ID && (
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${PUBLISHER_ID}`}
+            crossOrigin="anonymous"
+            nonce={nonce}
+          />
+        )}
       </head>
 
       {children}

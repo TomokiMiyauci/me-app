@@ -10,22 +10,17 @@ import { ErrorBoundary, GlobalError } from "react-app";
 export interface AppShellProps {
   app: AppProps;
   entry: Entry | undefined;
+  nonce: string | undefined;
 }
 
-export default function AppShell(
-  props: AppShellProps,
-): JSX.Element {
-  const { entry, app } = props;
+export default function AppShell(props: AppShellProps): JSX.Element {
+  const { entry, app, nonce } = props;
 
   return (
     <ErrorBoundary fallback={<GlobalError />}>
-      <Html {...app}>
+      <Html {...app} nonce={nonce}>
         <ErrorBoundary fallback={<Error {...app} />}>
-          <Router
-            entry={entry}
-            app={app}
-            map={component}
-          />
+          <Router entry={entry} app={app} map={component} />
         </ErrorBoundary>
       </Html>
     </ErrorBoundary>

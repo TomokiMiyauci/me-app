@@ -15,6 +15,7 @@ export const CONTENT_ENDPOINT = /* @__PURE__ */ loadContentEndpoint();
 export const GA_MEASUREMENT_ID = /* @__PURE__ */ Deno.env.get(
   "GA_MEASUREMENT_ID",
 );
+export const PUBLISHER_ID = /* @__PURE__ */ Deno.env.get("PUBLISHER_ID");
 
 export const PUBLIC = {
   SENTRY_ENV,

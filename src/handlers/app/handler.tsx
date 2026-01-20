@@ -84,17 +84,18 @@ export default async function handler(
   const params = resolved?.params ?? {};
   const i18n = createInstance({ lng: lang });
   await i18n.init(i18nConfig);
+  const { nonce } = context;
   const rscPayload = {
     root: (
       <AppShell
         entry={entry}
         app={{ lang, params, origin: url.origin, i18n }}
+        nonce={nonce}
       />
     ),
     formState,
     returnValue,
   } satisfies RscPayload;
-  const { nonce } = context;
   const rscOptions = {
     temporaryReferences,
     onError(e: unknown): string | undefined {
