@@ -1,3 +1,10 @@
+# [1.16.0](https://github.com/TomokiMiyauci/me-new/compare/1.15.0...1.16.0) (2026-01-20)
+
+
+### Features
+
+* add google adsense, env for publisher id ([c1c50fb](https://github.com/TomokiMiyauci/me-new/commit/c1c50fb1721f70525091980e9c564eae963b4983))
+
 # [1.15.0](https://github.com/TomokiMiyauci/me-new/compare/1.14.0...1.15.0) (2026-01-20)
 
 
