@@ -1,3 +1,10 @@
+# [1.15.0](https://github.com/TomokiMiyauci/me-new/compare/1.14.0...1.15.0) (2026-01-20)
+
+
+### Features
+
+* add ads.txt ([e9d3b96](https://github.com/TomokiMiyauci/me-new/commit/e9d3b96def1913726815369d609ef5fd2f78eb8d))
+
 # [1.14.0](https://github.com/TomokiMiyauci/me-new/compare/1.13.0...1.14.0) (2026-01-19)
 
 
