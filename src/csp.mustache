@@ -1,7 +1,4 @@
-default-src 'none';
-script-src 'nonce-{{{nonce}}}' 'unsafe-eval' 'self' *.googletagmanager.com;
-style-src 'self' 'unsafe-inline' https:;
-img-src https: data: 'self';
+script-src 'nonce-{{{nonce}}}' 'unsafe-eval' 'unsafe-inline' 'self' *.googletagmanager.com 'strict-dynamic' https: http:;
 report-uri {{{endpoint}}};
-connect-src ws: https: http:;
-font-src https:;
+object-src 'none';
+base-uri 'none';
