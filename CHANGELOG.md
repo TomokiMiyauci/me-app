@@ -1,3 +1,11 @@
+# [1.17.0](https://github.com/TomokiMiyauci/me-app/compare/1.16.0...1.17.0) (2026-01-24)
+
+
+### Features
+
+* change rsc-protocol ([f4e5fe3](https://github.com/TomokiMiyauci/me-app/commit/f4e5fe3d21f025974bf4fe8ea5567bc006497272))
+* update deps and corresponding to braking change ([3ca20d2](https://github.com/TomokiMiyauci/me-app/commit/3ca20d28416b4477fdf01b1d6b5f093910832631))
+
 # [1.16.0](https://github.com/TomokiMiyauci/me-new/compare/1.15.0...1.16.0) (2026-01-20)
 
 
