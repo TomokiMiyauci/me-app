@@ -33,7 +33,7 @@ export default function GlobalError(
       >
         <div>Caught an unexpected error</div>
         <pre>
-          Error: {props.error?.message ?? '(Unknown)'}
+          Error: {message(props.error, '(Unknown)')}
         </pre>
 
         {props.resetErrorBoundary && (
@@ -51,4 +51,15 @@ export default function GlobalError(
       </body>
     </html>
   );
+}
+
+function message(value: unknown, fallback: string): string {
+  if (
+    value &&
+    typeof value === "object" &&
+    "message" in value &&
+    typeof value.message === "string"
+  ) return value.message;
+
+  return fallback;
 }
