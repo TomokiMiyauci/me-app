@@ -723,50 +723,6 @@ export type PostSorting = {
   title?: InputMaybe<SortOrder>;
 };
 
-export type Redirect = Document & {
-  __typename?: 'Redirect';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  from?: Maybe<Scalars['String']['output']>;
-  permanent?: Maybe<Scalars['Boolean']['output']>;
-  to?: Maybe<Scalars['String']['output']>;
-};
-
-export type RedirectFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  from?: InputMaybe<StringFilter>;
-  permanent?: InputMaybe<BooleanFilter>;
-  to?: InputMaybe<StringFilter>;
-};
-
-export type RedirectSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  from?: InputMaybe<SortOrder>;
-  permanent?: InputMaybe<SortOrder>;
-  to?: InputMaybe<SortOrder>;
-};
-
 export type RootQuery = {
   __typename?: 'RootQuery';
   Author?: Maybe<Author>;
@@ -778,7 +734,6 @@ export type RootQuery = {
   MediaTag?: Maybe<MediaTag>;
   Picture?: Maybe<Picture>;
   Post?: Maybe<Post>;
-  Redirect?: Maybe<Redirect>;
   SanityFileAsset?: Maybe<SanityFileAsset>;
   SanityImageAsset?: Maybe<SanityImageAsset>;
   Tag?: Maybe<Tag>;
@@ -792,7 +747,6 @@ export type RootQuery = {
   allMediaTag: Array<MediaTag>;
   allPicture: Array<Picture>;
   allPost: Array<Post>;
-  allRedirect: Array<Redirect>;
   allSanityFileAsset: Array<SanityFileAsset>;
   allSanityImageAsset: Array<SanityImageAsset>;
   allTag: Array<Tag>;
@@ -841,11 +795,6 @@ export type RootQueryPictureArgs = {
 
 
 export type RootQueryPostArgs = {
-  id: Scalars['ID']['input'];
-};
-
-
-export type RootQueryRedirectArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -939,14 +888,6 @@ export type RootQueryAllPostArgs = {
   offset?: InputMaybe<Scalars['Int']['input']>;
   sort?: InputMaybe<Array<PostSorting>>;
   where?: InputMaybe<PostFilter>;
-};
-
-
-export type RootQueryAllRedirectArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<RedirectSorting>>;
-  where?: InputMaybe<RedirectFilter>;
 };
 
 
