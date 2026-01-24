@@ -5,7 +5,7 @@
  */
 
 import { type JSX, startTransition } from "react";
-import type { FallbackProps } from "react-error-boundary";
+import { type FallbackProps, getErrorMessage } from "react-error-boundary";
 
 export default function GlobalError(
   props: Partial<FallbackProps>,
@@ -33,7 +33,7 @@ export default function GlobalError(
       >
         <div>Caught an unexpected error</div>
         <pre>
-          Error: {message(props.error, '(Unknown)')}
+          Error: {getErrorMessage(props.error) ?? '(Unknown)'}
         </pre>
 
         {props.resetErrorBoundary && (
@@ -51,15 +51,4 @@ export default function GlobalError(
       </body>
     </html>
   );
-}
-
-function message(value: unknown, fallback: string): string {
-  if (
-    value &&
-    typeof value === "object" &&
-    "message" in value &&
-    typeof value.message === "string"
-  ) return value.message;
-
-  return fallback;
 }
