@@ -1,4 +1,4 @@
-import { HEADER_ACTION_ID, RSC_MEDIA_TYPE } from "./constants.ts";
+import { HEADER_ACTION_ID } from "./constants.ts";
 import type { Action } from "./types.ts";
 
 interface Base {
@@ -31,11 +31,10 @@ export type Result =
  */
 export function parseRequest(request: Request): Result {
   const isAction = request.method === "POST";
-  const accept = request.headers.get("accept");
-  const headers = { vary: "accept" } satisfies HeadersInit;
+  const headers = {} satisfies HeadersInit;
+  const url = new URL(request.url);
 
-  // TODO: use parser for accept header
-  if (accept?.includes(RSC_MEDIA_TYPE)) {
+  if (url.searchParams.has("rsc")) {
     const id = request.headers.get(HEADER_ACTION_ID);
 
     if (isAction && typeof id === "string") {

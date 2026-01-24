@@ -16,10 +16,22 @@ export class RscRequest extends Request {
 
     method ??= action ? "POST" : "GET";
 
-    super(input, {
+    const url = normalizeInput(input);
+
+    url.searchParams.append("rsc", "1");
+
+    super(url, {
       headers,
       method,
       ...rest,
     });
   }
+}
+
+function normalizeInput(input: RequestInfo | URL): URL {
+  return typeof input === "string"
+    ? new URL(input)
+    : input instanceof URL
+    ? input
+    : new URL(input.url);
 }
