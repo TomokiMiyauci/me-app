@@ -3,14 +3,14 @@ import { sentry } from "~config";
 import htmlRouter from "@/routers/html.ts";
 import type * as ssr from "./entry.ssr.tsx";
 import resourceRouter from "@/routers/resource.ts";
-import baseRouter from "@/routers/base.ts";
+import { Router } from "router";
 import { fromFileUrl } from "@std/path";
 import StaticDir from "router/static-dir";
 import App from "@/handlers/app//middleware.ts";
 
 init(sentry);
 
-let router = baseRouter
+let router = new Router()
   .use(resourceRouter);
 
 if (import.meta.env.PROD) {
