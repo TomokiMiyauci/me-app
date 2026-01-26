@@ -84,13 +84,11 @@ export default async function handler(
   const params = resolved?.params ?? {};
   const i18n = createInstance({ lng: lang });
   await i18n.init(i18nConfig);
-  const { nonce } = context;
   const rscPayload = {
     root: (
       <AppShell
         entry={entry}
         app={{ lang, params, origin: url.origin, i18n }}
-        nonce={nonce}
       />
     ),
     formState,
@@ -108,7 +106,6 @@ export default async function handler(
         console.error("Uncaough error", e);
       }
     },
-    nonce,
   };
   const rscStream = renderToReadableStream(rscPayload, rscOptions);
 
@@ -130,7 +127,6 @@ export default async function handler(
   // const htmlStream = await renderHtml(<RscPromise promise={promise} />);
   const htmlStream = await renderHtmlStream(rscStream1, {
     formState,
-    nonce: context.nonce,
     bootstrapScriptContent: nojs ? undefined : bootstrapScriptContent,
     onError(): void {
       // noop
@@ -148,7 +144,7 @@ export default async function handler(
     .pipeThrough(new TextEncoderStream())
     // initial RSC stream is injected in HTML stream as <script>...FLIGHT_DATA...</script>
     // using utility made by devongovett https://github.com/devongovett/rsc-html-stream
-    .pipeThrough(injectRSCPayload(rscStream2, { nonce }));
+    .pipeThrough(injectRSCPayload(rscStream2));
 
   return new Response(finalStream, { status, headers });
 }
