@@ -5,12 +5,10 @@ import { Ogp } from "react-ogp";
 import logo from "@/assets/logo.svg?url";
 import { PUBLISHER_ID } from "~env";
 
-interface HtmlProps extends AppProps {
-  nonce: string | undefined;
-}
+interface HtmlProps extends AppProps {}
 
 export default function Html(props: PropsWithChildren<HtmlProps>): JSX.Element {
-  const { children, lang, i18n, nonce } = props;
+  const { children, lang, i18n } = props;
   const { t } = i18n;
 
   return (
@@ -36,7 +34,6 @@ export default function Html(props: PropsWithChildren<HtmlProps>): JSX.Element {
             async
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${PUBLISHER_ID}`}
             crossOrigin="anonymous"
-            nonce={nonce}
           />
         )}
       </head>
