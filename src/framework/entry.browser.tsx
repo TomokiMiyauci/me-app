@@ -22,19 +22,8 @@ import { init, reactErrorHandler } from "@sentry/react";
 import { sentry } from "~config";
 import { Rsc, type RscPayload, RscRequest } from "rsc-protocol";
 import { createCallServer, getRSCStream } from "rsc-protocol/client";
-import { GA_MEASUREMENT_ID } from "~env";
-import analytics from "analytics";
-import googleAnalytics from "@analytics/google-analytics";
 
 init(sentry);
-
-analytics({
-  plugins: [
-    googleAnalytics({
-      measurementIds: [GA_MEASUREMENT_ID],
-    }),
-  ],
-});
 
 setServerCallback(createCallServer({
   createFromFetch,
