@@ -1,6 +1,5 @@
 import { init } from "@sentry/deno";
 import { sentry } from "~config";
-import htmlRouter from "@/routers/html.ts";
 import type * as ssr from "./entry.ssr.tsx";
 import resourceRouter from "@/routers/resource.ts";
 import { fromFileUrl } from "@std/path";
@@ -24,7 +23,7 @@ const bootstrapScriptContent = await import.meta.viteRsc
   .loadBootstrapScriptContent("index");
 
 router = router.use(
-  htmlRouter.use(new App(bootstrapScriptContent, renderHtmlStream)),
+  new App(bootstrapScriptContent, renderHtmlStream),
 );
 
 export default {

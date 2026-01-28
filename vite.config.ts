@@ -11,7 +11,7 @@ import codegen from "vite-plugin-graphql-codegen";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  server: { port: 8000 },
+  server: { port: 8000, open: "/en" },
   envDir: false,
   plugins: [
     rsc({
