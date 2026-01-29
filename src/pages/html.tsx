@@ -3,7 +3,6 @@ import type { JSX, PropsWithChildren } from "react";
 import type { AppProps } from "@/lib/app.tsx";
 import { Ogp } from "react-ogp";
 import logo from "@/assets/logo.svg?url";
-import { PUBLISHER_ID } from "~env";
 
 interface HtmlProps extends AppProps {}
 

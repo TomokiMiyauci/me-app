@@ -11,7 +11,6 @@ function loadContentEndpoint(): string {
 export const SENTRY_DSN = /* @__PURE__ */ Deno.env.get("SENTRY_DSN");
 export const SENTRY_ENV = /* @__PURE__ */ Deno.env.get("SENTRY_ENV");
 export const CONTENT_ENDPOINT = /* @__PURE__ */ loadContentEndpoint();
-export const PUBLISHER_ID = /* @__PURE__ */ Deno.env.get("PUBLISHER_ID");
 
 export const PUBLIC = {
   SENTRY_ENV,
