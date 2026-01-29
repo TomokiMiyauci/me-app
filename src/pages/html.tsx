@@ -29,13 +29,6 @@ export default function Html(props: PropsWithChildren<HtmlProps>): JSX.Element {
         />
 
         <Ogp siteName={t("site.name")} />
-        {PUBLISHER_ID && (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${PUBLISHER_ID}`}
-            crossOrigin="anonymous"
-          />
-        )}
       </head>
 
       {children}
