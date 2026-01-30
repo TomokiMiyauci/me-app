@@ -69,6 +69,7 @@ export default defineConfig({
   build: {
     license: true,
     assetsInlineLimit: 0,
+    sourcemap: true,
   },
   // specify entry point for each environment.
   // (currently the plugin assumes `rollupOptions.input.index` for some features.)
@@ -84,7 +85,6 @@ export default defineConfig({
             main: "./src/framework/entry.server.tsx",
           },
         },
-        sourcemap: true,
         outDir: "dist/server",
       },
       define: {
@@ -105,7 +105,6 @@ export default defineConfig({
             index: "./src/framework/entry.ssr.tsx",
           },
         },
-        sourcemap: true,
       },
     },
 
