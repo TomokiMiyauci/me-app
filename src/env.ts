@@ -12,8 +12,4 @@ export const SENTRY_DSN = /* @__PURE__ */ Deno.env.get("SENTRY_DSN");
 export const SENTRY_ENV = /* @__PURE__ */ Deno.env.get("SENTRY_ENV");
 export const CONTENT_ENDPOINT = /* @__PURE__ */ loadContentEndpoint();
 
-export const PUBLIC = {
-  SENTRY_ENV,
-  SENTRY_DSN,
-  CONTENT_ENDPOINT,
-};
+export const PUBLIC = { CONTENT_ENDPOINT };

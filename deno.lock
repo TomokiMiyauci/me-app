@@ -37,7 +37,6 @@
     "npm:@sanity/image-url@^2.0.3": "2.0.3",
     "npm:@sentry/core@^10.36.0": "10.36.0",
     "npm:@sentry/deno@^10.36.0": "10.36.0",
-    "npm:@sentry/react@^10.36.0": "10.36.0_react@19.2.3",
     "npm:@shikijs/transformers@^3.21.0": "3.21.0",
     "npm:@storybook/addon-a11y@^10.2.0": "10.2.0_storybook@10.2.0__react@19.2.3__react-dom@19.2.3___react@19.2.3_react@19.2.3_react-dom@19.2.3__react@19.2.3",
     "npm:@storybook/addon-docs@^10.2.0": "10.2.0_storybook@10.2.0__react@19.2.3__react-dom@19.2.3___react@19.2.3_@types+react@19.2.9_react@19.2.3_rollup@4.53.3_vite@7.3.1__@types+node@24.10.4__picomatch@4.0.3_react-dom@19.2.3__react@19.2.3_@types+node@24.10.4",
@@ -1818,42 +1817,6 @@
         "@noble/hashes"
       ]
     },
-    "@sentry-internal/browser-utils@10.36.0": {
-      "integrity": "sha512-WILVR8HQBWOxbqLRuTxjzRCMIACGsDTo6jXvzA8rz6ezElElLmIrn3CFAswrESLqEEUa4CQHl5bLgSVJCRNweA==",
-      "dependencies": [
-        "@sentry/core"
-      ]
-    },
-    "@sentry-internal/feedback@10.36.0": {
-      "integrity": "sha512-zPjz7AbcxEyx8AHj8xvp28fYtPTPWU1XcNtymhAHJLS9CXOblqSC7W02Jxz6eo3eR1/pLyOo6kJBUjvLe9EoFA==",
-      "dependencies": [
-        "@sentry/core"
-      ]
-    },
-    "@sentry-internal/replay-canvas@10.36.0": {
-      "integrity": "sha512-DLGIwmT2LX+O6TyYPtOQL5GiTm2rN0taJPDJ/Lzg2KEJZrdd5sKkzTckhh2x+vr4JQyeaLmnb8M40Ch1hvG/vQ==",
-      "dependencies": [
-        "@sentry-internal/replay",
-        "@sentry/core"
-      ]
-    },
-    "@sentry-internal/replay@10.36.0": {
-      "integrity": "sha512-nLMkJgvHq+uCCrQKV2KgSdVHxTsmDk0r2hsAoTcKCbzUpXyW5UhCziMRS6ULjBlzt5sbxoIIplE25ZpmIEeNgg==",
-      "dependencies": [
-        "@sentry-internal/browser-utils",
-        "@sentry/core"
-      ]
-    },
-    "@sentry/browser@10.36.0": {
-      "integrity": "sha512-yHhXbgdGY1s+m8CdILC9U/II7gb6+s99S2Eh8VneEn/JG9wHc+UOzrQCeFN0phFP51QbLkjkiQbbanjT1HP8UQ==",
-      "dependencies": [
-        "@sentry-internal/browser-utils",
-        "@sentry-internal/feedback",
-        "@sentry-internal/replay",
-        "@sentry-internal/replay-canvas",
-        "@sentry/core"
-      ]
-    },
     "@sentry/core@10.36.0": {
       "integrity": "sha512-EYJjZvofI+D93eUsPLDIUV0zQocYqiBRyXS6CCV6dHz64P/Hob5NJQOwPa8/v6nD+UvJXvwsFfvXOHhYZhZJOQ=="
     },
@@ -1862,14 +1825,6 @@
       "dependencies": [
         "@opentelemetry/api",
         "@sentry/core"
-      ]
-    },
-    "@sentry/react@10.36.0_react@19.2.3": {
-      "integrity": "sha512-k2GwMKgepJLXvEQffQymQyxsTVjsLiY6YXG0bcceM3vulii9Sy29uqGhpqwaPOfM4bPQzUXJzAxS/c9S7n5hTw==",
-      "dependencies": [
-        "@sentry/browser",
-        "@sentry/core",
-        "react"
       ]
     },
     "@shikijs/core@3.21.0": {
@@ -5450,7 +5405,6 @@
         "npm:@sanity/image-url@^2.0.3",
         "npm:@sentry/core@^10.36.0",
         "npm:@sentry/deno@^10.36.0",
-        "npm:@sentry/react@^10.36.0",
         "npm:@shikijs/transformers@^3.21.0",
         "npm:@storybook/addon-a11y@^10.2.0",
         "npm:@storybook/addon-docs@^10.2.0",
