@@ -18,12 +18,8 @@ import {
 } from "@vitejs/plugin-rsc/browser";
 import { type JSX, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
-import { init, reactErrorHandler } from "@sentry/react";
-import { sentry } from "~config";
 import { Rsc, type RscPayload, RscRequest } from "rsc-protocol";
 import { createCallServer, getRSCStream } from "rsc-protocol/client";
-
-init(sentry);
 
 setServerCallback(createCallServer({
   createFromFetch,
@@ -47,16 +43,6 @@ const root = hydrateRoot(
   <Root payload={initialPayload} />,
   {
     formState: initialPayload.formState,
-    // Callback called when an error is thrown and not caught by an ErrorBoundary.
-    onUncaughtError: reactErrorHandler((error, errorInfo) => {
-      console.error("Uncaught error", error, errorInfo.componentStack);
-    }),
-    // Callback called when React catches an error in an ErrorBoundary.
-    onCaughtError: () => {
-      // noop
-    },
-    // Callback called when React automatically recovers from errors.
-    onRecoverableError: reactErrorHandler(),
   },
 );
 
