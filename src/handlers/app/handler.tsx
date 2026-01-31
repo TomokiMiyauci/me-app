@@ -14,7 +14,6 @@ import {
   RscResponse,
 } from "rsc-protocol";
 import { isNotFoundErrorLike } from "react-app";
-import { captureException } from "@sentry/deno";
 import { URLResolver } from "route-kit";
 import language from "@/language.json" with { type: "json" };
 import { i18n as i18nConfig } from "~config";
@@ -57,7 +56,6 @@ export default async function handler(
       } catch (e) {
         returnValue = { ok: false, error: e };
         actionStatus = 500;
-        captureException(e);
         console.error("Uncatch error", e);
       }
     } else {
@@ -101,7 +99,6 @@ export default async function handler(
         status = 404;
         return e.digest;
       } else {
-        captureException(e);
         status = 500;
         console.error("Uncaough error", e);
       }

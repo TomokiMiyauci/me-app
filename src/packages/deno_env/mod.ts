@@ -1,3 +1,4 @@
+/// <reference lib="deno.ns" />
 /**
  * Mock for Deno.env
  */

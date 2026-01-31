@@ -36,15 +36,27 @@ jobs:
           artifact-ids: ${{ needs.build.outputs.artifact-id }}
           path: dist
 
+      - name: Upload Version
+        id: upload_version
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: versions upload --name ${{ vars.WORKER_NAME }}
+
+      - name: Debug
+        run: echo ${{ fromJSON(steps.upload_version.outputs.command-output).id }}
+
+      - name: Parse Version ID
+        id: parse
+        run: echo "id=${{ fromJSON(steps.upload_version.outputs.command-output).id }}" >> $GITHUB_OUTPUT
+
       - name: Deploy
-        run: |
-          deno deploy \
-            --org=${{ vars.ORG }} \
-            --app=${{ vars.APP }} \
-            --token=${{ secrets.DEPLOY_TOKEN }} \
-            --no-wait \
-            ${{ matrix.prod && '--prod' || '' }} \
-            ${{ steps.download-artifact.outputs.download-path }}
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: versions deploy ${{ steps.parse.outputs.id }}@100%
 
   publish:
     needs: [build, deploy]

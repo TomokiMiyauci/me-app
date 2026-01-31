@@ -7,10 +7,12 @@
       "vite/client",
       "@vitejs/plugin-rsc/types",
       "vite-plugin-rsc-assets-manifest/types",
-      "vite-plugin-manifest/types"
+      "vite-plugin-manifest/types",
+      "@cloudflare/workers-types"
     ],
     "noUncheckedIndexedAccess": true,
-    "noPropertyAccessFromIndexSignature": true
+    "noPropertyAccessFromIndexSignature": true,
+    "lib": ["esnext", "dom.iterable"]
   },
   "tasks": {
     "lint": {
@@ -35,7 +37,7 @@
     },
     "dev": "deno run -P=dev --allow-net --env-file vite dev",
     "build": "deno run -P=build vite build --manifest",
-    "preview": "deno serve -P=preview --allow-net --env-file --no-npm --no-remote dist/server/main.js",
+    "preview": "deno run -P=preview --allow-net --env-file vite preview",
     "generate:graphql": "deno run -A @graphql-codegen/cli/graphql-codegen-esm --config .graphqlrc",
     "storybook": "deno x storybook dev",
     "build:storybook": "deno x storybook build"
@@ -59,8 +61,12 @@
       "net": true
     },
     "preview": {
-      "read": ["dist"],
-      "env": true
+      "read": true,
+      "env": true,
+      "sys": true,
+      "ffi": true,
+      "write": true,
+      "run": true
     }
   },
   "imports": {
