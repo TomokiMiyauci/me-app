@@ -9,6 +9,11 @@
     "./trailing-slash": "./src/middleware/trailing_slash.ts",
     "./static-dir": "./src/middleware/static_dir.ts"
   },
+  "compilerOptions": {
+    "lib": [
+      "deno.window"
+    ]
+  },
   "imports": {
     "@/": "./src/",
     "@std/fs": "jsr:@std/fs@^1.0.21",

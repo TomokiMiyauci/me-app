@@ -41,7 +41,9 @@ export class GraphQLClient {
       throw new Error();
     }
 
-    const json = await response.json();
+    // TODO(miyauci) add validation
+    // deno-lint-ignore no-explicit-any
+    const json = await response.json() as any;
 
     return json.data;
   }
