@@ -56,11 +56,11 @@ jobs:
       - name: Parse Id
         id: list_parser
         env:
-            RAW_JSON: ${{ steps.version_list.outputs.command-output }}
+          RAW_JSON: ${{ steps.version_list.outputs.command-output }}
         run: |
-            LAST_ID=$(echo "$RAW_JSON" | jq -r '.[-1].id')
+          LAST_ID=$(echo "$RAW_JSON" | jq -r '.[-1].id')
 
-            echo "id=$LAST_ID" >> $GITHUB_OUTPUT
+          echo "id=$LAST_ID" >> $GITHUB_OUTPUT
 
       - name: Debug
         run: echo ${{ steps.list_parser.outputs.id }}
