@@ -1,3 +1,11 @@
+# [1.18.0](https://github.com/TomokiMiyauci/me-app/compare/1.17.0...1.18.0) (2026-01-31)
+
+
+### Features
+
+* change runtime to cloudflare workers ([dea7c37](https://github.com/TomokiMiyauci/me-app/commit/dea7c37a0febb9e82978940bfccc0df601e9ad8d))
+* switch highlighter to highlight.js ([6f0dde8](https://github.com/TomokiMiyauci/me-app/commit/6f0dde8143567268f1ca30ae9284ef7111932dea))
+
 # [1.17.0](https://github.com/TomokiMiyauci/me-app/compare/1.16.0...1.17.0) (2026-01-24)
 
 
