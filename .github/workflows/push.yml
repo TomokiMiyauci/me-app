@@ -32,7 +32,7 @@ jobs:
           cache: true
 
       - run: deno install
-      
+
       - name: Download artifact
         id: download-artifact
         uses: actions/download-artifact@v7
