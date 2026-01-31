@@ -13,8 +13,6 @@
     "@rollup/plugin-inject": "^5.0.5",
     "@sanity/client": "^7.14.1",
     "@sanity/image-url": "^2.0.3",
-    "@sentry/core": "^10.36.0",
-    "@sentry/deno": "^10.36.0",
     "@shikijs/transformers": "^3.21.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
