@@ -55,7 +55,10 @@ jobs:
 
       - name: Parse Id
         id: list_parser
-        run: echo "id=${{ fromJson(steps.version_list.outputs.command-output)[0].id }}" >> $GITHUB_OUTPUT
+        run: |
+            LAST_ID=$(echo "${{ steps.version_list.outputs.command-output }}" | jq -r '.[-1].id')
+
+            echo "id=$LAST_ID" >> $GITHUB_OUTPUT
 
       - name: Debug
         run: echo ${{ steps.list_parser.outputs.id }}
