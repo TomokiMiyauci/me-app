@@ -100,6 +100,7 @@ export default defineConfig({
     // - traditional SSR (React VDOM -> HTML string/stream)
     ssr: {
       build: {
+        outDir: "dist/server/rsc",
         rollupOptions: {
           input: {
             index: "./src/framework/entry.ssr.tsx",
