@@ -33,6 +33,7 @@ export default defineConfig({
         // Define `ssr` as a child environment so that it runs in the same Worker as the parent `rsc` environment
         childEnvironments: ["ssr"],
       },
+      config: { main: "./src/framework/entry.rsc.tsx" },
     }),
 
     // use any of react plugins https://github.com/vitejs/vite-plugin-react

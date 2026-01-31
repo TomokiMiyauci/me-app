@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/wrangler@4.61.1/config-schema.json",
-  "main": "src/framework/entry.rsc.tsx",
+  "main": "dist/rsc/index.js",
   "compatibility_date": "2025-10-01",
   "compatibility_flags": ["nodejs_compat"],
   "assets": {

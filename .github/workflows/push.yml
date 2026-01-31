@@ -41,26 +41,35 @@ jobs:
           path: dist
 
       - name: Upload Version
-        id: upload_version
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: versions upload --name ${{ vars.WORKER_NAME }}
 
-      - name: Debug
-        run: echo ${{ fromJSON(steps.upload_version.outputs.command-output).id }}
+      - name: Get Latest Version ID
+        id: version_list
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: versions list --name ${{ vars.WORKER_NAME }} --json
 
-      - name: Parse Version ID
-        id: parse
-        run: echo "id=${{ fromJSON(steps.upload_version.outputs.command-output).id }}" >> $GITHUB_OUTPUT
+      - name: Parse Id
+        id: list_parser
+        env:
+          RAW_JSON: ${{ steps.version_list.outputs.command-output }}
+        run: |
+          LAST_ID=$(echo "$RAW_JSON" | jq -r '.[-1].id')
+
+          echo "id=$LAST_ID" >> $GITHUB_OUTPUT
 
       - name: Deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: versions deploy ${{ steps.parse.outputs.id }}@100%
+          command: versions deploy ${{ steps.list_parser.outputs.id }}@100% --name ${{ vars.WORKER_NAME }} -y
 
   publish:
     needs: [build, deploy]
