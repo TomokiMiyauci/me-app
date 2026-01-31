@@ -27,11 +27,9 @@ export default function CodeBlock(props: CodeBlockProps): JSX.Element {
           </header>
         )}
 
-      <div
-        className="overflow-scroll"
-        dangerouslySetInnerHTML={{ __html: highlighted }}
-      >
-      </div>
+      <pre className="overflow-scroll">
+        <code dangerouslySetInnerHTML={{ __html: highlighted }} />
+      </pre>
     </div>
   );
 }
