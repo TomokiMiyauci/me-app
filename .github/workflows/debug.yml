@@ -47,7 +47,7 @@ jobs:
           command: versions upload --name ${{ vars.WORKER_NAME }}
 
       - name: Debug
-        run: echo ${{ fromJSON(steps.upload_version.outputs.command-output).id }}
+        run: echo ${{ steps.upload_version.outputs.command-output }}
 
       - name: Parse Version ID
         id: parse
