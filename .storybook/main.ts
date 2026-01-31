@@ -1,4 +1,34 @@
 import type { StorybookConfig } from "@storybook/react-vite";
+import type { Plugin, PluginOption } from "vite";
+
+const ignorePatterns = [
+  /^vite-plugin-cloudflare/,
+  /^rsc/,
+];
+
+async function normalizePluginOptions(
+  options: PluginOption,
+): Promise<Plugin[]> {
+  if (options instanceof Promise) {
+    const awaited = await options;
+
+    return normalizePluginOptions(awaited);
+  }
+
+  if (Array.isArray(options)) {
+    const promise = options.map((opt) => normalizePluginOptions(opt));
+
+    const optionsList = await Promise.all(promise);
+
+    return optionsList.flat();
+  }
+
+  if (!options) {
+    throw new Error("invalid plugin");
+  }
+
+  return [options];
+}
 
 export default {
   stories: [
@@ -10,24 +40,16 @@ export default {
     "@storybook/addon-docs",
   ],
   framework: "@storybook/react-vite",
-  viteFinal: (config) => {
-    const plugins = config.plugins?.filter((plugin) => {
-      if (Array.isArray(plugin)) {
-        // Fileter rsc plugin
-        const [first] = plugin;
+  viteFinal: async (config) => {
+    const plugins = await normalizePluginOptions(config.plugins ?? []);
 
-        if (first && "name" in first && first.name.includes("rsc")) {
-          return false;
-        }
-      }
-
-      return plugin;
+    const filtered = plugins.filter((plugin) => {
+      return ignorePatterns.every((pattern) => !pattern.test(plugin.name));
     });
-    console.log(plugins);
 
     // Disabled Environment API and rsc plugins
     config.environments = {};
-    config.plugins = plugins;
+    config.plugins = filtered;
 
     return config;
   },
