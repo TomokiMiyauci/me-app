@@ -65,4 +65,4 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: versions deploy ${{ steps.list_parser.outputs.id }}@100% --name ${{ vars.WORKER_NAME }}
+          command: versions deploy ${{ steps.list_parser.outputs.id }}@100% --name ${{ vars.WORKER_NAME }} -y
