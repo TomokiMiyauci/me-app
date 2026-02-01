@@ -133,9 +133,6 @@ export default async function handler(
   const headers = new Headers(result.headers);
   headers.set("content-type", "text/html;charset=utf-8");
 
-  // TODO for testing, remove it later
-  headers.set("cache-control", "public, max-age=60, s-maxage=60");
-
   const finalStream = nojs ? htmlStream : htmlStream
     .pipeThrough(new TextDecoderStream())
     .pipeThrough(
