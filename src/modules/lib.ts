@@ -1,1 +1,1 @@
-export { default as apolloClient } from "../lib/apollo_client.ts";
+export { default as gqlClient } from "../lib/graphql_request.ts";

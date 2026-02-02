@@ -7,21 +7,17 @@ import type { AppProps } from "@/lib/app.tsx";
 import language from "@/language.json" with { type: "json" };
 import Layout from "@/pages/layout.tsx";
 import { notFound } from "react-app";
-import { apolloClient } from "~lib";
+import { gqlClient } from "~lib";
 import PostsMeta from "./meta/meta.tsx";
 
 export default async function Posts(props: AppProps): Promise<JSX.Element> {
   const { lang, origin } = props;
   const [result, blogByLangQuery] = await Promise.all([
-    apolloClient.query({ query: ArticlesByLangDocument, variables: { lang } }),
-    apolloClient.query({ query: BlogByLangDocument, variables: { lang } }),
+    gqlClient.request(ArticlesByLangDocument, { lang }),
+    gqlClient.request(BlogByLangDocument, { lang }),
   ]);
 
-  if (!blogByLangQuery.data) {
-    throw new Error(blogByLangQuery.error?.message);
-  }
-
-  const blog = blogByLangQuery.data.blogs[0];
+  const blog = blogByLangQuery.blogs[0];
 
   if (!blog) notFound();
 
@@ -49,7 +45,7 @@ export default async function Posts(props: AppProps): Promise<JSX.Element> {
 
         <section>
           <ul className="mx-auto mt-10 grid max-w-2xl grid-cols-1 sm:grid-cols-2 border-t border-gray-200 gap-x-8 gap-y-16 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {result.data?.articles.map((article) => {
+            {result.articles.map((article) => {
               const slug = article.slug?.current ?? "";
               const href = resolver.resolve(Entry.Post, { slug, lang });
 
