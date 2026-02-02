@@ -11,7 +11,7 @@ import Entry from "@/routes/entry.ts";
 import { Article } from "~component";
 import Layout from "@/pages/layout.tsx";
 import PostMeta from "./meta/meta.tsx";
-import { apolloClient } from "~lib";
+import { gqlClient } from "~lib";
 import BodyRaw from "@/graphql/components/body_raw//body_raw.tsx";
 import Picture from "@/graphql/components/picture/picture.tsx";
 
@@ -26,32 +26,23 @@ export default async function Post(
   }
 
   const decodedSlug = decodeURIComponent(slug);
-  const result = await apolloClient.query({
-    query: PostBySlugDocument,
-    variables: { slug: decodedSlug, lang },
+  const result = await gqlClient.request(PostBySlugDocument, {
+    slug: decodedSlug,
+    lang,
   });
 
-  if (!result.data) {
-    throw new Error(result.error?.message);
-  }
-
-  const postPage = result.data.allPost[0];
+  const postPage = result.allPost[0];
   const id = postPage?.id;
 
   if (!postPage || !id) notFound();
 
-  const translationsQuery = await apolloClient.query({
-    query: TranslationBySlugDocument,
-    variables: { id },
+  const translationsQuery = await gqlClient.request(TranslationBySlugDocument, {
+    id,
   });
-
-  if (!translationsQuery.data) {
-    throw new Error(translationsQuery.error?.message);
-  }
 
   const title = postPage.title ?? "";
 
-  const normalized = normalizeTranslation(translationsQuery.data);
+  const normalized = normalizeTranslation(translationsQuery);
 
   const alternatives = normalized.map(({ slug, language }) => {
     return {

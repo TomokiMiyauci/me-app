@@ -2,7 +2,7 @@ import type { JSX } from "react";
 import type { AppProps } from "@/lib/app.tsx";
 import Layout from "@/pages/layout.tsx";
 import { PrivacyPolicyDocument } from "./privacy_policy.graphql.ts";
-import { apolloClient } from "~lib";
+import { gqlClient } from "~lib";
 import { notFound } from "react-app";
 import { PortableText } from "@portabletext/react";
 import language from "@/language.json" with { type: "json" };
@@ -14,16 +14,9 @@ export default async function PrivacyPolicy(
 ): Promise<JSX.Element> {
   const { lang, i18n } = props;
 
-  const queryResult = await apolloClient.query({
-    query: PrivacyPolicyDocument,
-    variables: { lang },
-  });
+  const queryResult = await gqlClient.request(PrivacyPolicyDocument, { lang });
 
-  if (!queryResult.data) {
-    throw new Error(queryResult.error?.message);
-  }
-
-  const doc = queryResult.data.allLegalDocument[0];
+  const doc = queryResult.allLegalDocument[0];
 
   if (!doc) notFound();
   const { t } = i18n;

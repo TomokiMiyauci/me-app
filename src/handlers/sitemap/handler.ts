@@ -4,7 +4,7 @@ import {
   SitemapStream,
   streamToPromise,
 } from "sitemap";
-import { apolloClient } from "~lib";
+import { gqlClient } from "~lib";
 import language from "@/language.json" with { type: "json" };
 import Entry from "@/routes/entry.ts";
 import resolver from "@/lib/link.ts";
@@ -53,13 +53,9 @@ async function* getPathnames(): AsyncIterable<string> {
 
   yield* pathnames;
 
-  const queryResult = await apolloClient.query({ query: PostSlugsDocument });
+  const queryResult = await gqlClient.request(PostSlugsDocument);
 
-  if (!queryResult.data) {
-    throw new Error(queryResult.error?.message);
-  }
-
-  for (const post of queryResult.data.posts) {
+  for (const post of queryResult.posts) {
     if (
       post.slug?.current && post.lang && language.languages.includes(post.lang)
     ) {
