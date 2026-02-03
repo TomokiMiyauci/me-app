@@ -5911,8 +5911,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@miyauci/material-react@^1.0.0-beta.24",
-      "jsr:@std/assert@^1.0.17",
-      "jsr:@std/path@^1.1.4"
+      "jsr:@std/assert@^1.0.17"
     ],
     "packageJson": {
       "dependencies": [
@@ -6002,7 +6001,8 @@
       "src/packages/router": {
         "dependencies": [
           "jsr:@std/fs@^1.0.21",
-          "jsr:@std/http@^1.0.22"
+          "jsr:@std/http@^1.0.22",
+          "jsr:@std/path@^1.1.4"
         ]
       },
       "src/packages/vite_node_env": {
@@ -6014,6 +6014,7 @@
         "dependencies": [
           "jsr:@deno/loader@~0.3.10",
           "jsr:@miyauci/format@^1.1.0",
+          "jsr:@std/path@^1.1.4",
           "npm:rollup@^4.53.3",
           "npm:vite@^7.2.6"
         ]
