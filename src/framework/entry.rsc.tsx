@@ -1,8 +1,10 @@
 import type * as ssr from "./entry.ssr.tsx";
-import resourceRouter from "@/routers/resource.ts";
 import App from "@/handlers/app//middleware.ts";
+import { Router } from "router";
+import sitemap from "@/handlers/sitemap/handler.ts";
 
-let router = resourceRouter;
+let router = new Router()
+  .get("/sitemap.xml", sitemap);
 
 const { renderHtmlStream } = await import.meta.viteRsc.loadModule<
   typeof ssr
