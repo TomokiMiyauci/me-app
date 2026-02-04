@@ -3,8 +3,6 @@
   "dependencies": {
     "@apollo/client": "^4.1.2",
     "@biggleszx/react-sanity-image": "^1.0.0",
-    "@cloudflare/vite-plugin": "^1.22.1",
-    "@cloudflare/workers-types": "^4.20260131.0",
     "@graphql-codegen/add": "^6.0.0",
     "@graphql-codegen/cli": "^6.1.1",
     "@graphql-codegen/near-operation-file-preset": "^4.0.0",
@@ -38,8 +36,7 @@
     "storybook": "^10.2.0",
     "tailwindcss": "^4.1.18",
     "vite": "^7.3.1",
-    "vite-plugin-graphql-codegen": "^3.8.0",
-    "wrangler": "^4.61.1"
+    "vite-plugin-graphql-codegen": "^3.8.0"
   },
   "devDependencies": {
     "@types/react": "^19.2.9",

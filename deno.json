@@ -7,8 +7,7 @@
       "vite/client",
       "@vitejs/plugin-rsc/types",
       "vite-plugin-rsc-assets-manifest/types",
-      "vite-plugin-manifest/types",
-      "@cloudflare/workers-types"
+      "vite-plugin-manifest/types"
     ],
     "noUncheckedIndexedAccess": true,
     "noPropertyAccessFromIndexSignature": true,
