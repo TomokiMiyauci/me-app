@@ -9,7 +9,6 @@ import { nodeScheme } from "vite-node-scheme";
 import deno from "vite-plugin-deno";
 import codegen from "vite-plugin-graphql-codegen";
 import tailwindcss from "@tailwindcss/vite";
-import { cloudflare } from "@cloudflare/vite-plugin";
 
 export default defineConfig({
   server: { port: 8000, open: "/en" },
@@ -22,18 +21,9 @@ export default defineConfig({
       // by default, the plugin setup request handler based on `default export` of `rsc` environment `rollupOptions.input.index`.
       // This can be disabled when setting up own server handler e.g. `@cloudflare/vite-plugin`.
       // > serverHandler: false
-      serverHandler: false,
       copyServerAssetsToClient: (fileName) => {
         return !fileName.endsWith(".map");
       },
-    }),
-    cloudflare({
-      viteEnvironment: {
-        name: "rsc",
-        // Define `ssr` as a child environment so that it runs in the same Worker as the parent `rsc` environment
-        childEnvironments: ["ssr"],
-      },
-      config: { main: "./src/framework/entry.rsc.tsx" },
     }),
 
     // use any of react plugins https://github.com/vitejs/vite-plugin-react
@@ -80,6 +70,21 @@ export default defineConfig({
   // specify entry point for each environment.
   // (currently the plugin assumes `rollupOptions.input.index` for some features.)
   environments: {
+    rsc: {
+      build: {
+        rollupOptions: {
+          input: {
+            index: "./src/framework/entry.rsc.tsx",
+          },
+        },
+      },
+      define: {
+        // Patch for "@std/http".
+        // This module contains code that includes `import.meta.main`, which causes issues when bundled.
+        "import.meta.main": false,
+      },
+    },
+
     ssr: {
       build: {
         // build `ssr` inside `rsc` directory so that

@@ -5911,7 +5911,8 @@
   "workspace": {
     "dependencies": [
       "jsr:@miyauci/material-react@^1.0.0-beta.24",
-      "jsr:@std/assert@^1.0.17"
+      "jsr:@std/assert@^1.0.17",
+      "jsr:@std/path@^1.1.4"
     ],
     "packageJson": {
       "dependencies": [
