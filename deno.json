@@ -10,8 +10,7 @@
       "vite-plugin-manifest/types"
     ],
     "noUncheckedIndexedAccess": true,
-    "noPropertyAccessFromIndexSignature": true,
-    "lib": ["esnext", "dom.iterable"]
+    "noPropertyAccessFromIndexSignature": true
   },
   "tasks": {
     "lint": {
