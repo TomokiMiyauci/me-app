@@ -1,3 +1,11 @@
+# [1.19.0](https://github.com/TomokiMiyauci/me-app/compare/1.18.0...1.19.0) (2026-02-04)
+
+
+### Features
+
+* change base runtime to deno ([2d3a06d](https://github.com/TomokiMiyauci/me-app/commit/2d3a06d3d82f04e47262cb7693d3c3445f9b5215))
+* change grapqhl client to graphql-request, remove inmemory caching ([2cfca8f](https://github.com/TomokiMiyauci/me-app/commit/2cfca8f34b8dea4f802c1335550d967c1b3fbe42))
+
 # [1.18.0](https://github.com/TomokiMiyauci/me-app/compare/1.17.0...1.18.0) (2026-01-31)
 
 
