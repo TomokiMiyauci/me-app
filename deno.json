@@ -120,11 +120,5 @@
         "verbatim-module-syntax"
       ]
     }
-  },
-  "deploy": {
-    "runtime": {
-      "entrypoint": "rsc/index.js",
-      "mode": "dynamic"
-    }
   }
 }
