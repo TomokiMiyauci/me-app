@@ -42,8 +42,8 @@ jobs:
             --org=${{ vars.ORG }} \
             --app=${{ vars.APP }} \
             --token=${{ secrets.DEPLOY_TOKEN }} \
+            --prod \
             --no-wait \
-            ${{ matrix.prod && '--prod' || '' }} \
             ${{ steps.download-artifact.outputs.download-path }}
 
   publish:
