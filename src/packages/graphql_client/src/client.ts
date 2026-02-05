@@ -31,7 +31,7 @@ export class GraphQLClient {
       variables: variables && JSON.stringify(variables),
     }, { method: "GET" });
 
-    const response = await this.exec(request);
+    const response = await this.fetch(request);
 
     if (!response.ok) {
       throw new Error();
@@ -48,7 +48,7 @@ export class GraphQLClient {
     return json.data;
   }
 
-  exec(request: Request): Promise<Response> {
+  fetch(request: Request): Promise<Response> {
     return exec(request, this.#middleware);
   }
 }
@@ -69,7 +69,8 @@ function exec(
     return exec(request, [first, ...resta]);
   }
 
-  return Promise.resolve(first(request, next));
+  const result = first(request, next);
+  return Promise.resolve(result);
 }
 
 function normalizeMiddleware(
