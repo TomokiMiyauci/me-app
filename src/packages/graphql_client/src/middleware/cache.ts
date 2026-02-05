@@ -12,14 +12,20 @@ export class Cache implements MiddlewareObject {
     request: Request,
     next: (request: Request) => Promise<Response>,
   ): Promise<Response> {
+    if (!isCacheable(request)) return next(request);
+
     const result = await this.store.match(request);
 
     if (result) return result;
 
     const response = await next(request);
 
-    await this.store.put(request, response);
+    await this.store.put(request, response.clone());
 
     return response;
   }
+}
+
+function isCacheable(request: Request): boolean {
+  return request.method.toUpperCase() === "GET";
 }
