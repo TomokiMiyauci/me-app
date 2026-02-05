@@ -12,9 +12,10 @@ import PostsMeta from "./meta/meta.tsx";
 
 export default async function Posts(props: AppProps): Promise<JSX.Element> {
   const { lang, origin } = props;
+
   const [result, blogByLangQuery] = await Promise.all([
-    gqlClient.request(ArticlesByLangDocument, { lang }),
-    gqlClient.request(BlogByLangDocument, { lang }),
+    gqlClient.query(ArticlesByLangDocument, { lang }),
+    gqlClient.query(BlogByLangDocument, { lang }),
   ]);
 
   const blog = blogByLangQuery.blogs[0];

@@ -14,7 +14,7 @@ export default async function PrivacyPolicy(
 ): Promise<JSX.Element> {
   const { lang, i18n } = props;
 
-  const queryResult = await gqlClient.request(PrivacyPolicyDocument, { lang });
+  const queryResult = await gqlClient.query(PrivacyPolicyDocument, { lang });
 
   const doc = queryResult.allLegalDocument[0];
 

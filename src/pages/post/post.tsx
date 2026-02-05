@@ -26,7 +26,7 @@ export default async function Post(
   }
 
   const decodedSlug = decodeURIComponent(slug);
-  const result = await gqlClient.request(PostBySlugDocument, {
+  const result = await gqlClient.query(PostBySlugDocument, {
     slug: decodedSlug,
     lang,
   });
@@ -36,7 +36,7 @@ export default async function Post(
 
   if (!postPage || !id) notFound();
 
-  const translationsQuery = await gqlClient.request(TranslationBySlugDocument, {
+  const translationsQuery = await gqlClient.query(TranslationBySlugDocument, {
     id,
   });
 
