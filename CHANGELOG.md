@@ -1,3 +1,17 @@
+# [1.20.0](https://github.com/TomokiMiyauci/me-app/compare/1.19.0...1.20.0) (2026-02-05)
+
+
+### Bug Fixes
+
+* **graphql-client:** add guard for http semantic ([5827051](https://github.com/TomokiMiyauci/me-app/commit/5827051a9a19b9516a5ef503c68e63f84272b9d2))
+
+
+### Features
+
+* **graphql-client:** export related types ([1b58d75](https://github.com/TomokiMiyauci/me-app/commit/1b58d75cab28b1c1e59ab4b0409075e57a8ab091))
+* **graphql-client:** split middleware entrypoint ([fceb368](https://github.com/TomokiMiyauci/me-app/commit/fceb3687e3c6d056bf6b8fedea9f27df80aacfc3))
+* switch to use graphql client ([a506fd4](https://github.com/TomokiMiyauci/me-app/commit/a506fd4da06c7439b25cb32a8b8484c35056de23))
+
 # [1.19.0](https://github.com/TomokiMiyauci/me-app/compare/1.18.0...1.19.0) (2026-02-04)
 
 
