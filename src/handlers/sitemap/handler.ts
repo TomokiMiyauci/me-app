@@ -53,7 +53,7 @@ async function* getPathnames(): AsyncIterable<string> {
 
   yield* pathnames;
 
-  const queryResult = await gqlClient.request(PostSlugsDocument);
+  const queryResult = await gqlClient.query(PostSlugsDocument);
 
   for (const post of queryResult.posts) {
     if (

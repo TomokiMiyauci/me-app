@@ -15,8 +15,8 @@ export default async function Home(props: AppProps): Promise<JSX.Element> {
   const { lang, i18n, origin } = props;
 
   const [queryResult, homeByLang] = await Promise.all([
-    gqlClient.request(BlogDocument, { lang }),
-    gqlClient.request(HomeByLangDocument, { lang }),
+    gqlClient.query(BlogDocument, { lang }),
+    gqlClient.query(HomeByLangDocument, { lang }),
   ]);
 
   const home = homeByLang.home[0];

@@ -1,1 +1,1 @@
-export { default as gqlClient } from "../lib/graphql_request.ts";
+export { default as gqlClient } from "../lib/graphql_client.ts";
