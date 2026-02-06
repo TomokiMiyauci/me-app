@@ -43,6 +43,9 @@ const root = hydrateRoot(
   <Root payload={initialPayload} />,
   {
     formState: initialPayload.formState,
+    onCaughtError(): void {
+      // This is catched by ErrorBoundary in Server Side.
+    },
   },
 );
 
