@@ -65,7 +65,7 @@
   },
   "imports": {
     "@miyauci/material-react": "jsr:@miyauci/material-react@^1.0.0-beta.24",
-    "@std/assert": "jsr:@std/assert@^1.0.17",
+    "@std/assert": "jsr:@std/assert@^1.0.18",
     "@/": "./src/",
     "@std/path": "jsr:@std/path@^1.1.4",
     "~env": "./src/env.ts",
