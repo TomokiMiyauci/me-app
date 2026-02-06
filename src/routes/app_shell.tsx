@@ -16,9 +16,9 @@ export default function AppShell(props: AppShellProps): JSX.Element {
   const { entry, app } = props;
 
   return (
-    <ErrorBoundary fallback={<GlobalError />}>
+    <ErrorBoundary key={entry} fallback={<GlobalError />}>
       <Html {...app}>
-        <ErrorBoundary fallback={<Error {...app} />}>
+        <ErrorBoundary key={entry} fallback={<Error {...app} />}>
           <Router entry={entry} app={app} map={component} />
         </ErrorBoundary>
       </Html>
