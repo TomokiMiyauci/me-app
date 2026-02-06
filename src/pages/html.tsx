@@ -23,7 +23,7 @@ export default function Html(props: PropsWithChildren<HtmlProps>): JSX.Element {
           crossOrigin=""
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:opsz,wght@14..32,100..900&?family=Noto+Sans+JP:wght@100..900&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:opsz,wght@14..32,100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
           rel="stylesheet"
         />
 

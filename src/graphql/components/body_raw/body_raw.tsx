@@ -4,12 +4,11 @@ import type {
 } from "@portabletext/react";
 import type { JSX } from "react";
 import type { Code as CodeType } from "@/graphql/types.ts";
-import { CodeBlock, Highlighter } from "~component";
+import { CodeBlock, ShikiHighlighter } from "~component";
 import { PortableText } from "@portabletext/react";
 import type { TypedObject } from "@portabletext/types";
 import Picture from "./picture/picture.tsx";
 import Table from "./table/table.tsx";
-import "highlight.js/styles/github.css";
 
 function Code(
   props: PortableTextTypeComponentProps<CodeType>,
@@ -21,7 +20,7 @@ function Code(
       fileName={filename ?? undefined}
       code={code ?? ""}
       language={language ?? undefined}
-      highlighter={new Highlighter()}
+      highlighter={new ShikiHighlighter()}
       className="not-prose"
     />
   );
