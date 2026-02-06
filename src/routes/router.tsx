@@ -19,7 +19,8 @@ export default function Router(props: RouterProps): JSX.Element {
   const Component = map[entry];
 
   return (
-    <NotFoundBoundary fallback={<NotFound {...app} />}>
+    // Key is required to reset the boundary when entry changes
+    <NotFoundBoundary key={entry} fallback={<NotFound {...app} />}>
       <Component {...app} />
     </NotFoundBoundary>
   );
