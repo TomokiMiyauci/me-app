@@ -1,3 +1,11 @@
+## [1.20.1](https://github.com/TomokiMiyauci/me-app/compare/1.20.0...1.20.1) (2026-02-06)
+
+
+### Bug Fixes
+
+* add key attr to error boundary ([977fa37](https://github.com/TomokiMiyauci/me-app/commit/977fa3742ef458c3482144d8a0b9c5593a03aa32))
+* define key to each page's error boundary ([d447f95](https://github.com/TomokiMiyauci/me-app/commit/d447f952ec4cb6d12ddba4a5a3ec0e87c0738a11))
+
 # [1.20.0](https://github.com/TomokiMiyauci/me-app/compare/1.19.0...1.20.0) (2026-02-05)
 
 
