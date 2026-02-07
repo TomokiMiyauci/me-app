@@ -1,4 +1,4 @@
-import { type JSX, use } from "react";
+import type { JSX } from "react";
 import type { Highlighter } from "./type.ts";
 
 export interface CodeBlockProps {
@@ -9,12 +9,12 @@ export interface CodeBlockProps {
   className?: string;
 }
 
-export default function CodeBlock(props: CodeBlockProps): JSX.Element {
+export default async function CodeBlock(
+  props: CodeBlockProps,
+): Promise<JSX.Element> {
   const { code, language, fileName, highlighter, className } = props;
 
-  const highlighted = use(
-    Promise.resolve(highlighter.highlight(code, { language })),
-  );
+  const highlighted = await highlighter.highlight(code, { language });
 
   return (
     <div className={className}>
