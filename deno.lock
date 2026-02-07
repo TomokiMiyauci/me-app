@@ -19,7 +19,6 @@
     "jsr:@std/path@^1.1.4": "1.1.4",
     "jsr:@std/regexp@0.221": "0.221.0",
     "jsr:@std/streams@^1.0.17": "1.0.17",
-    "npm:@apollo/client@^4.1.4": "4.1.4_graphql@16.12.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_rxjs@7.8.2",
     "npm:@biggleszx/react-sanity-image@1": "1.0.0_@sanity+client@7.14.1_react@19.2.4",
     "npm:@chromatic-com/storybook@5": "5.0.0_storybook@10.2.7__react@19.2.4__react-dom@19.2.4___react@19.2.4_react@19.2.4_react-dom@19.2.4__react@19.2.4",
     "npm:@graphql-codegen/add@6": "6.0.0_graphql@16.12.0",
@@ -54,7 +53,6 @@
     "npm:clsx@^2.1.1": "2.1.1",
     "npm:daisyui@^5.5.18": "5.5.18",
     "npm:github-slugid@^1.0.1": "1.0.1",
-    "npm:graphql-request@^7.4.0": "7.4.0_graphql@16.12.0",
     "npm:graphql@^16.12.0": "16.12.0",
     "npm:highlight.js@^11.11.1": "11.11.1",
     "npm:http-cache-semantics@^4.2.0": "4.2.0",
@@ -168,26 +166,6 @@
   "npm": {
     "@adobe/css-tools@4.4.4": {
       "integrity": "sha512-Elp+iwUx5rN5+Y8xLt5/GRoG20WGoDCQ/1Fb+1LiGtvwbDavuSk0jhD/eZdckHAuzcDzccnkv+rEjyWfRx18gg=="
-    },
-    "@apollo/client@4.1.4_graphql@16.12.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_rxjs@7.8.2": {
-      "integrity": "sha512-bTbxPHGXDMcYyQuWcYOzvWBHHJ+5ehvH3uKhd3+jI8X3ZPgWlfiI0MYN3r2exq/SNo5/TbL1p+bzQnE1xf+5tg==",
-      "dependencies": [
-        "@graphql-typed-document-node/core",
-        "@wry/caches",
-        "@wry/equality",
-        "@wry/trie",
-        "graphql",
-        "graphql-tag",
-        "optimism",
-        "react",
-        "react-dom",
-        "rxjs",
-        "tslib@2.8.1"
-      ],
-      "optionalPeers": [
-        "react",
-        "react-dom"
-      ]
     },
     "@ardatan/relay-compiler@12.0.3_graphql@16.12.0": {
       "integrity": "sha512-mBDFOGvAoVlWaWqs3hm1AciGHSQE1rqFc/liZTyYz/Oek9yZdT5H26pH2zAFuEiTiBVPPyMuqf5VjOFPI2DGsQ==",
@@ -2338,30 +2316,6 @@
         "tslib@2.8.1"
       ]
     },
-    "@wry/caches@1.0.1": {
-      "integrity": "sha512-bXuaUNLVVkD20wcGBWRyo7j9N3TxePEWFZj2Y+r9OoUzfqmavM84+mFykRicNsBqatba5JLay1t48wxaXaWnlA==",
-      "dependencies": [
-        "tslib@2.8.1"
-      ]
-    },
-    "@wry/context@0.7.4": {
-      "integrity": "sha512-jmT7Sb4ZQWI5iyu3lobQxICu2nC/vbUhP0vIdd6tHC9PTfenmRmuIFqktc6GH9cgi+ZHnsLWPvfSvc4DrYmKiQ==",
-      "dependencies": [
-        "tslib@2.8.1"
-      ]
-    },
-    "@wry/equality@0.5.7": {
-      "integrity": "sha512-BRFORjsTuQv5gxcXsuDXx6oGRhuVsEGwZy6LOzRRfgu+eSfxbhUQ9L9YtSEIuIjY/o7g3iWFjrc5eSY1GXP2Dw==",
-      "dependencies": [
-        "tslib@2.8.1"
-      ]
-    },
-    "@wry/trie@0.5.0": {
-      "integrity": "sha512-FNoYzHawTMk/6KMQoEG5O4PuioX19UbwdQKF44yw0nLfOypfQdjtfZzo/UIJWAJ23sNIFbD1Ug9lbaDGMwbqQA==",
-      "dependencies": [
-        "tslib@2.8.1"
-      ]
-    },
     "acorn@8.15.0": {
       "integrity": "sha512-NZyJarBfL7nWwIq+FDL6Zp/yHEhePMNnnJ0y3qfieCrmNvYct8uvtiV41UvlSe6apAfk0fY1FbWx+NwfmpvtTg==",
       "bin": true
@@ -3417,13 +3371,6 @@
         "tslib@2.8.1"
       ]
     },
-    "graphql-request@7.4.0_graphql@16.12.0": {
-      "integrity": "sha512-xfr+zFb/QYbs4l4ty0dltqiXIp07U6sl+tOKAb0t50/EnQek6CVVBLjETXi+FghElytvgaAWtIOt3EV7zLzIAQ==",
-      "dependencies": [
-        "@graphql-typed-document-node/core",
-        "graphql"
-      ]
-    },
     "graphql-tag@2.12.6_graphql@16.12.0": {
       "integrity": "sha512-FdSNcu2QQcWnM2VNvSCCDCVS5PpPqpzgFT8+GXzqJuoDd0CBncxCY278u4mhRO7tMgo2JjgJA5aZ+nWSQ/Z+xg==",
       "dependencies": [
@@ -4197,15 +4144,6 @@
         "define-lazy-prop",
         "is-inside-container",
         "wsl-utils"
-      ]
-    },
-    "optimism@0.18.1": {
-      "integrity": "sha512-mLXNwWPa9dgFyDqkNi54sjDyNJ9/fTI6WGBLgnXku1vdKY/jovHfZT5r+aiVeFFLOz+foPNOm5YJ4mqgld2GBQ==",
-      "dependencies": [
-        "@wry/caches",
-        "@wry/context",
-        "@wry/trie",
-        "tslib@2.8.1"
       ]
     },
     "p-limit@3.1.0": {
@@ -5363,7 +5301,6 @@
     ],
     "packageJson": {
       "dependencies": [
-        "npm:@apollo/client@^4.1.4",
         "npm:@biggleszx/react-sanity-image@1",
         "npm:@chromatic-com/storybook@5",
         "npm:@graphql-codegen/add@6",
@@ -5394,7 +5331,6 @@
         "npm:clsx@^2.1.1",
         "npm:daisyui@^5.5.18",
         "npm:github-slugid@^1.0.1",
-        "npm:graphql-request@^7.4.0",
         "npm:graphql@^16.12.0",
         "npm:highlight.js@^11.11.1",
         "npm:i18next@^25.8.4",
