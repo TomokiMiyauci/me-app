@@ -1,3 +1,17 @@
+# [1.21.0](https://github.com/TomokiMiyauci/me-app/compare/1.20.1...1.21.0) (2026-02-07)
+
+
+### Features
+
+* update deps ([7433a35](https://github.com/TomokiMiyauci/me-app/commit/7433a355abf277df378c37f18152081bffa1b45c))
+
+
+### Performance Improvements
+
+* **rsc-protocol:** switch to async-await component ([adba9ed](https://github.com/TomokiMiyauci/me-app/commit/adba9eda991593305e673820024ccc2a3b8317f2))
+* switch to async-await component instead of use ([e6965dc](https://github.com/TomokiMiyauci/me-app/commit/e6965dc1c5243b2916d9c0a945279c5331fe1530))
+* switch to using shiki as highlighter ([e746f01](https://github.com/TomokiMiyauci/me-app/commit/e746f01a648e1eee091b0cf8a5f0406a84403172))
+
 ## [1.20.1](https://github.com/TomokiMiyauci/me-app/compare/1.20.0...1.20.1) (2026-02-06)
 
 
