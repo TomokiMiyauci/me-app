@@ -86,7 +86,7 @@ export default async function handler(
     root: (
       <AppShell
         entry={entry}
-        app={{ lang, params, origin: url.origin, i18n }}
+        app={{ lang, params, i18n }}
       />
     ),
     formState,

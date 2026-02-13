@@ -18,7 +18,7 @@ import Picture from "@/graphql/components/picture/picture.tsx";
 export default async function Post(
   props: AppProps,
 ): Promise<JSX.Element> {
-  const { lang, params, origin, i18n } = props;
+  const { lang, params, i18n } = props;
   const slug = params["slug"];
 
   if (!slug) {
@@ -55,11 +55,7 @@ export default async function Post(
   return (
     <Layout translations={alternatives} {...props}>
       <PostMeta
-        lang={lang}
-        slug={slug}
-        origin={origin}
         fragment={postPage}
-        translations={alternatives}
       />
 
       <main className="space-y-2 lg:max-w-[65ch] mx-auto">

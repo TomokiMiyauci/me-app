@@ -12,7 +12,7 @@ import { notFound } from "react-app";
 import HomeMeta from "./meta/meta.tsx";
 
 export default async function Home(props: AppProps): Promise<JSX.Element> {
-  const { lang, i18n, origin } = props;
+  const { lang, i18n } = props;
 
   const [queryResult, homeByLang] = await Promise.all([
     gqlClient.query(BlogDocument, { lang }),
@@ -36,7 +36,7 @@ export default async function Home(props: AppProps): Promise<JSX.Element> {
         location: resolver.resolve(Entry.Home, { lang }) ?? undefined,
       }))}
     >
-      <HomeMeta fragment={home} lang={lang} origin={origin} />
+      <HomeMeta fragment={home} lang={lang} />
       <main>
         <div className="min-h-[90vh] grid place-content-center">
           <span className="text-rotate text-6xl leading-18 md:text-9xl md:leading-40">
