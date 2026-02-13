@@ -11,7 +11,7 @@ import { gqlClient } from "~lib";
 import PostsMeta from "./meta/meta.tsx";
 
 export default async function Posts(props: AppProps): Promise<JSX.Element> {
-  const { lang, origin } = props;
+  const { lang } = props;
 
   const [result, blogByLangQuery] = await Promise.all([
     gqlClient.query(ArticlesByLangDocument, { lang }),
@@ -33,7 +33,7 @@ export default async function Posts(props: AppProps): Promise<JSX.Element> {
         location: resolver.resolve(Entry.Posts, { lang }) ?? undefined,
       }))}
     >
-      <PostsMeta fragment={blog} lang={lang} origin={origin} />
+      <PostsMeta fragment={blog} />
       <main className="mt-4 mb-32 sm:mt-24">
         <section className="mx-auto lg:mx-0">
           <h1 className="text-4xl font-semibold tracking-tight text-pretty sm:text-5xl">
