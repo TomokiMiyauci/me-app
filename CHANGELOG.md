@@ -1,3 +1,10 @@
+# [1.22.0](https://github.com/TomokiMiyauci/me-app/compare/1.21.0...1.22.0) (2026-02-14)
+
+
+### Features
+
+* remove canonical and alternates meta tag ([799efe6](https://github.com/TomokiMiyauci/me-app/commit/799efe66f3c7dcdaa6881f7933e84e40f739143f))
+
 # [1.21.0](https://github.com/TomokiMiyauci/me-app/compare/1.20.1...1.21.0) (2026-02-07)
 
 
