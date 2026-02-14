@@ -19,9 +19,6 @@ import language from "@/language.json" with { type: "json" };
 import { i18n as i18nConfig } from "~config";
 import { createInstance } from "i18next";
 import { injectRSCPayload } from "rsc-html-stream/server";
-import { HTMLInjectionStream } from "html-stream";
-import { source } from "@/lib/source.ts";
-import { PUBLIC } from "~env";
 import AppShell from "@/routes/app_shell.tsx";
 import routes from "@/routes/route.ts";
 import type { HanderContext } from "./type.ts";
@@ -132,11 +129,6 @@ export default async function handler(
   headers.set("content-type", "text/html;charset=utf-8");
 
   const finalStream = htmlStream
-    .pipeThrough(new TextDecoderStream())
-    .pipeThrough(
-      new HTMLInjectionStream(source.provide(JSON.stringify(PUBLIC))),
-    )
-    .pipeThrough(new TextEncoderStream())
     // initial RSC stream is injected in HTML stream as <script>...FLIGHT_DATA...</script>
     // using utility made by devongovett https://github.com/devongovett/rsc-html-stream
     .pipeThrough(injectRSCPayload(rscStream2));

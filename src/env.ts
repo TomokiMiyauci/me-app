@@ -8,5 +8,3 @@ function loadContentEndpoint(): string {
   return CONTENT_ENDPOINT;
 }
 export const CONTENT_ENDPOINT = /* @__PURE__ */ loadContentEndpoint();
-
-export const PUBLIC = { CONTENT_ENDPOINT };
