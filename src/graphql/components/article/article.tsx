@@ -50,8 +50,9 @@ function fragmentToArticleSummaryProps(
       (
         <figure>
           <Picture
-            clasName="w-full aspect-video object-fit"
+            className="w-full aspect-video object-fit"
             fragment={coverImage}
+            loading="lazy"
           />
         </figure>
       ),

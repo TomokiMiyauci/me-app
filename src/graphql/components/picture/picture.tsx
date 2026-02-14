@@ -6,13 +6,14 @@ import type { SanityAsset } from "@sanity/image-url";
 
 export interface PictureProps {
   fragment: PictureFragment;
-  clasName?: string;
 }
 
 interface ImgImage extends SanityAsset, SanityImageObject {}
 
-export default function Picture(props: PictureProps): JSX.Element {
-  const { fragment, clasName } = props;
+export default function Picture(
+  props: PictureProps & JSX.IntrinsicElements["img"],
+): JSX.Element {
+  const { fragment, ...rest } = props;
 
   const image = fragment.image;
   const result = validate(image);
@@ -22,7 +23,7 @@ export default function Picture(props: PictureProps): JSX.Element {
 
   return (
     <Img
-      className={clasName}
+      {...rest}
       alt={description ?? undefined}
       client={client}
       image={image}

@@ -58,5 +58,5 @@ export default function PictureType(
 
   if (!fragment) throw new Error("invalid referenced picture data");
 
-  return <Picture clasName="mx-auto" fragment={fragment} />;
+  return <Picture className="mx-auto" fragment={fragment} />;
 }
