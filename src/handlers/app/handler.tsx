@@ -106,10 +106,7 @@ export default async function handler(
   // respond RSC stream without HTML rendering based on framework's convention.
   // here we use request header `content-type`.
   if (result.isRsc) {
-    return new RscResponse(rscStream, {
-      headers: result.headers,
-      status: actionStatus,
-    });
+    return new RscResponse(rscStream, { status: actionStatus });
   }
 
   // duplicate one RSC stream into two.
@@ -125,13 +122,15 @@ export default async function handler(
     },
   });
 
-  const headers = new Headers(result.headers);
-  headers.set("content-type", "text/html;charset=utf-8");
-
   const finalStream = htmlStream
     // initial RSC stream is injected in HTML stream as <script>...FLIGHT_DATA...</script>
     // using utility made by devongovett https://github.com/devongovett/rsc-html-stream
     .pipeThrough(injectRSCPayload(rscStream2));
 
-  return new Response(finalStream, { status, headers });
+  return new Response(finalStream, {
+    status,
+    headers: {
+      "content-type": "text/html;charset=utf-8",
+    },
+  });
 }
