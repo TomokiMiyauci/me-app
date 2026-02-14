@@ -32,7 +32,7 @@ export default async function handler(
   request: Request,
   context: HanderContext,
 ): Promise<Response> {
-  const { renderHtmlStream, noJs, bootstrapScriptContent } = context;
+  const { renderHtmlStream, bootstrapScriptContent } = context;
   const result = parseRequest(request);
 
   let returnValue: ReturnValue | undefined;
@@ -115,8 +115,6 @@ export default async function handler(
     });
   }
 
-  const nojs = noJs && url.searchParams.has("__nojs");
-
   // duplicate one RSC stream into two.
   // - one for SSR (ReactClient.createFromReadableStream below)
   // - another for browser hydration payload by injecting <script>...FLIGHT_DATA...</script>.
@@ -124,7 +122,7 @@ export default async function handler(
   // const htmlStream = await renderHtml(<RscPromise promise={promise} />);
   const htmlStream = await renderHtmlStream(rscStream1, {
     formState,
-    bootstrapScriptContent: nojs ? undefined : bootstrapScriptContent,
+    bootstrapScriptContent,
     onError(): void {
       // noop
     },
@@ -133,7 +131,7 @@ export default async function handler(
   const headers = new Headers(result.headers);
   headers.set("content-type", "text/html;charset=utf-8");
 
-  const finalStream = nojs ? htmlStream : htmlStream
+  const finalStream = htmlStream
     .pipeThrough(new TextDecoderStream())
     .pipeThrough(
       new HTMLInjectionStream(source.provide(JSON.stringify(PUBLIC))),
