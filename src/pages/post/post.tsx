@@ -85,7 +85,7 @@ export default async function Post(
           image={postPage.coverImage && (
             <figure>
               <Picture
-                clasName="w-full aspect-video object-fit"
+                className="w-full aspect-video object-fit"
                 fragment={postPage.coverImage}
               />
             </figure>

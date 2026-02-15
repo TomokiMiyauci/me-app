@@ -19,9 +19,6 @@ import language from "@/language.json" with { type: "json" };
 import { i18n as i18nConfig } from "~config";
 import { createInstance } from "i18next";
 import { injectRSCPayload } from "rsc-html-stream/server";
-import { HTMLInjectionStream } from "html-stream";
-import { source } from "@/lib/source.ts";
-import { PUBLIC } from "~env";
 import AppShell from "@/routes/app_shell.tsx";
 import routes from "@/routes/route.ts";
 import type { HanderContext } from "./type.ts";
@@ -32,7 +29,7 @@ export default async function handler(
   request: Request,
   context: HanderContext,
 ): Promise<Response> {
-  const { renderHtmlStream, noJs, bootstrapScriptContent } = context;
+  const { renderHtmlStream, bootstrapScriptContent } = context;
   const result = parseRequest(request);
 
   let returnValue: ReturnValue | undefined;
@@ -109,13 +106,8 @@ export default async function handler(
   // respond RSC stream without HTML rendering based on framework's convention.
   // here we use request header `content-type`.
   if (result.isRsc) {
-    return new RscResponse(rscStream, {
-      headers: result.headers,
-      status: actionStatus,
-    });
+    return new RscResponse(rscStream, { status: actionStatus });
   }
-
-  const nojs = noJs && url.searchParams.has("__nojs");
 
   // duplicate one RSC stream into two.
   // - one for SSR (ReactClient.createFromReadableStream below)
@@ -124,24 +116,21 @@ export default async function handler(
   // const htmlStream = await renderHtml(<RscPromise promise={promise} />);
   const htmlStream = await renderHtmlStream(rscStream1, {
     formState,
-    bootstrapScriptContent: nojs ? undefined : bootstrapScriptContent,
+    bootstrapScriptContent,
     onError(): void {
       // noop
     },
   });
 
-  const headers = new Headers(result.headers);
-  headers.set("content-type", "text/html;charset=utf-8");
-
-  const finalStream = nojs ? htmlStream : htmlStream
-    .pipeThrough(new TextDecoderStream())
-    .pipeThrough(
-      new HTMLInjectionStream(source.provide(JSON.stringify(PUBLIC))),
-    )
-    .pipeThrough(new TextEncoderStream())
+  const finalStream = htmlStream
     // initial RSC stream is injected in HTML stream as <script>...FLIGHT_DATA...</script>
     // using utility made by devongovett https://github.com/devongovett/rsc-html-stream
     .pipeThrough(injectRSCPayload(rscStream2));
 
-  return new Response(finalStream, { status, headers });
+  return new Response(finalStream, {
+    status,
+    headers: {
+      "content-type": "text/html;charset=utf-8",
+    },
+  });
 }

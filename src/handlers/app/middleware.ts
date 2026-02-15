@@ -15,7 +15,6 @@ export default class App implements MiddlewareObject {
     const context = {
       bootstrapScriptContent: this.bootstrapScriptContent,
       renderHtmlStream: this.renderHtmlStream,
-      noJs: import.meta.env.DEV,
     } satisfies HanderContext;
 
     return handler(request, context);

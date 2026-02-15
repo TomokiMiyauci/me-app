@@ -1,17 +1,16 @@
 import rsc from "@vitejs/plugin-rsc";
 import react from "@vitejs/plugin-react";
-import { defineConfig, perEnvironmentPlugin } from "vite";
+import { defineConfig } from "vite";
 import { nodeEnv } from "vite-node-env";
 import rscAssets from "vite-plugin-rsc-assets-manifest";
 import { manifest, outDirResolve } from "vite-plugin-manifest";
-import inject from "@rollup/plugin-inject";
 import { nodeScheme } from "vite-node-scheme";
 import deno from "vite-plugin-deno";
 import codegen from "vite-plugin-graphql-codegen";
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  server: { port: 8000, open: "/en" },
+  server: { open: "/en" },
   envDir: false,
   plugins: [
     rsc({
@@ -43,16 +42,6 @@ export default defineConfig({
     rscAssets,
     manifest,
     outDirResolve,
-    perEnvironmentPlugin("inject", (env) => {
-      if (env.name === "client") {
-        // This is deno bug
-        // deno-lint-ignore no-explicit-any
-        return (inject as any)({
-          "Deno.env": "@/framework/polyfills/deno_env.ts",
-        });
-      }
-      return false;
-    }),
     codegen({
       configFilePathOverride: "./.graphqlrc",
     }),
