@@ -1,3 +1,10 @@
+# [1.23.0](https://github.com/TomokiMiyauci/me-app/compare/1.22.0...1.23.0) (2026-02-15)
+
+
+### Features
+
+* update deps ([81a0f38](https://github.com/TomokiMiyauci/me-app/commit/81a0f385e645c4fc7b18dead96b72c4f1c4d1fe2))
+
 # [1.22.0](https://github.com/TomokiMiyauci/me-app/compare/1.21.0...1.22.0) (2026-02-14)
 
 
