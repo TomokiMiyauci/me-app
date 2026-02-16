@@ -5,6 +5,8 @@ import sitemap from "@/handlers/sitemap/handler.ts";
 import StaticDir from "router/static-dir";
 import { fromFileUrl } from "@std/path/from-file-url";
 
+console.time("init");
+
 let router = new Router()
   .get("/sitemap.xml", sitemap);
 
@@ -23,6 +25,8 @@ const bootstrapScriptContent = await import.meta.viteRsc
 router = router.use(
   new App(bootstrapScriptContent, renderHtmlStream),
 );
+
+console.timeEnd("init");
 
 export default {
   fetch: router.fetch.bind(router),
