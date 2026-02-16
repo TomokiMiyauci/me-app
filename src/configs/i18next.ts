@@ -28,8 +28,6 @@ function createCachedFetch(cache: Cache): FetchFunction {
 
     const cachedResponse = await cache.match(request);
 
-    console.log(!!cachedResponse);
-
     if (cachedResponse) return cachedResponse;
 
     const response = await fetch(request);
