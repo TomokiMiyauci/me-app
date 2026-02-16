@@ -9,10 +9,13 @@ export function dynamic<T>(
   fn: (
     request: Request,
     ctx: CallableContext<T>,
-  ) => Middleware<T> | MiddlewareObject<T>,
+  ) =>
+    | Middleware<T>
+    | MiddlewareObject<T>
+    | Promise<Middleware<T> | MiddlewareObject<T>>,
 ): Middleware<T> {
-  return (request, next) => {
-    const middlewareOrMiddlewareObject = fn(request, next);
+  return async (request, next) => {
+    const middlewareOrMiddlewareObject = await fn(request, next);
     const middleware = normalizeMiddleware<T>(middlewareOrMiddlewareObject);
 
     return middleware(request, next);
