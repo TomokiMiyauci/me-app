@@ -7,4 +7,17 @@ function loadContentEndpoint(): string {
 
   return CONTENT_ENDPOINT;
 }
+
 export const CONTENT_ENDPOINT = /* @__PURE__ */ loadContentEndpoint();
+
+function loadI18nEndpoint(): string {
+  const ENDPOINT = /* @__PURE__ */ Deno.env.get("I18N_ENDPOINT");
+
+  /* @__PURE__ */ assert(ENDPOINT, "I18N_ENDPOINT is not defined");
+
+  return ENDPOINT;
+}
+
+export const I18N_ENDPOINT = /* @__PURE__ */ loadI18nEndpoint();
+
+export const CACHE_KEY = Deno.env.get("CACHE_KEY") ?? "v1";

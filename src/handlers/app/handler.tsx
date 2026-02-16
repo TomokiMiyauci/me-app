@@ -22,6 +22,7 @@ import { injectRSCPayload } from "rsc-html-stream/server";
 import AppShell from "@/routes/app_shell.tsx";
 import routes from "@/routes/route.ts";
 import type { HanderContext } from "./type.ts";
+import http from "i18next-http-backend";
 
 const resolver = /* /@__PURE__/ */ new URLResolver(routes);
 
@@ -78,7 +79,7 @@ export default async function handler(
   const lang = resolved?.params["lang"] ?? language.default;
   const params = resolved?.params ?? {};
   const i18n = createInstance({ lng: lang });
-  await i18n.init(i18nConfig);
+  await i18n.use(http).init(i18nConfig);
   const rscPayload = {
     root: (
       <AppShell
