@@ -2,6 +2,7 @@ import "./debug.ts";
 import type * as ssr from "./entry.ssr.tsx";
 import App from "@/handlers/app//middleware.ts";
 import { Router } from "router";
+import { dynamic } from "router/middleware";
 import sitemap from "@/handlers/sitemap/handler.ts";
 import StaticDir from "router/static-dir";
 import { fromFileUrl } from "@std/path/from-file-url";
@@ -21,18 +22,17 @@ if (import.meta.env.PROD) {
   router = router.use(staticDir);
 }
 
-console.time("loadModule");
-
-const { renderHtmlStream } = await import.meta.viteRsc.loadModule<
-  typeof ssr
->("ssr", "index");
-console.timeEnd("loadModule");
-
-const bootstrapScriptContent = await import.meta.viteRsc
-  .loadBootstrapScriptContent("index");
-
 router = router.use(
-  new App(bootstrapScriptContent, renderHtmlStream),
+  dynamic(async () => {
+    const { renderHtmlStream } = await import.meta.viteRsc.loadModule<
+      typeof ssr
+    >("ssr", "index");
+
+    const bootstrapScriptContent = await import.meta.viteRsc
+      .loadBootstrapScriptContent("index");
+
+    return new App(bootstrapScriptContent, renderHtmlStream);
+  }),
 );
 
 console.timeEnd("start");
