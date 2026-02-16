@@ -1,3 +1,4 @@
+import "./debug.ts";
 import type * as ssr from "./entry.ssr.tsx";
 import App from "@/handlers/app//middleware.ts";
 import { Router } from "router";
@@ -33,6 +34,8 @@ const bootstrapScriptContent = await import.meta.viteRsc
 router = router.use(
   new App(bootstrapScriptContent, renderHtmlStream),
 );
+
+console.timeEnd("start");
 
 export default {
   fetch: router.fetch.bind(router),
