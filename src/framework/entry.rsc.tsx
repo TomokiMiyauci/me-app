@@ -13,13 +13,7 @@ let router = new Router()
 if (import.meta.env.PROD) {
   const clientDir = fromFileUrl(import.meta.vite.outDir.resolve("client"));
 
-  const staticDir = new StaticDir(clientDir);
-
-  console.time("staticDir.ready");
-  await staticDir.ready;
-  console.timeEnd("staticDir.ready");
-
-  router = router.use(staticDir);
+  router = router.use(new StaticDir(clientDir));
 }
 
 router = router.use(
