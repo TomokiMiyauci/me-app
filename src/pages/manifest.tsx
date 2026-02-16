@@ -1,20 +1,18 @@
-import type { JSX } from "react";
+import { type JSX, lazy } from "react";
 import type { AppProps } from "@/lib/app.tsx";
-import IndexEntry from "./home/home.tsx";
-import PostsEntry from "./posts//posts.tsx";
-import PostEntry from "./post/post.tsx";
 import LayoutEntry from "./layout.tsx";
 import NotFoundEntry from "./not_found/not_found.tsx";
 import ErrorEntry from "./error/error.tsx";
-import PrivacyPolicyEntry from "./privacy_policy/privacy_policy.tsx";
 
-export const Home = IndexEntry;
+export const Home = lazy(() => import("./home/home.tsx"));
 
-export const Posts = PostsEntry;
+export const Posts = lazy(() => import("./posts/posts.tsx"));
 
-export const Post = PostEntry;
+export const Post = lazy(() => import("./post/post.tsx"));
 
-export const PrivacyPolicy = PrivacyPolicyEntry;
+export const PrivacyPolicy = lazy(() =>
+  import("./privacy_policy/privacy_policy.tsx")
+);
 
 export function NotFound(props: AppProps): JSX.Element {
   return (
