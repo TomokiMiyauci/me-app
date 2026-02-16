@@ -56,6 +56,7 @@
     "npm:graphql@^16.12.0": "16.12.0",
     "npm:highlight.js@^11.11.1": "11.11.1",
     "npm:http-cache-semantics@^4.2.0": "4.2.0",
+    "npm:i18next-http-backend@^3.0.2": "3.0.2",
     "npm:i18next@^25.8.7": "25.8.7",
     "npm:magic-string@~0.30.21": "0.30.21",
     "npm:prop-types@^15.8.1": "15.8.1",
@@ -2738,6 +2739,12 @@
         "node-fetch@2.7.0"
       ]
     },
+    "cross-fetch@4.0.0": {
+      "integrity": "sha512-e4a5N8lVvuLgAWgnCrLr2PP0YyDOTHa9H/Rj54dirp61qXnNq46m82bRhNqIA5VccJtWBvPTFRV3TtvHUKPB1g==",
+      "dependencies": [
+        "node-fetch@2.7.0"
+      ]
+    },
     "cross-inspect@1.0.1": {
       "integrity": "sha512-Pcw1JTvZLSJH83iiGWt6fRcT+BjZlCDRVwYLbUcHzv/CRpB7r0MlSrGbIyQvVSNyGnbt7G4AXuyCiDR3POvZ1A==",
       "dependencies": [
@@ -3122,7 +3129,7 @@
     "fbjs@3.0.5": {
       "integrity": "sha512-ztsSx77JBtkuMrEypfhgc3cI0+0h+svqeie7xHbh1k/IKdcydnvadp/mUaGgjAOXQmQSxsqgaRhS3q9fy+1kxg==",
       "dependencies": [
-        "cross-fetch",
+        "cross-fetch@3.2.0",
         "fbjs-css-vars",
         "loose-envify",
         "object-assign",
@@ -3478,6 +3485,12 @@
     },
     "http-cache-semantics@4.2.0": {
       "integrity": "sha512-dTxcvPXqPvXBQpq5dUr6mEMJX4oIEFv6bwom3FDwKRDsuIjjJGANqhBuoAn9c1RQJIdAKav33ED65E2ys+87QQ=="
+    },
+    "i18next-http-backend@3.0.2": {
+      "integrity": "sha512-PdlvPnvIp4E1sYi46Ik4tBYh/v/NbYfFFgTjkwFl0is8A18s7/bx9aXqsrOax9WUbeNS6mD2oix7Z0yGGf6m5g==",
+      "dependencies": [
+        "cross-fetch@4.0.0"
+      ]
     },
     "i18next-parser@9.3.0_typescript@5.9.3": {
       "integrity": "sha512-VaQqk/6nLzTFx1MDiCZFtzZXKKyBV6Dv0cJMFM/hOt4/BWHWRgYafzYfVQRUzotwUwjqeNCprWnutzD/YAGczg==",
@@ -5337,6 +5350,7 @@
         "npm:github-slugid@^1.0.1",
         "npm:graphql@^16.12.0",
         "npm:highlight.js@^11.11.1",
+        "npm:i18next-http-backend@^3.0.2",
         "npm:i18next@^25.8.7",
         "npm:prop-types@^15.8.1",
         "npm:react-dom@^19.2.4",
