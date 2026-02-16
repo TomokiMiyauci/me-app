@@ -5,28 +5,34 @@ import sitemap from "@/handlers/sitemap/handler.ts";
 import StaticDir from "router/static-dir";
 import { fromFileUrl } from "@std/path/from-file-url";
 
-console.time("init");
-
 let router = new Router()
   .get("/sitemap.xml", sitemap);
 
 if (import.meta.env.PROD) {
   const clientDir = fromFileUrl(import.meta.vite.outDir.resolve("client"));
 
-  router = router.use(new StaticDir(clientDir));
+  const staticDir = new StaticDir(clientDir);
+
+  console.time("staticDir.ready");
+  await staticDir.ready;
+  console.timeEnd("staticDir.ready");
+
+  router = router.use(staticDir);
 }
+
+console.time("loadModule");
 
 const { renderHtmlStream } = await import.meta.viteRsc.loadModule<
   typeof ssr
 >("ssr", "index");
+console.timeEnd("loadModule");
+
 const bootstrapScriptContent = await import.meta.viteRsc
   .loadBootstrapScriptContent("index");
 
 router = router.use(
   new App(bootstrapScriptContent, renderHtmlStream),
 );
-
-console.timeEnd("init");
 
 export default {
   fetch: router.fetch.bind(router),
