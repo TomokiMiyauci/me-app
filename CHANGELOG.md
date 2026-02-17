@@ -1,3 +1,22 @@
+# [1.24.0](https://github.com/TomokiMiyauci/me-app/compare/1.23.0...1.24.0) (2026-02-17)
+
+
+### Bug Fixes
+
+* fix to recursive import ([3f9207b](https://github.com/TomokiMiyauci/me-app/commit/3f9207bca24d96963d6035aa151256ab4363c729))
+
+
+### Features
+
+* **router:** accept promise middleware factory ([46959e1](https://github.com/TomokiMiyauci/me-app/commit/46959e1d0286eddcac7498049a645e27f0f7bea5))
+* use remote i18n resource, remove local translation files ([974be21](https://github.com/TomokiMiyauci/me-app/commit/974be2132ff2ef2a5ae2103bc579a3ca1d0057e2))
+
+
+### Performance Improvements
+
+* to be lazy loading for page components ([eda6117](https://github.com/TomokiMiyauci/me-app/commit/eda611740949b6cad42d33d1445c585b44b0f7f2))
+* use http cache for i18n resource fetching ([0880e84](https://github.com/TomokiMiyauci/me-app/commit/0880e84cec6e09ed37a7f8833e3b674fa3b40348))
+
 # [1.23.0](https://github.com/TomokiMiyauci/me-app/compare/1.22.0...1.23.0) (2026-02-15)
 
 
