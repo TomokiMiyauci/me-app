@@ -11,9 +11,8 @@ import Entry from "@/routes/entry.ts";
 import { Article } from "~component";
 import Layout from "@/pages/layout.tsx";
 import PostMeta from "./meta/meta.tsx";
-import { gqlClient } from "~lib";
-import BodyRaw from "@/graphql/components/body_raw//body_raw.tsx";
-import Picture from "@/graphql/components/picture/picture.tsx";
+import { apolloClient } from "~lib";
+import BodyRaw from "@/graphql/components/body_raw/body_raw.tsx";
 
 export default async function Post(
   props: AppProps,
@@ -26,23 +25,30 @@ export default async function Post(
   }
 
   const decodedSlug = decodeURIComponent(slug);
-  const result = await gqlClient.query(PostBySlugDocument, {
-    slug: decodedSlug,
-    lang,
+  const result = await apolloClient.query({
+    query: PostBySlugDocument,
+    variables: { slug: decodedSlug, lang },
   });
 
-  const postPage = result.allPost[0];
+  if (!result.data) throw new Error("Failed to fetch post data");
+
+  const postPage = result.data.postConnection.edges?.[0]?.node;
   const id = postPage?.id;
 
   if (!postPage || !id) notFound();
 
-  const translationsQuery = await gqlClient.query(TranslationBySlugDocument, {
-    id,
+  const translationsQuery = await apolloClient.query({
+    query: TranslationBySlugDocument,
+    variables: { slug },
   });
+
+  if (!translationsQuery.data) {
+    throw new Error("Failed to fetch translation data");
+  }
 
   const title = postPage.title ?? "";
 
-  const normalized = normalizeTranslation(translationsQuery);
+  const normalized = normalizeTranslation(translationsQuery.data);
 
   const alternatives = normalized.map(({ slug, language }) => {
     return {
@@ -81,12 +87,12 @@ export default async function Post(
 
         <Article
           title={title}
-          body={postPage.bodyRaw && <BodyRaw fragment={postPage.bodyRaw} />}
+          body={postPage.body && <BodyRaw fragment={postPage.body} />}
           image={postPage.coverImage && (
             <figure>
-              <Picture
+              <img
                 className="w-full aspect-video object-fit"
-                fragment={postPage.coverImage}
+                src={postPage.coverImage}
               />
             </figure>
           )}
@@ -115,14 +121,14 @@ function isTranslationAlternation(
 function normalizeTranslation(
   query: TranslationBySlugQuery,
 ): NormalizedTranslation[] {
-  const result = query.allTranslationMetadata.flatMap((t) => {
-    return t.translations?.map((t) => {
+  const result = query.allTranslationMetadata.edges?.flatMap((t) => {
+    return t?.node?.translations?.map((t) => {
       switch (t?.value?.__typename) {
         case "Post": {
           const value = t.value;
           return {
             language: value.language,
-            slug: value.slug?.current,
+            slug: value.slug,
           };
         }
       }
@@ -131,7 +137,7 @@ function normalizeTranslation(
     }).filter(isNormalizedTranslation) ?? [];
   });
 
-  return result;
+  return result ?? [];
 }
 
 function isNormalizedTranslation(

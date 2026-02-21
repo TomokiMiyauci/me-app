@@ -1,18 +1,24 @@
-query ArticlesByLang($lang: String!) {
-  articles: allPost(
-    where: { language: { eq: $lang } }
-    sort: [{ publishedAt: DESC }]
-  ) {
-    ...Article
-    key: _id
-    slug {
-      current
+query BlogByLang($lang: String!) {
+  blogs: blogConnection(filter: { language: { eq: $lang } }) {
+    edges {
+      node {
+        ...PostsMeta
+      }
     }
   }
 }
 
-query BlogByLang($lang: String!) {
-  blogs: allBlog(where: { language: { eq: $lang } }) {
-    ...PostsMeta
+query ArticlesByLang($lang: String!) {
+  articles: postConnection(
+    filter: { language: { eq: $lang } }
+    sort: "published_at"
+  ) {
+    edges {
+      node {
+        ...Article
+        key: id
+        slug
+      }
+    }
   }
 }

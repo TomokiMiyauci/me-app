@@ -1,7 +1,7 @@
 import type { ArticleFragment } from "./article.graphql.ts";
 import type { JSX } from "react";
 import { ArticleSummary, type ArticleSummaryProps } from "~component";
-import Picture from "@/graphql/components/picture/picture.tsx";
+// import Picture from "@/graphql/components/picture/picture.tsx";
 
 export interface ArticleProps {
   lang: string;
@@ -24,13 +24,12 @@ function fragmentToArticleSummaryProps(
 ): ArticleSummaryProps {
   const {
     title,
-    _createdAt,
     description,
     createdAt: specifiedCreatedAt,
     coverImage,
   } = fragment;
   const excerpt = description ?? undefined;
-  const createdAt = (specifiedCreatedAt ?? _createdAt) ?? undefined;
+  const createdAt = specifiedCreatedAt;
   const date = createdAt
     ? {
       dateTime: new Date(createdAt).toISOString(),
@@ -49,9 +48,9 @@ function fragmentToArticleSummaryProps(
     img: coverImage &&
       (
         <figure>
-          <Picture
+          <img
             className="w-full aspect-video object-fit"
-            fragment={coverImage}
+            src={coverImage}
             loading="lazy"
           />
         </figure>

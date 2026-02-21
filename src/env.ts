@@ -8,7 +8,19 @@ function loadContentEndpoint(): string {
   return CONTENT_ENDPOINT;
 }
 
+function loadContentAuthToken(): string {
+  const CONTENT_AUTH_TOEKN = /* @__PURE__ */ Deno.env.get("CONTENT_AUTH_TOEKN");
+
+  /* @__PURE__ */ assert(
+    CONTENT_AUTH_TOEKN,
+    "CONTENT_AUTH_TOEKN is not defined",
+  );
+
+  return CONTENT_AUTH_TOEKN;
+}
+
 export const CONTENT_ENDPOINT = /* @__PURE__ */ loadContentEndpoint();
+export const CONTENT_AUTH_TOEKN = /* @__PURE__ */ loadContentAuthToken();
 
 function loadI18nEndpoint(): string {
   const ENDPOINT = /* @__PURE__ */ Deno.env.get("I18N_ENDPOINT");

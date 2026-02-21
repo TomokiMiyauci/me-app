@@ -2,12 +2,11 @@
 // deno-fmt-ignore-file
 import * as Types from '@/graphql/types.ts';
 
-import type { TypedObject } from "@portabletext/types";
 import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
 export type PostSlugsQueryVariables = Types.Exact<{ [key: string]: never; }>;
 
 
-export type PostSlugsQuery = { __typename?: 'RootQuery', posts: Array<{ __typename?: 'Post', lang?: string | null, slug?: { __typename?: 'Slug', current?: string | null } | null }> };
+export type PostSlugsQuery = { __typename?: 'Query', posts: { __typename?: 'PostConnection', edges?: Array<{ __typename?: 'PostConnectionEdges', node?: { __typename?: 'Post', language: string, slug: string } | null } | null> | null } };
 
 
-export const PostSlugsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PostSlugs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"posts"},"name":{"kind":"Name","value":"allPost"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"slug"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"current"}}]}},{"kind":"Field","alias":{"kind":"Name","value":"lang"},"name":{"kind":"Name","value":"language"}}]}}]}}]} as unknown as DocumentNode<PostSlugsQuery, PostSlugsQueryVariables>;
+export const PostSlugsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PostSlugs"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","alias":{"kind":"Name","value":"posts"},"name":{"kind":"Name","value":"postConnection"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"language"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}}]}}]}}]}}]}}]} as unknown as DocumentNode<PostSlugsQuery, PostSlugsQueryVariables>;

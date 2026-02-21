@@ -1,7 +1,7 @@
 import type { JSX } from "react";
 import { SeoMeta } from "react-meta";
 import type { PostsMetaFragment } from "@/pages/posts/meta/meta.graphql.ts";
-import OgImage from "@/graphql/components/og_image/og_image.tsx";
+// import OgImage from "@/graphql/components/og_image/og_image.tsx";
 import { Ogp } from "react-ogp";
 
 export interface PostsMetaProps {
@@ -13,7 +13,7 @@ export default function PostsMeta(props: PostsMetaProps): JSX.Element {
 
   const title = fragment.title ?? undefined;
   const desciription = fragment.description ?? undefined;
-  const { coverImage } = fragment;
+  // const { coverImage } = fragment;
 
   return (
     <>
@@ -22,7 +22,7 @@ export default function PostsMeta(props: PostsMetaProps): JSX.Element {
         description={desciription}
       />
       <Ogp title={title} description={desciription} type="website" />
-      {coverImage && <OgImage fragment={coverImage} />}
+      {/* {coverImage && <OgImage fragment={coverImage} />} */}
     </>
   );
 }

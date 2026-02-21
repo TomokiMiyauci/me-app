@@ -27,9 +27,11 @@ export default async function CodeBlock(
           </header>
         )}
 
-      <pre className="overflow-scroll">
-        <code dangerouslySetInnerHTML={{ __html: highlighted }} />
-      </pre>
+      <div
+        className="overflow-scroll"
+        dangerouslySetInnerHTML={{ __html: highlighted }}
+      >
+      </div>
     </div>
   );
 }

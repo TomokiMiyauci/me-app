@@ -7,18 +7,21 @@ import type { AppProps } from "@/lib/app.tsx";
 import language from "@/language.json" with { type: "json" };
 import Layout from "@/pages/layout.tsx";
 import { notFound } from "react-app";
-import { gqlClient } from "~lib";
+import { apolloClient } from "~lib";
 import PostsMeta from "./meta/meta.tsx";
 
 export default async function Posts(props: AppProps): Promise<JSX.Element> {
   const { lang } = props;
 
   const [result, blogByLangQuery] = await Promise.all([
-    gqlClient.query(ArticlesByLangDocument, { lang }),
-    gqlClient.query(BlogByLangDocument, { lang }),
+    apolloClient.query({ query: ArticlesByLangDocument, variables: { lang } }),
+    apolloClient.query({ query: BlogByLangDocument, variables: { lang } }),
   ]);
 
-  const blog = blogByLangQuery.blogs[0];
+  if (!blogByLangQuery.data) throw new Error("Failed to fetch blog data");
+  if (!result.data) throw new Error("Failed to fetch blog data");
+
+  const blog = blogByLangQuery.data.blogs.edges?.[0]?.node;
 
   if (!blog) notFound();
 
@@ -46,14 +49,18 @@ export default async function Posts(props: AppProps): Promise<JSX.Element> {
 
         <section>
           <ul className="mx-auto mt-10 grid max-w-2xl grid-cols-1 sm:grid-cols-2 border-t border-gray-200 gap-x-8 gap-y-16 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {result.articles.map((article) => {
-              const slug = article.slug?.current ?? "";
+            {result.data.articles.edges?.toReversed().map((article) => {
+              if (!article?.node) return;
+              const slug = article.node.slug;
               const href = resolver.resolve(Entry.Post, { slug, lang });
 
               return (
-                <li className="justify-self-center max-w-96" key={article.key}>
+                <li
+                  className="justify-self-center max-w-96"
+                  key={article.node.key}
+                >
                   <a href={href ?? undefined}>
-                    <ArticleFragment lang={lang} fragment={article} />
+                    <ArticleFragment lang={lang} fragment={article.node} />
                   </a>
                 </li>
               );

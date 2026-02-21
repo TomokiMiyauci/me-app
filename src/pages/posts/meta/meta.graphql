@@ -1,9 +1,7 @@
 fragment PostsMeta on Blog {
   title
   description
-  _updatedAt
-  _createdAt
-  coverImage {
-    ...OgImage
+  coverImage: cover_image {
+    source
   }
 }

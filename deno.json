@@ -30,7 +30,7 @@
       "description": "Format check"
     },
     "dev": "deno run -P=dev --allow-net --env-file vite dev",
-    "build": "deno run -P=build vite build --manifest",
+    "build": "deno run --env-file -P=build vite build --manifest",
     "preview": "deno serve -P=preview --allow-net --env-file --no-npm --no-remote dist/rsc/index.js",
     "generate:graphql": "deno run -A @graphql-codegen/cli/graphql-codegen-esm --config .graphqlrc",
     "storybook": "deno x storybook dev",

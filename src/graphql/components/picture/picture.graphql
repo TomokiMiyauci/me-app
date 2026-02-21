@@ -1,15 +1,4 @@
-fragment Picture on Picture {
-  image {
-    asset {
-      _id
-      metadata {
-        dimensions {
-          width
-          height
-        }
-        lqip
-      }
-    }
-  }
+fragment Picture on HomeCover_image {
+  source
   description
 }

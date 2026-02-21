@@ -7,7 +7,7 @@ import language from "@/language.json" with { type: "json" };
 import greet from "./greet.json" with { type: "json" };
 import { BlogDocument, HomeByLangDocument } from "./home.graphql.ts";
 import Picture from "@/graphql/components/picture/picture.tsx";
-import { gqlClient } from "~lib";
+import { apolloClient } from "~lib";
 import { notFound } from "react-app";
 import HomeMeta from "./meta/meta.tsx";
 
@@ -15,15 +15,18 @@ export default async function Home(props: AppProps): Promise<JSX.Element> {
   const { lang, i18n } = props;
 
   const [queryResult, homeByLang] = await Promise.all([
-    gqlClient.query(BlogDocument, { lang }),
-    gqlClient.query(HomeByLangDocument, { lang }),
+    apolloClient.query({ query: BlogDocument, variables: { lang } }),
+    apolloClient.query({ query: HomeByLangDocument, variables: { lang } }),
   ]);
 
-  const home = homeByLang.home[0];
+  if (!queryResult.data) throw new Error("Failed to fetch home data");
+  if (!homeByLang.data) throw new Error("Failed to fetch home data");
+
+  const home = homeByLang.data.home.edges?.[0]?.node;
 
   if (!home) notFound();
 
-  const blog = queryResult.allBlog[0];
+  const blog = queryResult.data.allBlog.edges?.[0]?.node;
   const title = blog?.title ?? "";
   const description = blog?.description;
   const { t } = i18n;
