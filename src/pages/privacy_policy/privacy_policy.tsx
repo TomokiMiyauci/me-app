@@ -4,7 +4,6 @@ import Layout from "@/pages/layout.tsx";
 import { PrivacyPolicyDocument } from "./privacy_policy.graphql.ts";
 import { apolloClient } from "~lib";
 import { notFound } from "react-app";
-// import { PortableText } from "@portabletext/react";
 import language from "@/language.json" with { type: "json" };
 import resolver from "@/lib/link.ts";
 import Entry from "@/routes/entry.ts";
