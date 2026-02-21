@@ -1,4 +1,0 @@
-fragment Picture on HomeCover_image {
-  source
-  description
-}

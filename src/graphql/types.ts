@@ -23,7 +23,7 @@ export type Author = Document & Node & {
   __typename?: 'Author';
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-  cover_image?: Maybe<AuthorCover_Image>;
+  cover_image?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
 };
@@ -41,32 +41,13 @@ export type AuthorConnectionEdges = {
   node?: Maybe<Author>;
 };
 
-export type AuthorCover_Image = {
-  __typename?: 'AuthorCover_image';
-  description?: Maybe<Scalars['String']['output']>;
-  source?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-};
-
-export type AuthorCover_ImageFilter = {
-  description?: InputMaybe<StringFilter>;
-  source?: InputMaybe<ImageFilter>;
-  title?: InputMaybe<StringFilter>;
-};
-
-export type AuthorCover_ImageMutation = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  source?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type AuthorFilter = {
-  cover_image?: InputMaybe<AuthorCover_ImageFilter>;
+  cover_image?: InputMaybe<ImageFilter>;
   name?: InputMaybe<StringFilter>;
 };
 
 export type AuthorMutation = {
-  cover_image?: InputMaybe<AuthorCover_ImageMutation>;
+  cover_image?: InputMaybe<Scalars['String']['input']>;
   name?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -74,7 +55,7 @@ export type Blog = Document & Node & {
   __typename?: 'Blog';
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-  cover_image?: Maybe<BlogCover_Image>;
+  cover_image?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   language: Scalars['String']['output'];
@@ -94,34 +75,15 @@ export type BlogConnectionEdges = {
   node?: Maybe<Blog>;
 };
 
-export type BlogCover_Image = {
-  __typename?: 'BlogCover_image';
-  description?: Maybe<Scalars['String']['output']>;
-  source?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-};
-
-export type BlogCover_ImageFilter = {
-  description?: InputMaybe<StringFilter>;
-  source?: InputMaybe<ImageFilter>;
-  title?: InputMaybe<StringFilter>;
-};
-
-export type BlogCover_ImageMutation = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  source?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type BlogFilter = {
-  cover_image?: InputMaybe<BlogCover_ImageFilter>;
+  cover_image?: InputMaybe<ImageFilter>;
   description?: InputMaybe<StringFilter>;
   language?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
 export type BlogMutation = {
-  cover_image?: InputMaybe<BlogCover_ImageMutation>;
+  cover_image?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   language?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;
@@ -268,7 +230,7 @@ export type Home = Document & Node & {
   __typename?: 'Home';
   _sys: SystemInfo;
   _values: Scalars['JSON']['output'];
-  cover_image?: Maybe<HomeCover_Image>;
+  cover_image?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   language: Scalars['String']['output'];
@@ -288,34 +250,15 @@ export type HomeConnectionEdges = {
   node?: Maybe<Home>;
 };
 
-export type HomeCover_Image = {
-  __typename?: 'HomeCover_image';
-  description?: Maybe<Scalars['String']['output']>;
-  source?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-};
-
-export type HomeCover_ImageFilter = {
-  description?: InputMaybe<StringFilter>;
-  source?: InputMaybe<ImageFilter>;
-  title?: InputMaybe<StringFilter>;
-};
-
-export type HomeCover_ImageMutation = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  source?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
 export type HomeFilter = {
-  cover_image?: InputMaybe<HomeCover_ImageFilter>;
+  cover_image?: InputMaybe<ImageFilter>;
   description?: InputMaybe<StringFilter>;
   language?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
 export type HomeMutation = {
-  cover_image?: InputMaybe<HomeCover_ImageMutation>;
+  cover_image?: InputMaybe<Scalars['String']['input']>;
   description?: InputMaybe<Scalars['String']['input']>;
   language?: InputMaybe<Scalars['String']['input']>;
   title?: InputMaybe<Scalars['String']['input']>;

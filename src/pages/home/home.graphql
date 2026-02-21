@@ -4,9 +4,7 @@ query Blog($lang: String!) {
       node {
         title
         description
-        coverImage: cover_image {
-          source
-        }
+        coverImage: cover_image
       }
     }
   }

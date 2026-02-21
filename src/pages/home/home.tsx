@@ -6,7 +6,6 @@ import Layout from "../layout.tsx";
 import language from "@/language.json" with { type: "json" };
 import greet from "./greet.json" with { type: "json" };
 import { BlogDocument, HomeByLangDocument } from "./home.graphql.ts";
-import Picture from "@/graphql/components/picture/picture.tsx";
 import { apolloClient } from "~lib";
 import { notFound } from "react-app";
 import HomeMeta from "./meta/meta.tsx";
@@ -63,9 +62,9 @@ export default async function Home(props: AppProps): Promise<JSX.Element> {
                   <div className="card bg-base-100 shadow-sm max-w-96">
                     {blog?.coverImage && (
                       <figure>
-                        <Picture
+                        <img
                           className="w-full aspect-video object-fit"
-                          fragment={blog.coverImage}
+                          src={blog.coverImage}
                         />
                       </figure>
                     )}
