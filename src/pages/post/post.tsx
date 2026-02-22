@@ -11,7 +11,7 @@ import Entry from "@/routes/entry.ts";
 import { Article } from "~component";
 import Layout from "@/pages/layout.tsx";
 import PostMeta from "./meta/meta.tsx";
-import { apolloClient } from "~lib";
+import { apolloClient, cloudinary } from "~lib";
 import BodyRaw from "@/graphql/components/body_raw/body_raw.tsx";
 
 export default async function Post(
@@ -92,7 +92,12 @@ export default async function Post(
             <figure>
               <img
                 className="w-full aspect-video object-fit"
-                src={postPage.coverImage}
+                src={cloudinary
+                  .image(postPage.coverImage)
+                  .setDeliveryType("fetch")
+                  .format("auto")
+                  .quality("auto")
+                  .toURL()}
               />
             </figure>
           )}

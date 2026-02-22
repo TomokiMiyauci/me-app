@@ -1,7 +1,7 @@
 import type { ArticleFragment } from "./article.graphql.ts";
 import type { JSX } from "react";
 import { ArticleSummary, type ArticleSummaryProps } from "~component";
-// import Picture from "@/graphql/components/picture/picture.tsx";
+import { cloudinary } from "~lib";
 
 export interface ArticleProps {
   lang: string;
@@ -50,7 +50,12 @@ function fragmentToArticleSummaryProps(
         <figure>
           <img
             className="w-full aspect-video object-fit"
-            src={coverImage}
+            src={cloudinary
+              .image(coverImage)
+              .setDeliveryType("fetch")
+              .format("auto")
+              .quality("auto")
+              .toURL()}
             loading="lazy"
           />
         </figure>

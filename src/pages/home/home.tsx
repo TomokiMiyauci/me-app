@@ -6,7 +6,7 @@ import Layout from "../layout.tsx";
 import language from "@/language.json" with { type: "json" };
 import greet from "./greet.json" with { type: "json" };
 import { BlogDocument, HomeByLangDocument } from "./home.graphql.ts";
-import { apolloClient } from "~lib";
+import { apolloClient, cloudinary } from "~lib";
 import { notFound } from "react-app";
 import HomeMeta from "./meta/meta.tsx";
 
@@ -64,7 +64,12 @@ export default async function Home(props: AppProps): Promise<JSX.Element> {
                       <figure>
                         <img
                           className="w-full aspect-video object-fit"
-                          src={blog.coverImage}
+                          src={cloudinary
+                            .image(blog.coverImage)
+                            .setDeliveryType("fetch")
+                            .format("auto")
+                            .quality("auto")
+                            .toURL()}
                         />
                       </figure>
                     )}

@@ -32,4 +32,6 @@ function loadI18nEndpoint(): string {
 
 export const I18N_ENDPOINT = /* @__PURE__ */ loadI18nEndpoint();
 
+export const CLOUDINARY_ID = Deno.env.get("CLOUDINARY_ID");
+
 export const CACHE_KEY = Deno.env.get("CACHE_KEY") ?? "v1";

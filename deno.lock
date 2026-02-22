@@ -21,6 +21,7 @@
     "jsr:@std/streams@^1.0.17": "1.0.17",
     "npm:@apollo/client@^4.1.5": "4.1.5_graphql@16.12.0_react@19.2.4_react-dom@19.2.4__react@19.2.4_rxjs@7.8.2",
     "npm:@chromatic-com/storybook@^5.0.1": "5.0.1_storybook@10.2.8__react@19.2.4__react-dom@19.2.4___react@19.2.4_react@19.2.4_react-dom@19.2.4__react@19.2.4",
+    "npm:@cloudinary/url-gen@^1.22.0": "1.22.0",
     "npm:@graphql-codegen/add@6": "6.0.0_graphql@16.12.0",
     "npm:@graphql-codegen/cli@6.1.1": "6.1.1_graphql@16.12.0_@types+node@24.10.4",
     "npm:@graphql-codegen/cli@^6.1.1": "6.1.1_graphql@16.12.0_@types+node@24.10.4",
@@ -60,7 +61,7 @@
     "npm:react-error-boundary@^6.0.1": "6.1.1_react@19.2.4",
     "npm:react-error-boundary@^6.1.1": "6.1.1_react@19.2.4",
     "npm:react-icons@^5.5.0": "5.5.0_react@19.2.4",
-    "npm:react-schemaorg@2": "2.0.0_react@19.2.4_schema-dts@1.1.5_typescript@5.6.3",
+    "npm:react-schemaorg@2": "2.0.0_react@19.2.4_schema-dts@1.1.5_typescript@4.9.5",
     "npm:react@^19.1.1": "19.2.4",
     "npm:react@^19.2.3": "19.2.4",
     "npm:react@^19.2.4": "19.2.4",
@@ -416,6 +417,18 @@
         "jsonfile",
         "storybook",
         "strip-ansi@7.1.2"
+      ]
+    },
+    "@cloudinary/transformation-builder-sdk@1.21.2": {
+      "integrity": "sha512-ehOgKUaP+Nvuf7B0TosmB8iilL0kdiVjzjl8tIK06cjvsNnwSJI3xP9nEJmKkvqNxwwFwvYXT+mxUTqnSv9JOA==",
+      "dependencies": [
+        "@cloudinary/url-gen"
+      ]
+    },
+    "@cloudinary/url-gen@1.22.0": {
+      "integrity": "sha512-le8RMlgyC0JN3+FlC/YAlPYfvmJdtw8QGcSKDjCsfhS2CIem0mJl6ayti8bMoZ0P5wDvBewvRB0/dUQvhCzy3g==",
+      "dependencies": [
+        "@cloudinary/transformation-builder-sdk"
       ]
     },
     "@date-fns/tz@1.4.1": {
@@ -1721,7 +1734,7 @@
         "@radix-ui/react-compose-refs",
         "@radix-ui/react-context",
         "@radix-ui/react-primitive",
-        "@radix-ui/react-slot@1.2.3_@types+react@19.2.14_react@19.2.4",
+        "@radix-ui/react-slot",
         "@types/react",
         "@types/react-dom",
         "react",
@@ -1765,7 +1778,7 @@
         "@radix-ui/react-portal",
         "@radix-ui/react-presence",
         "@radix-ui/react-primitive",
-        "@radix-ui/react-slot@1.2.3_@types+react@19.2.14_react@19.2.4",
+        "@radix-ui/react-slot",
         "@radix-ui/react-use-controllable-state",
         "@types/react",
         "@types/react-dom",
@@ -1881,7 +1894,7 @@
         "@radix-ui/react-presence",
         "@radix-ui/react-primitive",
         "@radix-ui/react-roving-focus",
-        "@radix-ui/react-slot@1.2.3_@types+react@19.2.14_react@19.2.4",
+        "@radix-ui/react-slot",
         "@radix-ui/react-use-callback-ref",
         "@types/react",
         "@types/react-dom",
@@ -1909,7 +1922,7 @@
         "@radix-ui/react-portal",
         "@radix-ui/react-presence",
         "@radix-ui/react-primitive",
-        "@radix-ui/react-slot@1.2.3_@types+react@19.2.14_react@19.2.4",
+        "@radix-ui/react-slot",
         "@radix-ui/react-use-controllable-state",
         "@types/react",
         "@types/react-dom",
@@ -1979,7 +1992,7 @@
     "@radix-ui/react-primitive@2.1.3_@types+react@19.2.14_@types+react-dom@19.2.3__@types+react@19.2.14_react@19.2.4_react-dom@19.2.4__react@19.2.4": {
       "integrity": "sha512-m9gTwRkhy2lvCPe6QJp4d3G1TYEUHn/FzJUtq9MjH46an1wJU+GdoGC5VLof8RX8Ft/DlpshApkhswDLZzHIcQ==",
       "dependencies": [
-        "@radix-ui/react-slot@1.2.3_@types+react@19.2.14_react@19.2.4",
+        "@radix-ui/react-slot",
         "@types/react",
         "@types/react-dom",
         "react",
@@ -2028,7 +2041,7 @@
         "@radix-ui/react-popper",
         "@radix-ui/react-portal",
         "@radix-ui/react-primitive",
-        "@radix-ui/react-slot@1.2.3_@types+react@19.2.14_react@19.2.4",
+        "@radix-ui/react-slot",
         "@radix-ui/react-use-callback-ref",
         "@radix-ui/react-use-controllable-state",
         "@radix-ui/react-use-layout-effect",
@@ -2062,17 +2075,6 @@
     },
     "@radix-ui/react-slot@1.2.3_@types+react@19.2.14_react@19.2.4": {
       "integrity": "sha512-aeNmHnBxbi2St0au6VBVC7JXFlhLlOnvIIlePNniyUNAClzmtAUEY8/pBiK3iHjufOlwA+c20/8jngo7xcrg8A==",
-      "dependencies": [
-        "@radix-ui/react-compose-refs",
-        "@types/react",
-        "react"
-      ],
-      "optionalPeers": [
-        "@types/react"
-      ]
-    },
-    "@radix-ui/react-slot@1.2.4_@types+react@19.2.14_react@19.2.4": {
-      "integrity": "sha512-Jl+bCv8HxKnlTLVrcDE8zTMJ09R9/ukw4qBs/oZClOfoQk/cOTbDn+NceXfV7j09YPVQUryJPHurafcSg6EVKA==",
       "dependencies": [
         "@radix-ui/react-compose-refs",
         "@types/react",
@@ -2150,7 +2152,7 @@
         "@radix-ui/react-portal",
         "@radix-ui/react-presence",
         "@radix-ui/react-primitive",
-        "@radix-ui/react-slot@1.2.3_@types+react@19.2.14_react@19.2.4",
+        "@radix-ui/react-slot",
         "@radix-ui/react-use-controllable-state",
         "@radix-ui/react-visually-hidden",
         "@types/react",
@@ -3548,7 +3550,7 @@
     "@udecode/react-utils@47.3.1_react@19.2.4_react-dom@19.2.4__react@19.2.4_@types+react@19.2.14": {
       "integrity": "sha512-fHnY0RGOeKKPnFW8xx8VWlLI0yscHd/kIU5t0bZ5bJ7Vanlhk1CUnPGDNa5HCIMVQrLARngGut/lIyGtoF65EQ==",
       "dependencies": [
-        "@radix-ui/react-slot@1.2.4_@types+react@19.2.14_react@19.2.4",
+        "@radix-ui/react-slot",
         "@udecode/utils",
         "clsx",
         "react",
@@ -7036,7 +7038,7 @@
         "@types/react"
       ]
     },
-    "react-docgen-typescript@2.4.0_typescript@5.6.3": {
+    "react-docgen-typescript@2.4.0_typescript@4.9.5": {
       "integrity": "sha512-ZtAp5XTO5HRzQctjPU0ybY0RRCQO19X/8fxn3w7y2VVTUbGHDKULPTL4ky3vB05euSgG5NpALhEhDPvQ56wvXg==",
       "dependencies": [
         "typescript"
@@ -7145,7 +7147,7 @@
         "react"
       ]
     },
-    "react-schemaorg@2.0.0_react@19.2.4_schema-dts@1.1.5_typescript@5.6.3": {
+    "react-schemaorg@2.0.0_react@19.2.4_schema-dts@1.1.5_typescript@4.9.5": {
       "integrity": "sha512-UqciFKA203ewNjn0zC09uYKuJSvMD8L75L1s/cW4rc7cS64w8l7vaI3SYkuoI/nwCBkJRmOkSJedWDUZBlYZwg==",
       "dependencies": [
         "react",
@@ -7953,7 +7955,7 @@
         "@radix-ui/react-popover",
         "@radix-ui/react-select",
         "@radix-ui/react-separator",
-        "@radix-ui/react-slot@1.2.4_@types+react@19.2.14_react@19.2.4",
+        "@radix-ui/react-slot",
         "@radix-ui/react-toolbar",
         "@radix-ui/react-tooltip",
         "@react-hook/window-size",
@@ -8135,7 +8137,7 @@
         "is-typed-array"
       ]
     },
-    "typedoc@0.26.11_typescript@5.6.3": {
+    "typedoc@0.26.11_typescript@4.9.5": {
       "integrity": "sha512-sFEgRRtrcDl2FxVP58Ze++ZK2UQAEvtvvH8rRlig1Ja3o7dDaMHmaBfvJmdGnNEFaLTpQsN8dpvZaTqJSu/Ugw==",
       "dependencies": [
         "lunr",
@@ -8147,8 +8149,8 @@
       ],
       "bin": true
     },
-    "typescript@5.6.3": {
-      "integrity": "sha512-hjcS1mhfuyi4WW8IWtjP7brDrG2cuDZukyrYrSauoXGNgx0S7zceP07adYkJycEr56BOUTNPzbInooiN3fn1qw==",
+    "typescript@4.9.5": {
+      "integrity": "sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==",
       "bin": true
     },
     "ua-parser-js@1.0.41": {
@@ -8647,6 +8649,7 @@
       "dependencies": [
         "npm:@apollo/client@^4.1.5",
         "npm:@chromatic-com/storybook@^5.0.1",
+        "npm:@cloudinary/url-gen@^1.22.0",
         "npm:@graphql-codegen/add@6",
         "npm:@graphql-codegen/cli@6.1.1",
         "npm:@graphql-codegen/cli@^6.1.1",
