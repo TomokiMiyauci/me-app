@@ -2,21 +2,26 @@ import type { JSX } from "react";
 import type { AppProps } from "@/lib/app.tsx";
 import Layout from "@/pages/layout.tsx";
 import { PrivacyPolicyDocument } from "./privacy_policy.graphql.ts";
-import { gqlClient } from "~lib";
+import { apolloClient } from "~lib";
 import { notFound } from "react-app";
-import { PortableText } from "@portabletext/react";
 import language from "@/language.json" with { type: "json" };
 import resolver from "@/lib/link.ts";
 import Entry from "@/routes/entry.ts";
+import { TinaMarkdown } from "tinacms/dist/rich-text";
 
 export default async function PrivacyPolicy(
   props: AppProps,
 ): Promise<JSX.Element> {
   const { lang, i18n } = props;
 
-  const queryResult = await gqlClient.query(PrivacyPolicyDocument, { lang });
+  const queryResult = await apolloClient.query({
+    query: PrivacyPolicyDocument,
+    variables: { lang },
+  });
 
-  const doc = queryResult.allLegalDocument[0];
+  if (!queryResult.data) throw new Error("Failed to fetch privacy policy data");
+
+  const doc = queryResult.data.allLegalDocument.edges?.[0]?.node;
 
   if (!doc) notFound();
   const { t } = i18n;
@@ -33,8 +38,8 @@ export default async function PrivacyPolicy(
         <h1>{t("document.privacy_policy")}</h1>
 
         <section>
-          {doc.bodyRaw &&
-            <PortableText value={doc.bodyRaw} />}
+          {doc.body &&
+            <TinaMarkdown content={doc.body} />}
         </section>
       </main>
     </Layout>

@@ -1,45 +1,36 @@
-import type {
-  PortableTextReactComponents,
-  PortableTextTypeComponentProps,
-} from "@portabletext/react";
-import type { JSX } from "react";
-import type { Code as CodeType } from "@/graphql/types.ts";
+import { type JSX, lazy } from "react";
+import {
+  type Components,
+  TinaMarkdown,
+  type TinaMarkdownContent,
+} from "tinacms/dist/rich-text";
 import { CodeBlock, ShikiHighlighter } from "~component";
-import { PortableText } from "@portabletext/react";
-import type { TypedObject } from "@portabletext/types";
-import Picture from "./picture/picture.tsx";
-import Table from "./table/table.tsx";
-
-function Code(
-  props: PortableTextTypeComponentProps<CodeType>,
-): JSX.Element {
-  const { code, language, filename } = props.value;
-
-  return (
-    <CodeBlock
-      fileName={filename ?? undefined}
-      code={code ?? ""}
-      language={language ?? undefined}
-      highlighter={new ShikiHighlighter()}
-      className="not-prose"
-    />
-  );
-}
-
-const types = {
-  code: Code,
-  picture: Picture,
-  table: Table,
-} satisfies PortableTextReactComponents["types"];
+const Mermaid = lazy(() => import("./mermaid.tsx"));
 
 const component = {
-  types,
-} satisfies Partial<PortableTextReactComponents>;
+  code_block: (props) => {
+    const { lang, value } = props ?? {};
+
+    if (lang === "mermaid") {
+      return <Mermaid className="not-prose my-8">{value}</Mermaid>;
+    }
+
+    return (
+      <CodeBlock
+        language={lang}
+        highlighter={new ShikiHighlighter()}
+        code={value ?? ""}
+        className="not-prose my-5"
+      />
+    );
+  },
+  // deno-lint-ignore ban-types
+} satisfies Components<{}>;
 
 export interface BodyRawProps {
-  fragment: TypedObject[];
+  fragment: TinaMarkdownContent | TinaMarkdownContent[];
 }
 
 export default function BodyRaw(props: BodyRawProps): JSX.Element {
-  return <PortableText components={component} value={props.fragment} />;
+  return <TinaMarkdown components={component} content={props.fragment} />;
 }

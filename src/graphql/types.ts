@@ -1,6 +1,6 @@
 // deno-lint-ignore-file
 // deno-fmt-ignore-file
-import type { TypedObject } from "@portabletext/types";
+import type { TinaMarkdownContent } from "tinacms/dist/rich-text";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -15,1455 +15,865 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  Date: { input: string; output: string; }
-  DateTime: { input: string; output: string; }
-  JSON: { input: TypedObject[]; output: TypedObject[]; }
+  JSON: { input: TinaMarkdownContent; output: TinaMarkdownContent; }
+  Reference: { input: any; output: any; }
 };
 
-export type Author = Document & {
+export type Author = Document & Node & {
   __typename?: 'Author';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  image?: Maybe<Picture>;
-  name?: Maybe<Array<Maybe<InternationalizedArrayStringValue>>>;
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+  cover_image?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+};
+
+export type AuthorConnection = Connection & {
+  __typename?: 'AuthorConnection';
+  edges?: Maybe<Array<Maybe<AuthorConnectionEdges>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+};
+
+export type AuthorConnectionEdges = {
+  __typename?: 'AuthorConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Author>;
 };
 
 export type AuthorFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  image?: InputMaybe<PictureFilter>;
+  cover_image?: InputMaybe<ImageFilter>;
+  name?: InputMaybe<StringFilter>;
 };
 
-export type AuthorSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  image?: InputMaybe<PictureSorting>;
+export type AuthorMutation = {
+  cover_image?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Block = {
-  __typename?: 'Block';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  children?: Maybe<Array<Maybe<Span>>>;
-  level?: Maybe<Scalars['Float']['output']>;
-  listItem?: Maybe<Scalars['String']['output']>;
-  style?: Maybe<Scalars['String']['output']>;
-};
-
-export type BlockOrCodeOrPictureOrTable = Block | Code | Picture | Table;
-
-export type Blog = Document & {
+export type Blog = Document & Node & {
   __typename?: 'Blog';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  coverImage?: Maybe<Picture>;
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+  cover_image?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  language?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  language: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type BlogConnection = Connection & {
+  __typename?: 'BlogConnection';
+  edges?: Maybe<Array<Maybe<BlogConnectionEdges>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+};
+
+export type BlogConnectionEdges = {
+  __typename?: 'BlogConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Blog>;
 };
 
 export type BlogFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  coverImage?: InputMaybe<PictureFilter>;
+  cover_image?: InputMaybe<ImageFilter>;
   description?: InputMaybe<StringFilter>;
   language?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
-export type BlogOrCategoryOrHomeOrLegalDocumentOrPostOrTag = Blog | Category | Home | LegalDocument | Post | Tag;
-
-export type BlogSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  coverImage?: InputMaybe<PictureSorting>;
-  description?: InputMaybe<SortOrder>;
-  language?: InputMaybe<SortOrder>;
-  title?: InputMaybe<SortOrder>;
+export type BlogMutation = {
+  cover_image?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type BooleanFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Checks if the value is defined. */
-  is_defined?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type Category = Document & {
+export type Category = Document & Node & {
   __typename?: 'Category';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
   description?: Maybe<Scalars['String']['output']>;
-  language?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  slug?: Maybe<Slug>;
+  id: Scalars['ID']['output'];
+  language: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+};
+
+export type CategoryConnection = Connection & {
+  __typename?: 'CategoryConnection';
+  edges?: Maybe<Array<Maybe<CategoryConnectionEdges>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+};
+
+export type CategoryConnectionEdges = {
+  __typename?: 'CategoryConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Category>;
 };
 
 export type CategoryFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
   description?: InputMaybe<StringFilter>;
   language?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
-  slug?: InputMaybe<SlugFilter>;
+  slug?: InputMaybe<StringFilter>;
 };
 
-export type CategorySorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  description?: InputMaybe<SortOrder>;
-  language?: InputMaybe<SortOrder>;
-  name?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SlugSorting>;
+export type CategoryMutation = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Code = {
-  __typename?: 'Code';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  code?: Maybe<Scalars['String']['output']>;
-  filename?: Maybe<Scalars['String']['output']>;
-  highlightedLines?: Maybe<Array<Maybe<Scalars['Float']['output']>>>;
-  language?: Maybe<Scalars['String']['output']>;
+export type Collection = {
+  __typename?: 'Collection';
+  documents: DocumentConnection;
+  fields?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
+  format?: Maybe<Scalars['String']['output']>;
+  label?: Maybe<Scalars['String']['output']>;
+  matches?: Maybe<Scalars['String']['output']>;
+  name: Scalars['String']['output'];
+  path: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  templates?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
 };
 
-export type CodeFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  code?: InputMaybe<StringFilter>;
-  filename?: InputMaybe<StringFilter>;
-  language?: InputMaybe<StringFilter>;
+
+export type CollectionDocumentsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<DocumentFilter>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  folder?: InputMaybe<Scalars['String']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type CodeSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  code?: InputMaybe<SortOrder>;
-  filename?: InputMaybe<SortOrder>;
-  language?: InputMaybe<SortOrder>;
-};
-
-export type CrossDatasetReference = {
-  __typename?: 'CrossDatasetReference';
-  _dataset?: Maybe<Scalars['String']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  _projectId?: Maybe<Scalars['String']['output']>;
-  _ref?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  _weak?: Maybe<Scalars['Boolean']['output']>;
-};
-
-export type CrossDatasetReferenceFilter = {
-  _dataset?: InputMaybe<StringFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _projectId?: InputMaybe<StringFilter>;
-  _ref?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _weak?: InputMaybe<BooleanFilter>;
-};
-
-export type CrossDatasetReferenceSorting = {
-  _dataset?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _projectId?: InputMaybe<SortOrder>;
-  _ref?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _weak?: InputMaybe<SortOrder>;
-};
-
-export type DateFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: InputMaybe<Scalars['Date']['input']>;
-  /** Checks if the value is greater than the given input. */
-  gt?: InputMaybe<Scalars['Date']['input']>;
-  /** Checks if the value is greater than or equal to the given input. */
-  gte?: InputMaybe<Scalars['Date']['input']>;
-  /** Checks if the value is defined. */
-  is_defined?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Checks if the value is lesser than the given input. */
-  lt?: InputMaybe<Scalars['Date']['input']>;
-  /** Checks if the value is lesser than or equal to the given input. */
-  lte?: InputMaybe<Scalars['Date']['input']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: InputMaybe<Scalars['Date']['input']>;
+/** A relay-compliant pagination connection */
+export type Connection = {
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
 };
 
 export type DatetimeFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Checks if the value is greater than the given input. */
-  gt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Checks if the value is greater than or equal to the given input. */
-  gte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Checks if the value is defined. */
-  is_defined?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Checks if the value is lesser than the given input. */
-  lt?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Checks if the value is lesser than or equal to the given input. */
-  lte?: InputMaybe<Scalars['DateTime']['input']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: InputMaybe<Scalars['DateTime']['input']>;
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-/** A Sanity document */
 export type Document = {
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  _sys?: Maybe<SystemInfo>;
+  _values: Scalars['JSON']['output'];
+  id: Scalars['ID']['output'];
+};
+
+export type DocumentConnection = Connection & {
+  __typename?: 'DocumentConnection';
+  edges?: Maybe<Array<Maybe<DocumentConnectionEdges>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+};
+
+export type DocumentConnectionEdges = {
+  __typename?: 'DocumentConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<DocumentNode>;
 };
 
 export type DocumentFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
+  author?: InputMaybe<AuthorFilter>;
+  blog?: InputMaybe<BlogFilter>;
+  category?: InputMaybe<CategoryFilter>;
+  home?: InputMaybe<HomeFilter>;
+  legal_document?: InputMaybe<Legal_DocumentFilter>;
+  post?: InputMaybe<PostFilter>;
+  tag?: InputMaybe<TagFilter>;
+  translation_metadata?: InputMaybe<Translation_MetadataFilter>;
 };
 
-export type DocumentSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
+export type DocumentMutation = {
+  author?: InputMaybe<AuthorMutation>;
+  blog?: InputMaybe<BlogMutation>;
+  category?: InputMaybe<CategoryMutation>;
+  home?: InputMaybe<HomeMutation>;
+  legal_document?: InputMaybe<Legal_DocumentMutation>;
+  post?: InputMaybe<PostMutation>;
+  tag?: InputMaybe<TagMutation>;
+  translation_metadata?: InputMaybe<Translation_MetadataMutation>;
 };
 
-export type File = {
-  __typename?: 'File';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  asset?: Maybe<SanityFileAsset>;
-  media?: Maybe<GlobalDocumentReference>;
+export type DocumentNode = Author | Blog | Category | Folder | Home | Legal_Document | Post | Tag | Translation_Metadata;
+
+export type DocumentUpdateMutation = {
+  author?: InputMaybe<AuthorMutation>;
+  blog?: InputMaybe<BlogMutation>;
+  category?: InputMaybe<CategoryMutation>;
+  home?: InputMaybe<HomeMutation>;
+  legal_document?: InputMaybe<Legal_DocumentMutation>;
+  post?: InputMaybe<PostMutation>;
+  relativePath?: InputMaybe<Scalars['String']['input']>;
+  tag?: InputMaybe<TagMutation>;
+  translation_metadata?: InputMaybe<Translation_MetadataMutation>;
 };
 
-export type FileFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  asset?: InputMaybe<SanityFileAssetFilter>;
-  media?: InputMaybe<GlobalDocumentReferenceFilter>;
+export type Folder = {
+  __typename?: 'Folder';
+  name: Scalars['String']['output'];
+  path: Scalars['String']['output'];
 };
 
-export type FileSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  media?: InputMaybe<GlobalDocumentReferenceSorting>;
-};
-
-export type FloatFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: InputMaybe<Scalars['Float']['input']>;
-  /** Checks if the value is greater than the given input. */
-  gt?: InputMaybe<Scalars['Float']['input']>;
-  /** Checks if the value is greater than or equal to the given input. */
-  gte?: InputMaybe<Scalars['Float']['input']>;
-  /** Checks if the value is defined. */
-  is_defined?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Checks if the value is lesser than the given input. */
-  lt?: InputMaybe<Scalars['Float']['input']>;
-  /** Checks if the value is lesser than or equal to the given input. */
-  lte?: InputMaybe<Scalars['Float']['input']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: InputMaybe<Scalars['Float']['input']>;
-};
-
-export type Geopoint = {
-  __typename?: 'Geopoint';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  alt?: Maybe<Scalars['Float']['output']>;
-  lat?: Maybe<Scalars['Float']['output']>;
-  lng?: Maybe<Scalars['Float']['output']>;
-};
-
-export type GeopointFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  alt?: InputMaybe<FloatFilter>;
-  lat?: InputMaybe<FloatFilter>;
-  lng?: InputMaybe<FloatFilter>;
-};
-
-export type GeopointSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  alt?: InputMaybe<SortOrder>;
-  lat?: InputMaybe<SortOrder>;
-  lng?: InputMaybe<SortOrder>;
-};
-
-export type GlobalDocumentReference = {
-  __typename?: 'GlobalDocumentReference';
-  _key?: Maybe<Scalars['String']['output']>;
-  _ref?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  _weak?: Maybe<Scalars['Boolean']['output']>;
-};
-
-export type GlobalDocumentReferenceFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _ref?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _weak?: InputMaybe<BooleanFilter>;
-};
-
-export type GlobalDocumentReferenceSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _ref?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _weak?: InputMaybe<SortOrder>;
-};
-
-export type Home = Document & {
+export type Home = Document & Node & {
   __typename?: 'Home';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  coverImage?: Maybe<Picture>;
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+  cover_image?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  language?: Maybe<Scalars['String']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  language: Scalars['String']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type HomeConnection = Connection & {
+  __typename?: 'HomeConnection';
+  edges?: Maybe<Array<Maybe<HomeConnectionEdges>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+};
+
+export type HomeConnectionEdges = {
+  __typename?: 'HomeConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Home>;
 };
 
 export type HomeFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  coverImage?: InputMaybe<PictureFilter>;
+  cover_image?: InputMaybe<ImageFilter>;
   description?: InputMaybe<StringFilter>;
   language?: InputMaybe<StringFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
-export type HomeSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  coverImage?: InputMaybe<PictureSorting>;
-  description?: InputMaybe<SortOrder>;
-  language?: InputMaybe<SortOrder>;
-  title?: InputMaybe<SortOrder>;
-};
-
-export type IdFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: InputMaybe<Scalars['ID']['input']>;
-  in?: InputMaybe<Array<Scalars['ID']['input']>>;
-  /** Checks if the value matches the given word/words. */
-  matches?: InputMaybe<Scalars['ID']['input']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: InputMaybe<Scalars['ID']['input']>;
-  nin?: InputMaybe<Array<Scalars['ID']['input']>>;
-};
-
-export type Image = {
-  __typename?: 'Image';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  asset?: Maybe<SanityImageAsset>;
-  crop?: Maybe<SanityImageCrop>;
-  hotspot?: Maybe<SanityImageHotspot>;
-  media?: Maybe<GlobalDocumentReference>;
+export type HomeMutation = {
+  cover_image?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type ImageFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  asset?: InputMaybe<SanityImageAssetFilter>;
-  crop?: InputMaybe<SanityImageCropFilter>;
-  hotspot?: InputMaybe<SanityImageHotspotFilter>;
-  media?: InputMaybe<GlobalDocumentReferenceFilter>;
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type ImageSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  crop?: InputMaybe<SanityImageCropSorting>;
-  hotspot?: InputMaybe<SanityImageHotspotSorting>;
-  media?: InputMaybe<GlobalDocumentReferenceSorting>;
+export type Legal_Document = Document & Node & {
+  __typename?: 'Legal_document';
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+  body?: Maybe<Scalars['JSON']['output']>;
+  effective_at?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  language: Scalars['String']['output'];
+  type: Scalars['String']['output'];
 };
 
-export type IntFilter = {
-  /** Checks if the value is equal to the given input. */
-  eq?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks if the value is greater than the given input. */
-  gt?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks if the value is greater than or equal to the given input. */
-  gte?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks if the value is defined. */
-  is_defined?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Checks if the value is lesser than the given input. */
-  lt?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks if the value is lesser than or equal to the given input. */
-  lte?: InputMaybe<Scalars['Int']['input']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: InputMaybe<Scalars['Int']['input']>;
+export type Legal_DocumentConnection = Connection & {
+  __typename?: 'Legal_documentConnection';
+  edges?: Maybe<Array<Maybe<Legal_DocumentConnectionEdges>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
 };
 
-export type InternationalizedArrayBodyContentValue = {
-  __typename?: 'InternationalizedArrayBodyContentValue';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  valueRaw?: Maybe<Scalars['JSON']['output']>;
+export type Legal_DocumentConnectionEdges = {
+  __typename?: 'Legal_documentConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Legal_Document>;
 };
 
-export type InternationalizedArrayBodyContentValueFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-};
-
-export type InternationalizedArrayBodyContentValueSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-};
-
-export type InternationalizedArrayReferenceValue = {
-  __typename?: 'InternationalizedArrayReferenceValue';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  value?: Maybe<BlogOrCategoryOrHomeOrLegalDocumentOrPostOrTag>;
-};
-
-export type InternationalizedArrayReferenceValueFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-};
-
-export type InternationalizedArrayReferenceValueSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-};
-
-export type InternationalizedArrayStringValue = {
-  __typename?: 'InternationalizedArrayStringValue';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  value?: Maybe<Scalars['String']['output']>;
-};
-
-export type InternationalizedArrayStringValueFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  value?: InputMaybe<StringFilter>;
-};
-
-export type InternationalizedArrayStringValueSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  value?: InputMaybe<SortOrder>;
-};
-
-export type LegalDocument = Document & {
-  __typename?: 'LegalDocument';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  bodyRaw?: Maybe<Scalars['JSON']['output']>;
-  effectiveAt?: Maybe<Scalars['DateTime']['output']>;
-  language?: Maybe<Scalars['String']['output']>;
-  type?: Maybe<Scalars['String']['output']>;
-};
-
-export type LegalDocumentFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  effectiveAt?: InputMaybe<DatetimeFilter>;
+export type Legal_DocumentFilter = {
+  body?: InputMaybe<RichTextFilter>;
+  effective_at?: InputMaybe<DatetimeFilter>;
   language?: InputMaybe<StringFilter>;
   type?: InputMaybe<StringFilter>;
 };
 
-export type LegalDocumentSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  effectiveAt?: InputMaybe<SortOrder>;
-  language?: InputMaybe<SortOrder>;
-  type?: InputMaybe<SortOrder>;
+export type Legal_DocumentMutation = {
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  effective_at?: InputMaybe<Scalars['String']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type MediaTag = Document & {
-  __typename?: 'MediaTag';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  name?: Maybe<Slug>;
+export type Mutation = {
+  __typename?: 'Mutation';
+  addPendingDocument: DocumentNode;
+  createAuthor: Author;
+  createBlog: Blog;
+  createCategory: Category;
+  createDocument: DocumentNode;
+  createFolder: DocumentNode;
+  createHome: Home;
+  createLegal_document: Legal_Document;
+  createPost: Post;
+  createTag: Tag;
+  createTranslation_metadata: Translation_Metadata;
+  deleteDocument: DocumentNode;
+  updateAuthor: Author;
+  updateBlog: Blog;
+  updateCategory: Category;
+  updateDocument: DocumentNode;
+  updateHome: Home;
+  updateLegal_document: Legal_Document;
+  updatePost: Post;
+  updateTag: Tag;
+  updateTranslation_metadata: Translation_Metadata;
 };
 
-export type MediaTagFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  name?: InputMaybe<SlugFilter>;
+
+export type MutationAddPendingDocumentArgs = {
+  collection: Scalars['String']['input'];
+  relativePath: Scalars['String']['input'];
+  template?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type MediaTagSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  name?: InputMaybe<SlugSorting>;
+
+export type MutationCreateAuthorArgs = {
+  params: AuthorMutation;
+  relativePath: Scalars['String']['input'];
 };
 
-export type Picture = Document & {
-  __typename?: 'Picture';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  image?: Maybe<Image>;
-  title?: Maybe<Scalars['String']['output']>;
+
+export type MutationCreateBlogArgs = {
+  params: BlogMutation;
+  relativePath: Scalars['String']['input'];
 };
 
-export type PictureFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  description?: InputMaybe<StringFilter>;
-  image?: InputMaybe<ImageFilter>;
-  title?: InputMaybe<StringFilter>;
+
+export type MutationCreateCategoryArgs = {
+  params: CategoryMutation;
+  relativePath: Scalars['String']['input'];
 };
 
-export type PictureSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  description?: InputMaybe<SortOrder>;
-  image?: InputMaybe<ImageSorting>;
-  title?: InputMaybe<SortOrder>;
+
+export type MutationCreateDocumentArgs = {
+  collection?: InputMaybe<Scalars['String']['input']>;
+  params: DocumentMutation;
+  relativePath: Scalars['String']['input'];
 };
 
-export type Post = Document & {
+
+export type MutationCreateFolderArgs = {
+  collection?: InputMaybe<Scalars['String']['input']>;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationCreateHomeArgs = {
+  params: HomeMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationCreateLegal_DocumentArgs = {
+  params: Legal_DocumentMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationCreatePostArgs = {
+  params: PostMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationCreateTagArgs = {
+  params: TagMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationCreateTranslation_MetadataArgs = {
+  params: Translation_MetadataMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationDeleteDocumentArgs = {
+  collection?: InputMaybe<Scalars['String']['input']>;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateAuthorArgs = {
+  params: AuthorMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateBlogArgs = {
+  params: BlogMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateCategoryArgs = {
+  params: CategoryMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateDocumentArgs = {
+  collection?: InputMaybe<Scalars['String']['input']>;
+  params: DocumentUpdateMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateHomeArgs = {
+  params: HomeMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateLegal_DocumentArgs = {
+  params: Legal_DocumentMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdatePostArgs = {
+  params: PostMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateTagArgs = {
+  params: TagMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+
+export type MutationUpdateTranslation_MetadataArgs = {
+  params: Translation_MetadataMutation;
+  relativePath: Scalars['String']['input'];
+};
+
+export type Node = {
+  id: Scalars['ID']['output'];
+};
+
+export type PageInfo = {
+  __typename?: 'PageInfo';
+  endCursor: Scalars['String']['output'];
+  hasNextPage: Scalars['Boolean']['output'];
+  hasPreviousPage: Scalars['Boolean']['output'];
+  startCursor: Scalars['String']['output'];
+};
+
+export type Post = Document & Node & {
   __typename?: 'Post';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  authors?: Maybe<Array<Maybe<Author>>>;
-  bodyRaw?: Maybe<Scalars['JSON']['output']>;
-  categories?: Maybe<Array<Maybe<Category>>>;
-  coverImage?: Maybe<Picture>;
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+  authors?: Maybe<Array<Maybe<PostAuthors>>>;
+  body?: Maybe<Scalars['JSON']['output']>;
+  categories?: Maybe<Array<Maybe<PostCategories>>>;
+  cover_image?: Maybe<Scalars['String']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  language?: Maybe<Scalars['String']['output']>;
-  modifiedAt?: Maybe<Scalars['DateTime']['output']>;
-  publishedAt?: Maybe<Scalars['DateTime']['output']>;
-  slug?: Maybe<Slug>;
-  tags?: Maybe<Array<Maybe<Tag>>>;
-  title?: Maybe<Scalars['String']['output']>;
+  id: Scalars['ID']['output'];
+  language: Scalars['String']['output'];
+  modified_at?: Maybe<Scalars['String']['output']>;
+  published_at: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+  tags?: Maybe<Array<Maybe<PostTags>>>;
+  title: Scalars['String']['output'];
+};
+
+export type PostAuthors = {
+  __typename?: 'PostAuthors';
+  author?: Maybe<PostAuthorsAuthor>;
+};
+
+export type PostAuthorsAuthor = Author;
+
+export type PostAuthorsAuthorFilter = {
+  author?: InputMaybe<AuthorFilter>;
+};
+
+export type PostAuthorsFilter = {
+  author?: InputMaybe<PostAuthorsAuthorFilter>;
+};
+
+export type PostAuthorsMutation = {
+  author?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PostCategories = {
+  __typename?: 'PostCategories';
+  category?: Maybe<PostCategoriesCategory>;
+};
+
+export type PostCategoriesCategory = Category;
+
+export type PostCategoriesCategoryFilter = {
+  category?: InputMaybe<CategoryFilter>;
+};
+
+export type PostCategoriesFilter = {
+  category?: InputMaybe<PostCategoriesCategoryFilter>;
+};
+
+export type PostCategoriesMutation = {
+  category?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type PostConnection = Connection & {
+  __typename?: 'PostConnection';
+  edges?: Maybe<Array<Maybe<PostConnectionEdges>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+};
+
+export type PostConnectionEdges = {
+  __typename?: 'PostConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Post>;
 };
 
 export type PostFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  coverImage?: InputMaybe<PictureFilter>;
+  authors?: InputMaybe<PostAuthorsFilter>;
+  body?: InputMaybe<RichTextFilter>;
+  categories?: InputMaybe<PostCategoriesFilter>;
+  cover_image?: InputMaybe<ImageFilter>;
   description?: InputMaybe<StringFilter>;
   language?: InputMaybe<StringFilter>;
-  modifiedAt?: InputMaybe<DatetimeFilter>;
-  publishedAt?: InputMaybe<DatetimeFilter>;
-  slug?: InputMaybe<SlugFilter>;
+  modified_at?: InputMaybe<DatetimeFilter>;
+  published_at?: InputMaybe<DatetimeFilter>;
+  slug?: InputMaybe<StringFilter>;
+  tags?: InputMaybe<PostTagsFilter>;
   title?: InputMaybe<StringFilter>;
 };
 
-export type PostSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  coverImage?: InputMaybe<PictureSorting>;
-  description?: InputMaybe<SortOrder>;
-  language?: InputMaybe<SortOrder>;
-  modifiedAt?: InputMaybe<SortOrder>;
-  publishedAt?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SlugSorting>;
-  title?: InputMaybe<SortOrder>;
+export type PostMutation = {
+  authors?: InputMaybe<Array<InputMaybe<PostAuthorsMutation>>>;
+  body?: InputMaybe<Scalars['JSON']['input']>;
+  categories?: InputMaybe<Array<InputMaybe<PostCategoriesMutation>>>;
+  cover_image?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+  modified_at?: InputMaybe<Scalars['String']['input']>;
+  published_at?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<InputMaybe<PostTagsMutation>>>;
+  title?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type RootQuery = {
-  __typename?: 'RootQuery';
-  Author?: Maybe<Author>;
-  Blog?: Maybe<Blog>;
-  Category?: Maybe<Category>;
-  Document?: Maybe<Document>;
-  Home?: Maybe<Home>;
-  LegalDocument?: Maybe<LegalDocument>;
-  MediaTag?: Maybe<MediaTag>;
-  Picture?: Maybe<Picture>;
-  Post?: Maybe<Post>;
-  SanityFileAsset?: Maybe<SanityFileAsset>;
-  SanityImageAsset?: Maybe<SanityImageAsset>;
-  Tag?: Maybe<Tag>;
-  TranslationMetadata?: Maybe<TranslationMetadata>;
-  allAuthor: Array<Author>;
-  allBlog: Array<Blog>;
-  allCategory: Array<Category>;
-  allDocument: Array<Document>;
-  allHome: Array<Home>;
-  allLegalDocument: Array<LegalDocument>;
-  allMediaTag: Array<MediaTag>;
-  allPicture: Array<Picture>;
-  allPost: Array<Post>;
-  allSanityFileAsset: Array<SanityFileAsset>;
-  allSanityImageAsset: Array<SanityImageAsset>;
-  allTag: Array<Tag>;
-  allTranslationMetadata: Array<TranslationMetadata>;
+export type PostTags = {
+  __typename?: 'PostTags';
+  tag?: Maybe<PostTagsTag>;
 };
 
-
-export type RootQueryAuthorArgs = {
-  id: Scalars['ID']['input'];
+export type PostTagsFilter = {
+  tag?: InputMaybe<PostTagsTagFilter>;
 };
 
-
-export type RootQueryBlogArgs = {
-  id: Scalars['ID']['input'];
+export type PostTagsMutation = {
+  tag?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type PostTagsTag = Tag;
 
-export type RootQueryCategoryArgs = {
-  id: Scalars['ID']['input'];
+export type PostTagsTagFilter = {
+  tag?: InputMaybe<TagFilter>;
+};
+
+export type Query = {
+  __typename?: 'Query';
+  author: Author;
+  authorConnection: AuthorConnection;
+  blog: Blog;
+  blogConnection: BlogConnection;
+  category: Category;
+  categoryConnection: CategoryConnection;
+  collection: Collection;
+  collections: Array<Collection>;
+  document: DocumentNode;
+  getOptimizedQuery?: Maybe<Scalars['String']['output']>;
+  home: Home;
+  homeConnection: HomeConnection;
+  legal_document: Legal_Document;
+  legal_documentConnection: Legal_DocumentConnection;
+  node: Node;
+  post: Post;
+  postConnection: PostConnection;
+  tag: Tag;
+  tagConnection: TagConnection;
+  translation_metadata: Translation_Metadata;
+  translation_metadataConnection: Translation_MetadataConnection;
 };
 
 
-export type RootQueryDocumentArgs = {
-  id: Scalars['ID']['input'];
+export type QueryAuthorArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryHomeArgs = {
-  id: Scalars['ID']['input'];
+export type QueryAuthorConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<AuthorFilter>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryLegalDocumentArgs = {
-  id: Scalars['ID']['input'];
+export type QueryBlogArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryMediaTagArgs = {
-  id: Scalars['ID']['input'];
+export type QueryBlogConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<BlogFilter>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryPictureArgs = {
-  id: Scalars['ID']['input'];
+export type QueryCategoryArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryPostArgs = {
-  id: Scalars['ID']['input'];
+export type QueryCategoryConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<CategoryFilter>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQuerySanityFileAssetArgs = {
-  id: Scalars['ID']['input'];
+export type QueryCollectionArgs = {
+  collection?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQuerySanityImageAssetArgs = {
-  id: Scalars['ID']['input'];
+export type QueryDocumentArgs = {
+  collection?: InputMaybe<Scalars['String']['input']>;
+  relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryTagArgs = {
-  id: Scalars['ID']['input'];
+export type QueryGetOptimizedQueryArgs = {
+  queryString: Scalars['String']['input'];
 };
 
 
-export type RootQueryTranslationMetadataArgs = {
-  id: Scalars['ID']['input'];
+export type QueryHomeArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllAuthorArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<AuthorSorting>>;
-  where?: InputMaybe<AuthorFilter>;
+export type QueryHomeConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<HomeFilter>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllBlogArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<BlogSorting>>;
-  where?: InputMaybe<BlogFilter>;
+export type QueryLegal_DocumentArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllCategoryArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<CategorySorting>>;
-  where?: InputMaybe<CategoryFilter>;
+export type QueryLegal_DocumentConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Legal_DocumentFilter>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllDocumentArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<DocumentSorting>>;
-  where?: InputMaybe<DocumentFilter>;
+export type QueryNodeArgs = {
+  id?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllHomeArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<HomeSorting>>;
-  where?: InputMaybe<HomeFilter>;
+export type QueryPostArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllLegalDocumentArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<LegalDocumentSorting>>;
-  where?: InputMaybe<LegalDocumentFilter>;
+export type QueryPostConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<PostFilter>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllMediaTagArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<MediaTagSorting>>;
-  where?: InputMaybe<MediaTagFilter>;
+export type QueryTagArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllPictureArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<PictureSorting>>;
-  where?: InputMaybe<PictureFilter>;
+export type QueryTagConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<TagFilter>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllPostArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<PostSorting>>;
-  where?: InputMaybe<PostFilter>;
+export type QueryTranslation_MetadataArgs = {
+  relativePath?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-export type RootQueryAllSanityFileAssetArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<SanityFileAssetSorting>>;
-  where?: InputMaybe<SanityFileAssetFilter>;
+export type QueryTranslation_MetadataConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<Translation_MetadataFilter>;
+  first?: InputMaybe<Scalars['Float']['input']>;
+  last?: InputMaybe<Scalars['Float']['input']>;
+  sort?: InputMaybe<Scalars['String']['input']>;
 };
 
-
-export type RootQueryAllSanityImageAssetArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<SanityImageAssetSorting>>;
-  where?: InputMaybe<SanityImageAssetFilter>;
-};
-
-
-export type RootQueryAllTagArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<TagSorting>>;
-  where?: InputMaybe<TagFilter>;
-};
-
-
-export type RootQueryAllTranslationMetadataArgs = {
-  limit?: InputMaybe<Scalars['Int']['input']>;
-  offset?: InputMaybe<Scalars['Int']['input']>;
-  sort?: InputMaybe<Array<TranslationMetadataSorting>>;
-  where?: InputMaybe<TranslationMetadataFilter>;
-};
-
-export type SanityAssetSourceData = {
-  __typename?: 'SanityAssetSourceData';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  /** The unique ID for the asset within the originating source so you can programatically find back to it */
-  id?: Maybe<Scalars['String']['output']>;
-  /** A canonical name for the source this asset is originating from */
-  name?: Maybe<Scalars['String']['output']>;
-  /** A URL to find more information about this asset in the originating source */
-  url?: Maybe<Scalars['String']['output']>;
-};
-
-export type SanityAssetSourceDataFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  id?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-  url?: InputMaybe<StringFilter>;
-};
-
-export type SanityAssetSourceDataSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  id?: InputMaybe<SortOrder>;
-  name?: InputMaybe<SortOrder>;
-  url?: InputMaybe<SortOrder>;
-};
-
-export type SanityFileAsset = Document & {
-  __typename?: 'SanityFileAsset';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  altText?: Maybe<Scalars['String']['output']>;
-  assetId?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  extension?: Maybe<Scalars['String']['output']>;
-  label?: Maybe<Scalars['String']['output']>;
-  mimeType?: Maybe<Scalars['String']['output']>;
-  originalFilename?: Maybe<Scalars['String']['output']>;
-  path?: Maybe<Scalars['String']['output']>;
-  sha1hash?: Maybe<Scalars['String']['output']>;
-  size?: Maybe<Scalars['Float']['output']>;
-  source?: Maybe<SanityAssetSourceData>;
-  title?: Maybe<Scalars['String']['output']>;
-  uploadId?: Maybe<Scalars['String']['output']>;
-  url?: Maybe<Scalars['String']['output']>;
-};
-
-export type SanityFileAssetFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  altText?: InputMaybe<StringFilter>;
-  assetId?: InputMaybe<StringFilter>;
-  description?: InputMaybe<StringFilter>;
-  extension?: InputMaybe<StringFilter>;
-  label?: InputMaybe<StringFilter>;
-  mimeType?: InputMaybe<StringFilter>;
-  originalFilename?: InputMaybe<StringFilter>;
-  path?: InputMaybe<StringFilter>;
-  sha1hash?: InputMaybe<StringFilter>;
-  size?: InputMaybe<FloatFilter>;
-  source?: InputMaybe<SanityAssetSourceDataFilter>;
-  title?: InputMaybe<StringFilter>;
-  uploadId?: InputMaybe<StringFilter>;
-  url?: InputMaybe<StringFilter>;
-};
-
-export type SanityFileAssetSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  altText?: InputMaybe<SortOrder>;
-  assetId?: InputMaybe<SortOrder>;
-  description?: InputMaybe<SortOrder>;
-  extension?: InputMaybe<SortOrder>;
-  label?: InputMaybe<SortOrder>;
-  mimeType?: InputMaybe<SortOrder>;
-  originalFilename?: InputMaybe<SortOrder>;
-  path?: InputMaybe<SortOrder>;
-  sha1hash?: InputMaybe<SortOrder>;
-  size?: InputMaybe<SortOrder>;
-  source?: InputMaybe<SanityAssetSourceDataSorting>;
-  title?: InputMaybe<SortOrder>;
-  uploadId?: InputMaybe<SortOrder>;
-  url?: InputMaybe<SortOrder>;
-};
-
-export type SanityImageAsset = Document & {
-  __typename?: 'SanityImageAsset';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  altText?: Maybe<Scalars['String']['output']>;
-  assetId?: Maybe<Scalars['String']['output']>;
-  description?: Maybe<Scalars['String']['output']>;
-  extension?: Maybe<Scalars['String']['output']>;
-  label?: Maybe<Scalars['String']['output']>;
-  metadata?: Maybe<SanityImageMetadata>;
-  mimeType?: Maybe<Scalars['String']['output']>;
-  originalFilename?: Maybe<Scalars['String']['output']>;
-  path?: Maybe<Scalars['String']['output']>;
-  sha1hash?: Maybe<Scalars['String']['output']>;
-  size?: Maybe<Scalars['Float']['output']>;
-  source?: Maybe<SanityAssetSourceData>;
-  title?: Maybe<Scalars['String']['output']>;
-  uploadId?: Maybe<Scalars['String']['output']>;
-  url?: Maybe<Scalars['String']['output']>;
-};
-
-export type SanityImageAssetFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
-  altText?: InputMaybe<StringFilter>;
-  assetId?: InputMaybe<StringFilter>;
-  description?: InputMaybe<StringFilter>;
-  extension?: InputMaybe<StringFilter>;
-  label?: InputMaybe<StringFilter>;
-  metadata?: InputMaybe<SanityImageMetadataFilter>;
-  mimeType?: InputMaybe<StringFilter>;
-  originalFilename?: InputMaybe<StringFilter>;
-  path?: InputMaybe<StringFilter>;
-  sha1hash?: InputMaybe<StringFilter>;
-  size?: InputMaybe<FloatFilter>;
-  source?: InputMaybe<SanityAssetSourceDataFilter>;
-  title?: InputMaybe<StringFilter>;
-  uploadId?: InputMaybe<StringFilter>;
-  url?: InputMaybe<StringFilter>;
-};
-
-export type SanityImageAssetSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  altText?: InputMaybe<SortOrder>;
-  assetId?: InputMaybe<SortOrder>;
-  description?: InputMaybe<SortOrder>;
-  extension?: InputMaybe<SortOrder>;
-  label?: InputMaybe<SortOrder>;
-  metadata?: InputMaybe<SanityImageMetadataSorting>;
-  mimeType?: InputMaybe<SortOrder>;
-  originalFilename?: InputMaybe<SortOrder>;
-  path?: InputMaybe<SortOrder>;
-  sha1hash?: InputMaybe<SortOrder>;
-  size?: InputMaybe<SortOrder>;
-  source?: InputMaybe<SanityAssetSourceDataSorting>;
-  title?: InputMaybe<SortOrder>;
-  uploadId?: InputMaybe<SortOrder>;
-  url?: InputMaybe<SortOrder>;
-};
-
-export type SanityImageCrop = {
-  __typename?: 'SanityImageCrop';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  bottom?: Maybe<Scalars['Float']['output']>;
-  left?: Maybe<Scalars['Float']['output']>;
-  right?: Maybe<Scalars['Float']['output']>;
-  top?: Maybe<Scalars['Float']['output']>;
-};
-
-export type SanityImageCropFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  bottom?: InputMaybe<FloatFilter>;
-  left?: InputMaybe<FloatFilter>;
-  right?: InputMaybe<FloatFilter>;
-  top?: InputMaybe<FloatFilter>;
-};
-
-export type SanityImageCropSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  bottom?: InputMaybe<SortOrder>;
-  left?: InputMaybe<SortOrder>;
-  right?: InputMaybe<SortOrder>;
-  top?: InputMaybe<SortOrder>;
-};
-
-export type SanityImageDimensions = {
-  __typename?: 'SanityImageDimensions';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  aspectRatio?: Maybe<Scalars['Float']['output']>;
-  height?: Maybe<Scalars['Float']['output']>;
-  width?: Maybe<Scalars['Float']['output']>;
-};
-
-export type SanityImageDimensionsFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  aspectRatio?: InputMaybe<FloatFilter>;
-  height?: InputMaybe<FloatFilter>;
-  width?: InputMaybe<FloatFilter>;
-};
-
-export type SanityImageDimensionsSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  aspectRatio?: InputMaybe<SortOrder>;
-  height?: InputMaybe<SortOrder>;
-  width?: InputMaybe<SortOrder>;
-};
-
-export type SanityImageHotspot = {
-  __typename?: 'SanityImageHotspot';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  height?: Maybe<Scalars['Float']['output']>;
-  width?: Maybe<Scalars['Float']['output']>;
-  x?: Maybe<Scalars['Float']['output']>;
-  y?: Maybe<Scalars['Float']['output']>;
-};
-
-export type SanityImageHotspotFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  height?: InputMaybe<FloatFilter>;
-  width?: InputMaybe<FloatFilter>;
-  x?: InputMaybe<FloatFilter>;
-  y?: InputMaybe<FloatFilter>;
-};
-
-export type SanityImageHotspotSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  height?: InputMaybe<SortOrder>;
-  width?: InputMaybe<SortOrder>;
-  x?: InputMaybe<SortOrder>;
-  y?: InputMaybe<SortOrder>;
-};
-
-export type SanityImageMetadata = {
-  __typename?: 'SanityImageMetadata';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  blurHash?: Maybe<Scalars['String']['output']>;
-  dimensions?: Maybe<SanityImageDimensions>;
-  hasAlpha?: Maybe<Scalars['Boolean']['output']>;
-  isOpaque?: Maybe<Scalars['Boolean']['output']>;
-  location?: Maybe<Geopoint>;
-  lqip?: Maybe<Scalars['String']['output']>;
-  palette?: Maybe<SanityImagePalette>;
-  thumbHash?: Maybe<Scalars['String']['output']>;
-};
-
-export type SanityImageMetadataFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  blurHash?: InputMaybe<StringFilter>;
-  dimensions?: InputMaybe<SanityImageDimensionsFilter>;
-  hasAlpha?: InputMaybe<BooleanFilter>;
-  isOpaque?: InputMaybe<BooleanFilter>;
-  location?: InputMaybe<GeopointFilter>;
-  lqip?: InputMaybe<StringFilter>;
-  palette?: InputMaybe<SanityImagePaletteFilter>;
-  thumbHash?: InputMaybe<StringFilter>;
-};
-
-export type SanityImageMetadataSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  blurHash?: InputMaybe<SortOrder>;
-  dimensions?: InputMaybe<SanityImageDimensionsSorting>;
-  hasAlpha?: InputMaybe<SortOrder>;
-  isOpaque?: InputMaybe<SortOrder>;
-  location?: InputMaybe<GeopointSorting>;
-  lqip?: InputMaybe<SortOrder>;
-  palette?: InputMaybe<SanityImagePaletteSorting>;
-  thumbHash?: InputMaybe<SortOrder>;
-};
-
-export type SanityImagePalette = {
-  __typename?: 'SanityImagePalette';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  darkMuted?: Maybe<SanityImagePaletteSwatch>;
-  darkVibrant?: Maybe<SanityImagePaletteSwatch>;
-  dominant?: Maybe<SanityImagePaletteSwatch>;
-  lightMuted?: Maybe<SanityImagePaletteSwatch>;
-  lightVibrant?: Maybe<SanityImagePaletteSwatch>;
-  muted?: Maybe<SanityImagePaletteSwatch>;
-  vibrant?: Maybe<SanityImagePaletteSwatch>;
-};
-
-export type SanityImagePaletteFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  darkMuted?: InputMaybe<SanityImagePaletteSwatchFilter>;
-  darkVibrant?: InputMaybe<SanityImagePaletteSwatchFilter>;
-  dominant?: InputMaybe<SanityImagePaletteSwatchFilter>;
-  lightMuted?: InputMaybe<SanityImagePaletteSwatchFilter>;
-  lightVibrant?: InputMaybe<SanityImagePaletteSwatchFilter>;
-  muted?: InputMaybe<SanityImagePaletteSwatchFilter>;
-  vibrant?: InputMaybe<SanityImagePaletteSwatchFilter>;
-};
-
-export type SanityImagePaletteSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  darkMuted?: InputMaybe<SanityImagePaletteSwatchSorting>;
-  darkVibrant?: InputMaybe<SanityImagePaletteSwatchSorting>;
-  dominant?: InputMaybe<SanityImagePaletteSwatchSorting>;
-  lightMuted?: InputMaybe<SanityImagePaletteSwatchSorting>;
-  lightVibrant?: InputMaybe<SanityImagePaletteSwatchSorting>;
-  muted?: InputMaybe<SanityImagePaletteSwatchSorting>;
-  vibrant?: InputMaybe<SanityImagePaletteSwatchSorting>;
-};
-
-export type SanityImagePaletteSwatch = {
-  __typename?: 'SanityImagePaletteSwatch';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  background?: Maybe<Scalars['String']['output']>;
-  foreground?: Maybe<Scalars['String']['output']>;
-  population?: Maybe<Scalars['Float']['output']>;
-  title?: Maybe<Scalars['String']['output']>;
-};
-
-export type SanityImagePaletteSwatchFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  background?: InputMaybe<StringFilter>;
-  foreground?: InputMaybe<StringFilter>;
-  population?: InputMaybe<FloatFilter>;
-  title?: InputMaybe<StringFilter>;
-};
-
-export type SanityImagePaletteSwatchSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  background?: InputMaybe<SortOrder>;
-  foreground?: InputMaybe<SortOrder>;
-  population?: InputMaybe<SortOrder>;
-  title?: InputMaybe<SortOrder>;
-};
-
-export type Sanity_DocumentFilter = {
-  /** All documents that are drafts. */
-  is_draft?: InputMaybe<Scalars['Boolean']['input']>;
-  /** All documents referencing the given document ID. */
-  references?: InputMaybe<Scalars['ID']['input']>;
-};
-
-export type Slug = {
-  __typename?: 'Slug';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  current?: Maybe<Scalars['String']['output']>;
-  source?: Maybe<Scalars['String']['output']>;
-};
-
-export type SlugFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  current?: InputMaybe<StringFilter>;
-  source?: InputMaybe<StringFilter>;
-};
-
-export type SlugSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  current?: InputMaybe<SortOrder>;
-  source?: InputMaybe<SortOrder>;
-};
-
-export enum SortOrder {
-  /** Sorts on the value in ascending order. */
-  Asc = 'ASC',
-  /** Sorts on the value in descending order. */
-  Desc = 'DESC'
-}
-
-export type Span = {
-  __typename?: 'Span';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  marks?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  text?: Maybe<Scalars['String']['output']>;
+export type RichTextFilter = {
+  eq?: InputMaybe<Scalars['String']['input']>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type StringFilter = {
-  /** Checks if the value is equal to the given input. */
   eq?: InputMaybe<Scalars['String']['input']>;
-  in?: InputMaybe<Array<Scalars['String']['input']>>;
-  /** Checks if the value is defined. */
-  is_defined?: InputMaybe<Scalars['Boolean']['input']>;
-  /** Checks if the value matches the given word/words. */
-  matches?: InputMaybe<Scalars['String']['input']>;
-  /** Checks if the value is not equal to the given input. */
-  neq?: InputMaybe<Scalars['String']['input']>;
-  nin?: InputMaybe<Array<Scalars['String']['input']>>;
+  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startsWith?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type Table = {
-  __typename?: 'Table';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  rows?: Maybe<Array<Maybe<TableRow>>>;
+export type SystemInfo = {
+  __typename?: 'SystemInfo';
+  basename: Scalars['String']['output'];
+  breadcrumbs: Array<Scalars['String']['output']>;
+  collection: Collection;
+  extension: Scalars['String']['output'];
+  filename: Scalars['String']['output'];
+  hasReferences?: Maybe<Scalars['Boolean']['output']>;
+  path: Scalars['String']['output'];
+  relativePath: Scalars['String']['output'];
+  template: Scalars['String']['output'];
+  title?: Maybe<Scalars['String']['output']>;
 };
 
-export type TableFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
+
+export type SystemInfoBreadcrumbsArgs = {
+  excludeExtension?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
-export type TableRow = {
-  __typename?: 'TableRow';
-  _key?: Maybe<Scalars['String']['output']>;
-  _type?: Maybe<Scalars['String']['output']>;
-  cells?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-};
-
-export type TableRowFilter = {
-  _key?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-};
-
-export type TableRowSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-};
-
-export type TableSorting = {
-  _key?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-};
-
-export type Tag = Document & {
+export type Tag = Document & Node & {
   __typename?: 'Tag';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
   description?: Maybe<Scalars['String']['output']>;
-  language?: Maybe<Scalars['String']['output']>;
-  name?: Maybe<Scalars['String']['output']>;
-  slug?: Maybe<Slug>;
+  id: Scalars['ID']['output'];
+  language: Scalars['String']['output'];
+  name: Scalars['String']['output'];
+  slug: Scalars['String']['output'];
+};
+
+export type TagConnection = Connection & {
+  __typename?: 'TagConnection';
+  edges?: Maybe<Array<Maybe<TagConnectionEdges>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
+};
+
+export type TagConnectionEdges = {
+  __typename?: 'TagConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Tag>;
 };
 
 export type TagFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
   description?: InputMaybe<StringFilter>;
   language?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
-  slug?: InputMaybe<SlugFilter>;
+  slug?: InputMaybe<StringFilter>;
 };
 
-export type TagSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
-  description?: InputMaybe<SortOrder>;
-  language?: InputMaybe<SortOrder>;
-  name?: InputMaybe<SortOrder>;
-  slug?: InputMaybe<SlugSorting>;
+export type TagMutation = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  language?: InputMaybe<Scalars['String']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  slug?: InputMaybe<Scalars['String']['input']>;
 };
 
-export type TranslationMetadata = Document & {
-  __typename?: 'TranslationMetadata';
-  /** Date the document was created */
-  _createdAt?: Maybe<Scalars['DateTime']['output']>;
-  /** Document ID */
-  _id?: Maybe<Scalars['ID']['output']>;
-  _key?: Maybe<Scalars['String']['output']>;
-  /** Current document revision */
-  _rev?: Maybe<Scalars['String']['output']>;
-  /** Document type */
-  _type?: Maybe<Scalars['String']['output']>;
-  /** Date the document was last modified */
-  _updatedAt?: Maybe<Scalars['DateTime']['output']>;
-  schemaTypes?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
-  translations?: Maybe<Array<Maybe<InternationalizedArrayReferenceValue>>>;
+export type Translation_Metadata = Document & Node & {
+  __typename?: 'Translation_metadata';
+  _sys: SystemInfo;
+  _values: Scalars['JSON']['output'];
+  id: Scalars['ID']['output'];
+  translations?: Maybe<Array<Maybe<Translation_MetadataTranslations>>>;
 };
 
-export type TranslationMetadataFilter = {
-  /** Apply filters on document level */
-  _?: InputMaybe<Sanity_DocumentFilter>;
-  _createdAt?: InputMaybe<DatetimeFilter>;
-  _id?: InputMaybe<IdFilter>;
-  _key?: InputMaybe<StringFilter>;
-  _rev?: InputMaybe<StringFilter>;
-  _type?: InputMaybe<StringFilter>;
-  _updatedAt?: InputMaybe<DatetimeFilter>;
+export type Translation_MetadataConnection = Connection & {
+  __typename?: 'Translation_metadataConnection';
+  edges?: Maybe<Array<Maybe<Translation_MetadataConnectionEdges>>>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Float']['output'];
 };
 
-export type TranslationMetadataSorting = {
-  _createdAt?: InputMaybe<SortOrder>;
-  _id?: InputMaybe<SortOrder>;
-  _key?: InputMaybe<SortOrder>;
-  _rev?: InputMaybe<SortOrder>;
-  _type?: InputMaybe<SortOrder>;
-  _updatedAt?: InputMaybe<SortOrder>;
+export type Translation_MetadataConnectionEdges = {
+  __typename?: 'Translation_metadataConnectionEdges';
+  cursor: Scalars['String']['output'];
+  node?: Maybe<Translation_Metadata>;
+};
+
+export type Translation_MetadataFilter = {
+  translations?: InputMaybe<Translation_MetadataTranslationsFilter>;
+};
+
+export type Translation_MetadataMutation = {
+  translations?: InputMaybe<Array<InputMaybe<Translation_MetadataTranslationsMutation>>>;
+};
+
+export type Translation_MetadataTranslations = {
+  __typename?: 'Translation_metadataTranslations';
+  key?: Maybe<Scalars['String']['output']>;
+  value?: Maybe<Translation_MetadataTranslationsValue>;
+};
+
+export type Translation_MetadataTranslationsFilter = {
+  key?: InputMaybe<StringFilter>;
+  value?: InputMaybe<Translation_MetadataTranslationsValueFilter>;
+};
+
+export type Translation_MetadataTranslationsMutation = {
+  key?: InputMaybe<Scalars['String']['input']>;
+  value?: InputMaybe<Scalars['String']['input']>;
+};
+
+export type Translation_MetadataTranslationsValue = Post;
+
+export type Translation_MetadataTranslationsValueFilter = {
+  post?: InputMaybe<PostFilter>;
 };

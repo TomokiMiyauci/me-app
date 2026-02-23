@@ -1,8 +1,10 @@
 query PostSlugs {
-  posts: allPost {
-    slug {
-      current
+  posts: postConnection {
+    edges {
+      node {
+        language
+        slug
+      }
     }
-    lang: language
   }
 }

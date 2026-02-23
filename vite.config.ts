@@ -44,6 +44,7 @@ export default defineConfig({
     outDirResolve,
     codegen({
       configFilePathOverride: "./.graphqlrc",
+      runOnBuild: false,
     }),
     tailwindcss(),
   ],

@@ -1,5 +1,13 @@
 {
-  "schema": "https://qruzdhzp.api.sanity.io/v2023-08-01/graphql/development/default",
+  "schema": [
+    {
+      "${CONTENT_ENDPOINT}": {
+        "headers": {
+          "X-API-KEY": "${CONTENT_AUTH_TOEKN}"
+        }
+      }
+    }
+  ],
   "documents": "src/**/*.graphql",
   "generates": {
     "src/graphql/types.ts": {
@@ -8,10 +16,15 @@
           "content": [
             "// deno-lint-ignore-file",
             "// deno-fmt-ignore-file",
-            "import type { TypedObject } from \"@portabletext/types\";"
+            "import type { TinaMarkdownContent } from \"tinacms/dist/rich-text\";"
           ]
         }
-      }]
+      }],
+      "config": {
+        "scalars": {
+          "JSON": "TinaMarkdownContent"
+        }
+      }
     },
     "src": {
       "preset": "near-operation-file",
@@ -23,20 +36,17 @@
         "add": {
           "content": [
             "// deno-lint-ignore-file",
-            "// deno-fmt-ignore-file",
-            "import type { TypedObject } from \"@portabletext/types\";"
+            "// deno-fmt-ignore-file"
           ]
         }
-      }]
+      }],
+      "config": {
+        "scalars": {
+          "JSON": "Types.Scalars['JSON']['output']"
+        }
+      }
     }
   },
   "importExtension": [".ts"],
-  "emitLegacyCommonJSImports": false,
-  "config": {
-    "scalars": {
-      "Date": "string",
-      "DateTime": "string",
-      "JSON": "TypedObject[]"
-    }
-  }
+  "emitLegacyCommonJSImports": false
 }

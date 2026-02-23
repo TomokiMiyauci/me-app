@@ -1,38 +1,39 @@
 query PostBySlug($slug: String!, $lang: String!) {
-  allPost(
-    where: { slug: { current: { eq: $slug } }, language: { eq: $lang } }
-  ) {
-    ...PostMeta
-    id: _id
-    title
-    bodyRaw
-    description
-    categories {
-      name
+  postConnection(filter: { slug: { eq: $slug }, language: { eq: $lang } }) {
+    edges {
+      node {
+        ...PostMeta
+        id
+        title
+        description
+        publishedAt: published_at
+        modifiedAt: modified_at
+        body
+        tags {
+          tag {
+            ... on Tag {
+              name
+            }
+          }
+        }
+      }
     }
-    tags {
-      name
-    }
-    coverImage {
-      ...Picture
-    }
-    _createdAt
-    _updatedAt
-    createdAt: publishedAt
-    updatedAt: modifiedAt
   }
 }
 
-query TranslationBySlug($id: ID!) {
-  allTranslationMetadata(where: { _: { references: $id } }) {
-    translations {
-      value {
-        __typename
-        ... on Post {
-          slug {
-            current
+query TranslationBySlug($slug: String!) {
+  allTranslationMetadata: translation_metadataConnection(
+    filter: { translations: { value: { post: { slug: { eq: $slug } } } } }
+  ) {
+    edges {
+      node {
+        translations {
+          value {
+            ... on Post {
+              slug
+              language
+            }
           }
-          language
         }
       }
     }

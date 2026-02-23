@@ -1,0 +1,38 @@
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: development
+
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: denoland/setup-deno@v2
+
+      - name: Download artifact
+        id: download-artifact
+        uses: actions/download-artifact@v7
+        with:
+          artifact-ids: ${{ needs.build.outputs.artifact-id }}
+          path: dist
+
+      - name: Deploy
+        run: |
+          deno deploy \
+            --org=${{ vars.ORG }} \
+            --app=${{ vars.APP }} \
+            --token=${{ secrets.DEPLOY_TOKEN }} \
+            --no-wait \
+            ${{ steps.download-artifact.outputs.download-path }}
