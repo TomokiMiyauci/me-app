@@ -1,3 +1,4 @@
+// deno-lint-ignore-file ban-types
 import { type JSX, lazy } from "react";
 import {
   type Components,
@@ -24,13 +25,33 @@ const component = {
       />
     );
   },
-  // deno-lint-ignore ban-types
 } satisfies Components<{}>;
+
+function createAComponent(resolveURL: ResolvePath): Components<{}>["a"] {
+  return (props) => {
+    const { url, children } = props ?? {};
+    const path = url ? resolveURL(url) : undefined;
+
+    return <a href={path}>{children}</a>;
+  };
+}
+
+interface ResolvePath {
+  (path: string): string | undefined;
+}
 
 export interface BodyRawProps {
   fragment: TinaMarkdownContent | TinaMarkdownContent[];
+  resolveURL: ResolvePath;
 }
 
 export default function BodyRaw(props: BodyRawProps): JSX.Element {
-  return <TinaMarkdown components={component} content={props.fragment} />;
+  const a = createAComponent(props.resolveURL);
+
+  return (
+    <TinaMarkdown
+      components={{ ...component, a }}
+      content={props.fragment}
+    />
+  );
 }

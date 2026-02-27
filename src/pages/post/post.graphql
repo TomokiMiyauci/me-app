@@ -16,6 +16,9 @@ query PostBySlug($slug: String!, $lang: String!) {
             }
           }
         }
+        _sys {
+          path
+        }
       }
     }
   }
@@ -34,6 +37,27 @@ query TranslationBySlug($slug: String!) {
               language
             }
           }
+        }
+      }
+    }
+  }
+}
+
+query AllPosts {
+  postConnection {
+    edges {
+      node {
+        slug
+        language
+        _sys {
+          path
+          filename
+          title
+          basename
+          hasReferences
+          breadcrumbs
+          relativePath
+          extension
         }
       }
     }

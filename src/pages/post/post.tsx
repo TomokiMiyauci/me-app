@@ -1,6 +1,8 @@
 import type { JSX } from "react";
 import resolver from "@/lib/link.ts";
 import {
+  AllPostsDocument,
+  type AllPostsQuery,
   PostBySlugDocument,
   TranslationBySlugDocument,
   type TranslationBySlugQuery,
@@ -13,6 +15,7 @@ import Layout from "@/pages/layout.tsx";
 import PostMeta from "./meta/meta.tsx";
 import { apolloClient, cloudinary } from "~lib";
 import BodyRaw from "@/graphql/components/body_raw/body_raw.tsx";
+import { dirname, join, resolve } from "@std/path";
 
 export default async function Post(
   props: AppProps,
@@ -25,10 +28,17 @@ export default async function Post(
   }
 
   const decodedSlug = decodeURIComponent(slug);
-  const result = await apolloClient.query({
-    query: PostBySlugDocument,
-    variables: { slug: decodedSlug, lang },
-  });
+  const [result, allDocuments] = await Promise.all([
+    apolloClient.query({
+      query: PostBySlugDocument,
+      variables: { slug: decodedSlug, lang },
+    }),
+    apolloClient.query({ query: AllPostsDocument }),
+  ]);
+
+  if (!allDocuments.data) throw new Error("Failed to fetch post data");
+
+  const map = createMap({ posts: allDocuments.data });
 
   if (!result.data) throw new Error("Failed to fetch post data");
 
@@ -56,6 +66,33 @@ export default async function Post(
       lang: language,
     };
   }).filter(isTranslationAlternation);
+  const basePath = postPage._sys.path;
+
+  function toVirtualURL(path: string): URL {
+    const absolutePath = toAbsolute(basePath, path);
+    return new URL(`virtual:${absolutePath}`);
+  }
+
+  function resolveURL(urlLike: string): string | undefined {
+    const url = URL.canParse(urlLike)
+      ? new URL(urlLike)
+      : toVirtualURL(urlLike);
+
+    if (url.protocol === "virtual:") {
+      const mappted = map[url.toString()];
+
+      if (mappted) {
+        return resolver.resolve(Entry.Post, {
+          lang: mappted.language,
+          slug: mappted.slug,
+        }) ?? undefined;
+      }
+
+      return;
+    }
+
+    return url.toString();
+  }
 
   const { t } = i18n;
   return (
@@ -87,7 +124,9 @@ export default async function Post(
 
         <Article
           title={title}
-          body={postPage.body && <BodyRaw fragment={postPage.body} />}
+          body={postPage.body && (
+            <BodyRaw resolveURL={resolveURL} fragment={postPage.body} />
+          )}
           image={postPage.coverImage && (
             <figure>
               <img
@@ -115,6 +154,38 @@ interface NormalizedTranslation {
 interface TranslationAlternation {
   location: string;
   lang: string;
+}
+
+function createMap(
+  { posts }: { posts: AllPostsQuery },
+): Record<string, Mapping> {
+  const map: Record<string, Mapping> = {};
+
+  posts.postConnection.edges?.forEach((edge) => {
+    const node = edge?.node;
+    if (!node) return;
+
+    const slug = node.slug;
+    const language = node.language;
+
+    if (!slug || !language) return;
+
+    const id = new URL(`virtual:${join("/", node._sys.path)}`);
+
+    map[id.toString()] = {
+      slug,
+      language,
+      type: "Post",
+    };
+  });
+
+  return map;
+}
+
+interface Mapping {
+  slug: string;
+  language: string;
+  type: "Post";
 }
 
 function isTranslationAlternation(
@@ -149,4 +220,13 @@ function isNormalizedTranslation(
   value: object,
 ): value is NormalizedTranslation {
   return value !== null && "slug" in value && "language" in value;
+}
+
+function toAbsolute(base: string, path: string): string {
+  if (path.startsWith("/")) {
+    return path;
+  }
+
+  const dir = dirname(join("/", base));
+  return resolve(dir, path);
 }
