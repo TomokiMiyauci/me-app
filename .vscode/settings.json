@@ -39,5 +39,6 @@
       "fileMatch": [".graphqlrc"],
       "url": "https://the-guild.dev/graphql/codegen/config.schema.json"
     }
-  ]
+  ],
+  "graphql-config.dotEnvPath": ".env"
 }
