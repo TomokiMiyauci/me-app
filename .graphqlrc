@@ -1,13 +1,5 @@
 {
-  "schema": [
-    {
-      "${CONTENT_ENDPOINT}": {
-        "headers": {
-          "X-API-KEY": "${CONTENT_AUTH_TOEKN}"
-        }
-      }
-    }
-  ],
+  "schema": "${CONTENT_ENDPOINT}",
   "documents": "src/**/*.graphql",
   "generates": {
     "src/graphql/types.ts": {

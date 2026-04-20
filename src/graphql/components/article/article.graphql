@@ -1,7 +1,6 @@
 fragment Article on Post {
-  _id: id
   title
   description
-  createdAt: published_at
-  coverImage: cover_image
+  createdAt: publishedAt
+  coverImage: coverImage
 }

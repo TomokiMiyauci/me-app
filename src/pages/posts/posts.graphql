@@ -1,24 +1,15 @@
 query BlogByLang($lang: String!) {
-  blogs: blogConnection(filter: { language: { eq: $lang } }) {
-    edges {
-      node {
-        ...PostsMeta
-      }
-    }
+  blogs: blogs(where: { language: { eq: $lang } }) {
+    ...PostsMeta
   }
 }
 
 query ArticlesByLang($lang: String!) {
-  articles: postConnection(
-    filter: { language: { eq: $lang } }
-    sort: "published_at"
+  articles: posts(
+    where: { language: { eq: $lang } }
+    # sort: "published_at"
   ) {
-    edges {
-      node {
-        ...Article
-        key: id
+   ...Article
         slug
-      }
-    }
   }
 }

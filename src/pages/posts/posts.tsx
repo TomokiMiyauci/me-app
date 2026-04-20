@@ -21,7 +21,7 @@ export default async function Posts(props: AppProps): Promise<JSX.Element> {
   if (!blogByLangQuery.data) throw new Error("Failed to fetch blog data");
   if (!result.data) throw new Error("Failed to fetch blog data");
 
-  const blog = blogByLangQuery.data.blogs.edges?.[0]?.node;
+  const blog = blogByLangQuery.data.blogs[0];
 
   if (!blog) notFound();
 
@@ -49,18 +49,17 @@ export default async function Posts(props: AppProps): Promise<JSX.Element> {
 
         <section>
           <ul className="mx-auto mt-10 grid max-w-2xl grid-cols-1 sm:grid-cols-2 border-t border-gray-200 gap-x-8 gap-y-16 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {result.data.articles.edges?.toReversed().map((article) => {
-              if (!article?.node) return;
-              const slug = article.node.slug;
+            {result.data.articles?.toReversed().map((article, i) => {
+              const slug = article.slug;
               const href = resolver.resolve(Entry.Post, { slug, lang });
 
               return (
                 <li
                   className="justify-self-center max-w-96"
-                  key={article.node.key}
+                  key={i}
                 >
                   <a href={href ?? undefined}>
-                    <ArticleFragment lang={lang} fragment={article.node} />
+                    <ArticleFragment lang={lang} fragment={article} />
                   </a>
                 </li>
               );

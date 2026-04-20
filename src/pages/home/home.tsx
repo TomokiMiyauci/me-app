@@ -21,11 +21,11 @@ export default async function Home(props: AppProps): Promise<JSX.Element> {
   if (!queryResult.data) throw new Error("Failed to fetch home data");
   if (!homeByLang.data) throw new Error("Failed to fetch home data");
 
-  const home = homeByLang.data.home.edges?.[0]?.node;
+  const home = homeByLang.data.home[0];
 
   if (!home) notFound();
 
-  const blog = queryResult.data.allBlog.edges?.[0]?.node;
+  const blog = queryResult.data.allBlog[0];
   const title = blog?.title ?? "";
   const description = blog?.description;
   const { t } = i18n;

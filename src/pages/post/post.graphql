@@ -1,65 +1,53 @@
 query PostBySlug($slug: String!, $lang: String!) {
-  postConnection(filter: { slug: { eq: $slug }, language: { eq: $lang } }) {
-    edges {
-      node {
-        ...PostMeta
-        id
-        title
-        description
-        publishedAt: published_at
-        modifiedAt: modified_at
-        body
-        tags {
-          tag {
-            ... on Tag {
-              name
-            }
-          }
-        }
-        _sys {
-          path
-        }
-      }
+  posts(where: { slug: { eq: $slug }, language: { eq: $lang } }) {
+    ...PostMeta
+    title
+    description
+    publishedAt: publishedAt
+    modifiedAt: modifiedAt
+    body
+    tags {
+      name
     }
   }
 }
 
-query TranslationBySlug($slug: String!) {
-  allTranslationMetadata: translation_metadataConnection(
-    filter: { translations: { value: { post: { slug: { eq: $slug } } } } }
-  ) {
-    edges {
-      node {
-        translations {
-          value {
-            ... on Post {
-              slug
-              language
-            }
-          }
-        }
-      }
-    }
-  }
-}
+# query TranslationBySlug($slug: String!) {
+#   allTranslationMetadata: translation_metadataConnection(
+#     filter: { translations: { value: { post: { slug: { eq: $slug } } } } }
+#   ) {
+#     edges {
+#       node {
+#         translations {
+#           value {
+#             ... on Post {
+#               slug
+#               language
+#             }
+#           }
+#         }
+#       }
+#     }
+#   }
+# }
 
-query AllPosts {
-  postConnection {
-    edges {
-      node {
-        slug
-        language
-        _sys {
-          path
-          filename
-          title
-          basename
-          hasReferences
-          breadcrumbs
-          relativePath
-          extension
-        }
-      }
-    }
-  }
-}
+# query AllPosts {
+#   postConnection {
+#     edges {
+#       node {
+#         slug
+#         language
+#         _sys {
+#           path
+#           filename
+#           title
+#           basename
+#           hasReferences
+#           breadcrumbs
+#           relativePath
+#           extension
+#         }
+#       }
+#     }
+#   }
+# }
