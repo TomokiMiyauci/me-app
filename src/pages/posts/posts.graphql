@@ -7,7 +7,9 @@ query BlogByLang($lang: String!) {
 query ArticlesByLang($lang: String!) {
   articles: posts(
     where: { language: { eq: $lang } }
-    # sort: "published_at"
+    orderBy: {
+      published_at: ASC
+    }
   ) {
    ...Article
         slug

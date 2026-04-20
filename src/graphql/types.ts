@@ -42,6 +42,10 @@ export type AuthorEdge = {
   node?: Maybe<Author>;
 };
 
+export type AuthorOrderByInput = {
+  name?: InputMaybe<SortOrder>;
+};
+
 export type AuthorWhereInput = {
   AND?: InputMaybe<Array<AuthorWhereInput>>;
   NOT?: InputMaybe<Array<AuthorWhereInput>>;
@@ -73,6 +77,12 @@ export type BlogEdge = {
   cursor: Scalars['String']['output'];
   /** The item at the end of the edge */
   node?: Maybe<Blog>;
+};
+
+export type BlogOrderByInput = {
+  description?: InputMaybe<SortOrder>;
+  language?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
 export type BlogWhereInput = {
@@ -126,6 +136,12 @@ export type HomeEdge = {
   node?: Maybe<Home>;
 };
 
+export type HomeOrderByInput = {
+  description?: InputMaybe<SortOrder>;
+  language?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+};
+
 export type HomeWhereInput = {
   AND?: InputMaybe<Array<HomeWhereInput>>;
   NOT?: InputMaybe<Array<HomeWhereInput>>;
@@ -140,7 +156,7 @@ export type LegalDocument = {
   body?: Maybe<Scalars['String']['output']>;
   effectiveAt?: Maybe<Scalars['DateTime']['output']>;
   language: Scalars['String']['output'];
-  type?: Maybe<Scalars['String']['output']>;
+  type: Scalars['String']['output'];
 };
 
 /** A connection to a list of items. */
@@ -159,6 +175,12 @@ export type LegalDocumentEdge = {
   cursor: Scalars['String']['output'];
   /** The item at the end of the edge */
   node?: Maybe<LegalDocument>;
+};
+
+export type LegalDocumentOrderByInput = {
+  effective_at?: InputMaybe<SortOrder>;
+  language?: InputMaybe<SortOrder>;
+  type?: InputMaybe<SortOrder>;
 };
 
 export type LegalDocumentWhereInput = {
@@ -216,6 +238,15 @@ export type PostEdge = {
   node?: Maybe<Post>;
 };
 
+export type PostOrderByInput = {
+  description?: InputMaybe<SortOrder>;
+  language?: InputMaybe<SortOrder>;
+  modified_at?: InputMaybe<SortOrder>;
+  published_at?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
+};
+
 export type PostTags = {
   __typename?: 'PostTags';
   name?: Maybe<Scalars['String']['output']>;
@@ -257,6 +288,7 @@ export type QueryAuthorConnectionArgs = {
 
 
 export type QueryAuthorsArgs = {
+  orderBy?: InputMaybe<AuthorOrderByInput>;
   where?: InputMaybe<AuthorWhereInput>;
 };
 
@@ -270,6 +302,7 @@ export type QueryBlogConnectionArgs = {
 
 
 export type QueryBlogsArgs = {
+  orderBy?: InputMaybe<BlogOrderByInput>;
   where?: InputMaybe<BlogWhereInput>;
 };
 
@@ -283,6 +316,7 @@ export type QueryHomeConnectionArgs = {
 
 
 export type QueryHomesArgs = {
+  orderBy?: InputMaybe<HomeOrderByInput>;
   where?: InputMaybe<HomeWhereInput>;
 };
 
@@ -296,6 +330,7 @@ export type QueryLegalDocumentConnectionArgs = {
 
 
 export type QueryLegalDocumentsArgs = {
+  orderBy?: InputMaybe<LegalDocumentOrderByInput>;
   where?: InputMaybe<LegalDocumentWhereInput>;
 };
 
@@ -309,8 +344,14 @@ export type QueryPostConnectionArgs = {
 
 
 export type QueryPostsArgs = {
+  orderBy?: InputMaybe<PostOrderByInput>;
   where?: InputMaybe<PostWhereInput>;
 };
+
+export enum SortOrder {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
 
 export type StringWhereInput = {
   contains?: InputMaybe<Scalars['String']['input']>;
