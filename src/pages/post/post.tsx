@@ -14,7 +14,7 @@ import { Article } from "~component";
 import Layout from "@/pages/layout.tsx";
 import PostMeta from "./meta/meta.tsx";
 import { apolloClient, cloudinary } from "~lib";
-// import BodyRaw from "@/graphql/components/body_raw/body_raw.tsx";
+import BodyRaw from "@/graphql/components/body_raw/body_raw.tsx";
 // import { dirname, join, resolve } from "@std/path";
 
 export default async function Post(
@@ -60,7 +60,7 @@ export default async function Post(
 
   // const normalized = normalizeTranslation(translationsQuery.data);
 
-  const alternatives = [];
+  const alternatives: [] = [];
   // const basePath = postPage._sys.path;
 
   // function toVirtualURL(path: string): URL {
@@ -120,10 +120,7 @@ export default async function Post(
 
         <Article
           title={title}
-          body={postPage.body && (
-            // <BodyRaw resolveURL={resolveURL} fragment={postPage.body} />
-            postPage.body
-          )}
+          body={postPage.body && <BodyRaw fragment={postPage.body} />}
           image={postPage.coverImage && (
             <figure>
               <img

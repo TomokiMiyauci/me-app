@@ -1,57 +1,56 @@
-// deno-lint-ignore-file ban-types
-import { type JSX, lazy } from "react";
-import {
-  type Components,
-  TinaMarkdown,
-  type TinaMarkdownContent,
-} from "tinacms/dist/rich-text";
-import { CodeBlock, ShikiHighlighter } from "~component";
-const Mermaid = lazy(() => import("./mermaid.tsx"));
+import type { JSX } from "react";
+// import { CodeBlock, ShikiHighlighter } from "~component";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
-const component = {
-  code_block: (props) => {
-    const { lang, value } = props ?? {};
+// const Mermaid = lazy(() => import("./mermaid.tsx"));
 
-    if (lang === "mermaid") {
-      return <Mermaid className="not-prose my-8">{value}</Mermaid>;
-    }
+// const component = {
+//   code_block: (props) => {
+//     const { lang, value } = props ?? {};
 
-    return (
-      <CodeBlock
-        language={lang}
-        highlighter={new ShikiHighlighter()}
-        code={value ?? ""}
-        className="not-prose my-5"
-      />
-    );
-  },
-} satisfies Components<{}>;
+//     if (lang === "mermaid") {
+//       return <Mermaid className="not-prose my-8">{value}</Mermaid>;
+//     }
 
-function createAComponent(resolveURL: ResolvePath): Components<{}>["a"] {
-  return (props) => {
-    const { url, children } = props ?? {};
-    const path = url ? resolveURL(url) : undefined;
+//     return (
+//       <CodeBlock
+//         language={lang}
+//         highlighter={new ShikiHighlighter()}
+//         code={value ?? ""}
+//         className="not-prose my-5"
+//       />
+//     );
+//   },
+// } satisfies Components;
 
-    return <a href={path}>{children}</a>;
-  };
-}
+// function createAComponent(resolveURL: ResolvePath): Components["a"] {
+//   return (props) => {
+//     const { url, children } = props ?? {};
+//     const path = url ? resolveURL(url) : undefined;
+
+//     return <a href={path}>{children}</a>;
+//   };
+// }
 
 interface ResolvePath {
   (path: string): string | undefined;
 }
 
 export interface BodyRawProps {
-  fragment: TinaMarkdownContent | TinaMarkdownContent[];
-  resolveURL: ResolvePath;
+  fragment: string;
+  // resolveURL: ResolvePath;
 }
 
 export default function BodyRaw(props: BodyRawProps): JSX.Element {
-  const a = createAComponent(props.resolveURL);
+  // const a = createAComponent(props.resolveURL);
 
   return (
-    <TinaMarkdown
-      components={{ ...component, a }}
-      content={props.fragment}
-    />
+    <Markdown
+      components={{}}
+      remarkPlugins={[remarkGfm]}
+    >
+      {props.fragment}
+    </Markdown>
   );
 }

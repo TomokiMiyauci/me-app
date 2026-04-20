@@ -7,7 +7,7 @@ import { notFound } from "react-app";
 import language from "@/language.json" with { type: "json" };
 import resolver from "@/lib/link.ts";
 import Entry from "@/routes/entry.ts";
-// import { TinaMarkdown } from "tinacms/dist/rich-text";
+import BodyRaw from "@/graphql/components/body_raw/body_raw.tsx";
 
 export default async function PrivacyPolicy(
   props: AppProps,
@@ -39,8 +39,7 @@ export default async function PrivacyPolicy(
 
         <section>
           {doc.body &&
-            // <TinaMarkdown content={doc.body} />
-            doc.body}
+            <BodyRaw fragment={doc.body} />}
         </section>
       </main>
     </Layout>

@@ -7,16 +7,10 @@
         "add": {
           "content": [
             "// deno-lint-ignore-file",
-            "// deno-fmt-ignore-file",
-            "import type { TinaMarkdownContent } from \"tinacms/dist/rich-text\";"
+            "// deno-fmt-ignore-file"
           ]
         }
-      }],
-      "config": {
-        "scalars": {
-          "JSON": "TinaMarkdownContent"
-        }
-      }
+      }]
     },
     "src": {
       "preset": "near-operation-file",
@@ -31,12 +25,7 @@
             "// deno-fmt-ignore-file"
           ]
         }
-      }],
-      "config": {
-        "scalars": {
-          "JSON": "Types.Scalars['JSON']['output']"
-        }
-      }
+      }]
     }
   },
   "importExtension": [".ts"],

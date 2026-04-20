@@ -1,6 +1,5 @@
 // deno-lint-ignore-file
 // deno-fmt-ignore-file
-import type { TinaMarkdownContent } from "tinacms/dist/rich-text";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
