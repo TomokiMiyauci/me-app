@@ -2,20 +2,12 @@ fragment PostMeta on Post {
   title
   description
   categories {
-    category {
-      ... on Category {
-        name
-      }
-    }
+    name
   }
   tags {
-    tag {
-      ... on Tag {
-        name
-      }
-    }
+    name
   }
-  createdAt: published_at
-  updatedAt: modified_at
-  coverImage: cover_image
+  createdAt: publishedAt
+  updatedAt: modifiedAt
+  coverImage: coverImage
 }

@@ -7,7 +7,7 @@ import { notFound } from "react-app";
 import language from "@/language.json" with { type: "json" };
 import resolver from "@/lib/link.ts";
 import Entry from "@/routes/entry.ts";
-import { TinaMarkdown } from "tinacms/dist/rich-text";
+import BodyRaw from "@/graphql/components/body_raw/body_raw.tsx";
 
 export default async function PrivacyPolicy(
   props: AppProps,
@@ -21,7 +21,7 @@ export default async function PrivacyPolicy(
 
   if (!queryResult.data) throw new Error("Failed to fetch privacy policy data");
 
-  const doc = queryResult.data.allLegalDocument.edges?.[0]?.node;
+  const doc = queryResult.data.allLegalDocument[0];
 
   if (!doc) notFound();
   const { t } = i18n;
@@ -39,7 +39,7 @@ export default async function PrivacyPolicy(
 
         <section>
           {doc.body &&
-            <TinaMarkdown content={doc.body} />}
+            <BodyRaw fragment={doc.body} />}
         </section>
       </main>
     </Layout>

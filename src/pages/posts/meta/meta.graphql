@@ -1,5 +1,5 @@
 fragment PostsMeta on Blog {
   title
   description
-  coverImage: cover_image
+  coverImage: coverImage
 }

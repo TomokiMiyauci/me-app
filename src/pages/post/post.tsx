@@ -1,9 +1,9 @@
 import type { JSX } from "react";
 import resolver from "@/lib/link.ts";
 import {
+  AllPostsDocument,
+  type AllPostsQuery,
   PostBySlugDocument,
-  TranslationBySlugDocument,
-  type TranslationBySlugQuery,
 } from "./post.graphql.ts";
 import { notFound } from "react-app";
 import type { AppProps } from "@/lib/app.tsx";
@@ -25,37 +25,49 @@ export default async function Post(
   }
 
   const decodedSlug = decodeURIComponent(slug);
-  const result = await apolloClient.query({
-    query: PostBySlugDocument,
-    variables: { slug: decodedSlug, lang },
-  });
+  const [result, allDocuments] = await Promise.all([
+    apolloClient.query({
+      query: PostBySlugDocument,
+      variables: { slug: decodedSlug, lang },
+    }),
+    apolloClient.query({ query: AllPostsDocument }),
+  ]);
+
+  if (!allDocuments.data) throw new Error("Failed to fetch post data");
+
+  // const map = createMap(allDocuments.data);
 
   if (!result.data) throw new Error("Failed to fetch post data");
 
-  const postPage = result.data.postConnection.edges?.[0]?.node;
-  const id = postPage?.id;
+  const postPage = result.data.posts[0];
+  // const id = postPage?.id;
 
-  if (!postPage || !id) notFound();
+  if (!postPage) notFound();
 
-  const translationsQuery = await apolloClient.query({
-    query: TranslationBySlugDocument,
-    variables: { slug },
-  });
+  // const translationsQuery = await apolloClient.query({
+  //   query: TranslationBySlugDocument,
+  //   variables: { slug },
+  // });
 
-  if (!translationsQuery.data) {
-    throw new Error("Failed to fetch translation data");
-  }
+  // if (!translationsQuery.data) {
+  //   throw new Error("Failed to fetch translation data");
+  // }
 
   const title = postPage.title ?? "";
 
-  const normalized = normalizeTranslation(translationsQuery.data);
+  // const normalized = normalizeTranslation(translationsQuery.data);
 
-  const alternatives = normalized.map(({ slug, language }) => {
-    return {
-      location: resolver.resolve(Entry.Post, { lang: language, slug }),
-      lang: language,
-    };
-  }).filter(isTranslationAlternation);
+  const alternatives: [] = [];
+
+  // function resolve(specifier: string): string {
+  //   const mapped = map.get("specifier");
+
+  //   if (mapped) {
+  //     console.log("hit");
+  //   }
+
+  //   return specifier;
+  // }
 
   const { t } = i18n;
   return (
@@ -117,36 +129,72 @@ interface TranslationAlternation {
   lang: string;
 }
 
-function isTranslationAlternation(
-  _: object,
-): _ is TranslationAlternation {
-  return true;
-}
+function createMap(
+  { posts }: AllPostsQuery,
+): Map<string, Mapping> {
+  const map: Map<string, Mapping> = new Map();
 
-function normalizeTranslation(
-  query: TranslationBySlugQuery,
-): NormalizedTranslation[] {
-  const result = query.allTranslationMetadata.edges?.flatMap((t) => {
-    return t?.node?.translations?.map((t) => {
-      switch (t?.value?.__typename) {
-        case "Post": {
-          const value = t.value;
-          return {
-            language: value.language,
-            slug: value.slug,
-          };
-        }
-      }
+  posts.forEach((post) => {
+    if (!post.id) throw new Error();
 
-      return {};
-    }).filter(isNormalizedTranslation) ?? [];
+    const slug = post.slug;
+    const language = post.language;
+
+    map.set(post.id, {
+      slug,
+      language,
+      type: "Post",
+    });
   });
 
-  return result ?? [];
+  return map;
 }
 
-function isNormalizedTranslation(
-  value: object,
-): value is NormalizedTranslation {
-  return value !== null && "slug" in value && "language" in value;
+interface Mapping {
+  slug: string;
+  language: string;
+  type: "Post";
 }
+
+// function isTranslationAlternation(
+//   _: object,
+// ): _ is TranslationAlternation {
+//   return true;
+// }
+
+// function normalizeTranslation(
+//   query: TranslationBySlugQuery,
+// ): NormalizedTranslation[] {
+//   const result = query.allTranslationMetadata.edges?.flatMap((t) => {
+//     return t?.node?.translations?.map((t) => {
+//       switch (t?.value?.__typename) {
+//         case "Post": {
+//           const value = t.value;
+//           return {
+//             language: value.language,
+//             slug: value.slug,
+//           };
+//         }
+//       }
+
+//       return {};
+//     }).filter(isNormalizedTranslation) ?? [];
+//   });
+
+//   return result ?? [];
+// }
+
+// function isNormalizedTranslation(
+//   value: object,
+// ): value is NormalizedTranslation {
+//   return value !== null && "slug" in value && "language" in value;
+// }
+
+// function toAbsolute(base: string, path: string): string {
+//   if (path.startsWith("/")) {
+//     return path;
+//   }
+
+//   const dir = dirname(join("/", base));
+//   return resolve(dir, path);
+// }

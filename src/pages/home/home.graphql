@@ -1,21 +1,13 @@
 query Blog($lang: String!) {
-  allBlog: blogConnection(filter: { language: { eq: $lang } }) {
-    edges {
-      node {
-        title
-        description
-        coverImage: cover_image
-      }
-    }
+  allBlog: blogs(where: { language: { eq: $lang } }) {
+    title
+    description
+    coverImage: coverImage
   }
 }
 
 query HomeByLang($lang: String!) {
-  home: homeConnection(filter: { language: { eq: $lang } }) {
-    edges {
-      node {
-        ...HomeMeta
-      }
-    }
+  home: homes(where: { language: { eq: $lang } }) {
+    ...HomeMeta
   }
 }

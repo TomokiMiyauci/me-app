@@ -1,11 +1,7 @@
 query PrivacyPolicy($lang: String!) {
-  allLegalDocument: legal_documentConnection(
-    filter: { type: { eq: "privacy_policy" }, language: { eq: $lang } }
+  allLegalDocument: legalDocuments(
+    where: { type: { eq: "privacy_policy" }, language: { eq: $lang } }
   ) {
-    edges {
-      node {
-        body
-      }
-    }
+    body
   }
 }

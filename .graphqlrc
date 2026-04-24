@@ -1,13 +1,5 @@
 {
-  "schema": [
-    {
-      "${CONTENT_ENDPOINT}": {
-        "headers": {
-          "X-API-KEY": "${CONTENT_AUTH_TOEKN}"
-        }
-      }
-    }
-  ],
+  "schema": "${CONTENT_ENDPOINT}",
   "documents": "src/**/*.graphql",
   "generates": {
     "src/graphql/types.ts": {
@@ -15,16 +7,10 @@
         "add": {
           "content": [
             "// deno-lint-ignore-file",
-            "// deno-fmt-ignore-file",
-            "import type { TinaMarkdownContent } from \"tinacms/dist/rich-text\";"
+            "// deno-fmt-ignore-file"
           ]
         }
-      }],
-      "config": {
-        "scalars": {
-          "JSON": "TinaMarkdownContent"
-        }
-      }
+      }]
     },
     "src": {
       "preset": "near-operation-file",
@@ -39,12 +25,7 @@
             "// deno-fmt-ignore-file"
           ]
         }
-      }],
-      "config": {
-        "scalars": {
-          "JSON": "Types.Scalars['JSON']['output']"
-        }
-      }
+      }]
     }
   },
   "importExtension": [".ts"],

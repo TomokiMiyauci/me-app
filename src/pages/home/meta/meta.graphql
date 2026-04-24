@@ -1,5 +1,5 @@
 fragment HomeMeta on Home {
   title
   description
-  coverImage: cover_image
+  coverImage: coverImage
 }

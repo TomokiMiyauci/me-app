@@ -1,6 +1,5 @@
 // deno-lint-ignore-file
 // deno-fmt-ignore-file
-import type { TinaMarkdownContent } from "tinacms/dist/rich-text";
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -15,865 +14,368 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  JSON: { input: TinaMarkdownContent; output: TinaMarkdownContent; }
-  Reference: { input: any; output: any; }
+  DateTime: { input: any; output: any; }
+  URL: { input: any; output: any; }
 };
 
-export type Author = Document & Node & {
+export type Author = Node & {
   __typename?: 'Author';
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-  cover_image?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  name: Scalars['String']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
-export type AuthorConnection = Connection & {
+/** A connection to a list of items. */
+export type AuthorConnection = {
   __typename?: 'AuthorConnection';
-  edges?: Maybe<Array<Maybe<AuthorConnectionEdges>>>;
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<AuthorEdge>>>;
+  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
 };
 
-export type AuthorConnectionEdges = {
-  __typename?: 'AuthorConnectionEdges';
+/** An edge in a connection. */
+export type AuthorEdge = {
+  __typename?: 'AuthorEdge';
+  /** A cursor for use in pagination */
   cursor: Scalars['String']['output'];
+  /** The item at the end of the edge */
   node?: Maybe<Author>;
 };
 
-export type AuthorFilter = {
-  cover_image?: InputMaybe<ImageFilter>;
-  name?: InputMaybe<StringFilter>;
+export type AuthorOrderByInput = {
+  name?: InputMaybe<SortOrder>;
 };
 
-export type AuthorMutation = {
-  cover_image?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
+export type AuthorWhereInput = {
+  AND?: InputMaybe<Array<AuthorWhereInput>>;
+  NOT?: InputMaybe<Array<AuthorWhereInput>>;
+  OR?: InputMaybe<Array<AuthorWhereInput>>;
+  name?: InputMaybe<StringWhereInput>;
 };
 
-export type Blog = Document & Node & {
+export type Blog = Node & {
   __typename?: 'Blog';
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-  cover_image?: Maybe<Scalars['String']['output']>;
+  coverImage?: Maybe<Scalars['URL']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
   language: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
-export type BlogConnection = Connection & {
+/** A connection to a list of items. */
+export type BlogConnection = {
   __typename?: 'BlogConnection';
-  edges?: Maybe<Array<Maybe<BlogConnectionEdges>>>;
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<BlogEdge>>>;
+  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
 };
 
-export type BlogConnectionEdges = {
-  __typename?: 'BlogConnectionEdges';
+/** An edge in a connection. */
+export type BlogEdge = {
+  __typename?: 'BlogEdge';
+  /** A cursor for use in pagination */
   cursor: Scalars['String']['output'];
+  /** The item at the end of the edge */
   node?: Maybe<Blog>;
 };
 
-export type BlogFilter = {
-  cover_image?: InputMaybe<ImageFilter>;
-  description?: InputMaybe<StringFilter>;
-  language?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
+export type BlogOrderByInput = {
+  description?: InputMaybe<SortOrder>;
+  language?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
-export type BlogMutation = {
-  cover_image?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
+export type BlogWhereInput = {
+  AND?: InputMaybe<Array<BlogWhereInput>>;
+  NOT?: InputMaybe<Array<BlogWhereInput>>;
+  OR?: InputMaybe<Array<BlogWhereInput>>;
+  description?: InputMaybe<StringWhereInput>;
+  language?: InputMaybe<StringWhereInput>;
+  title?: InputMaybe<StringWhereInput>;
 };
 
-export type Category = Document & Node & {
+export type Category = Node & {
   __typename?: 'Category';
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-  description?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  language: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  slug: Scalars['String']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
-export type CategoryConnection = Connection & {
-  __typename?: 'CategoryConnection';
-  edges?: Maybe<Array<Maybe<CategoryConnectionEdges>>>;
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-};
-
-export type CategoryConnectionEdges = {
-  __typename?: 'CategoryConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<Category>;
-};
-
-export type CategoryFilter = {
-  description?: InputMaybe<StringFilter>;
-  language?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-  slug?: InputMaybe<StringFilter>;
-};
-
-export type CategoryMutation = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Collection = {
-  __typename?: 'Collection';
-  documents: DocumentConnection;
-  fields?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
-  format?: Maybe<Scalars['String']['output']>;
-  label?: Maybe<Scalars['String']['output']>;
-  matches?: Maybe<Scalars['String']['output']>;
-  name: Scalars['String']['output'];
-  path: Scalars['String']['output'];
-  slug: Scalars['String']['output'];
-  templates?: Maybe<Array<Maybe<Scalars['JSON']['output']>>>;
-};
-
-
-export type CollectionDocumentsArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<DocumentFilter>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  folder?: InputMaybe<Scalars['String']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-};
-
-/** A relay-compliant pagination connection */
-export type Connection = {
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-};
-
-export type DatetimeFilter = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
+export type DatetimeWhereInput = {
   eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<Scalars['String']['input']>;
+  not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type Document = {
-  _sys?: Maybe<SystemInfo>;
-  _values: Scalars['JSON']['output'];
-  id: Scalars['ID']['output'];
-};
-
-export type DocumentConnection = Connection & {
-  __typename?: 'DocumentConnection';
-  edges?: Maybe<Array<Maybe<DocumentConnectionEdges>>>;
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-};
-
-export type DocumentConnectionEdges = {
-  __typename?: 'DocumentConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<DocumentNode>;
-};
-
-export type DocumentFilter = {
-  author?: InputMaybe<AuthorFilter>;
-  blog?: InputMaybe<BlogFilter>;
-  category?: InputMaybe<CategoryFilter>;
-  home?: InputMaybe<HomeFilter>;
-  legal_document?: InputMaybe<Legal_DocumentFilter>;
-  post?: InputMaybe<PostFilter>;
-  tag?: InputMaybe<TagFilter>;
-  translation_metadata?: InputMaybe<Translation_MetadataFilter>;
-};
-
-export type DocumentMutation = {
-  author?: InputMaybe<AuthorMutation>;
-  blog?: InputMaybe<BlogMutation>;
-  category?: InputMaybe<CategoryMutation>;
-  home?: InputMaybe<HomeMutation>;
-  legal_document?: InputMaybe<Legal_DocumentMutation>;
-  post?: InputMaybe<PostMutation>;
-  tag?: InputMaybe<TagMutation>;
-  translation_metadata?: InputMaybe<Translation_MetadataMutation>;
-};
-
-export type DocumentNode = Author | Blog | Category | Folder | Home | Legal_Document | Post | Tag | Translation_Metadata;
-
-export type DocumentUpdateMutation = {
-  author?: InputMaybe<AuthorMutation>;
-  blog?: InputMaybe<BlogMutation>;
-  category?: InputMaybe<CategoryMutation>;
-  home?: InputMaybe<HomeMutation>;
-  legal_document?: InputMaybe<Legal_DocumentMutation>;
-  post?: InputMaybe<PostMutation>;
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-  tag?: InputMaybe<TagMutation>;
-  translation_metadata?: InputMaybe<Translation_MetadataMutation>;
-};
-
-export type Folder = {
-  __typename?: 'Folder';
-  name: Scalars['String']['output'];
-  path: Scalars['String']['output'];
-};
-
-export type Home = Document & Node & {
+export type Home = Node & {
   __typename?: 'Home';
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-  cover_image?: Maybe<Scalars['String']['output']>;
+  coverImage?: Maybe<Scalars['URL']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
   language: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
 
-export type HomeConnection = Connection & {
+/** A connection to a list of items. */
+export type HomeConnection = {
   __typename?: 'HomeConnection';
-  edges?: Maybe<Array<Maybe<HomeConnectionEdges>>>;
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<HomeEdge>>>;
+  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
 };
 
-export type HomeConnectionEdges = {
-  __typename?: 'HomeConnectionEdges';
+/** An edge in a connection. */
+export type HomeEdge = {
+  __typename?: 'HomeEdge';
+  /** A cursor for use in pagination */
   cursor: Scalars['String']['output'];
+  /** The item at the end of the edge */
   node?: Maybe<Home>;
 };
 
-export type HomeFilter = {
-  cover_image?: InputMaybe<ImageFilter>;
-  description?: InputMaybe<StringFilter>;
-  language?: InputMaybe<StringFilter>;
-  title?: InputMaybe<StringFilter>;
+export type HomeOrderByInput = {
+  description?: InputMaybe<SortOrder>;
+  language?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
-export type HomeMutation = {
-  cover_image?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-  title?: InputMaybe<Scalars['String']['input']>;
+export type HomeWhereInput = {
+  AND?: InputMaybe<Array<HomeWhereInput>>;
+  NOT?: InputMaybe<Array<HomeWhereInput>>;
+  OR?: InputMaybe<Array<HomeWhereInput>>;
+  description?: InputMaybe<StringWhereInput>;
+  language?: InputMaybe<StringWhereInput>;
+  title?: InputMaybe<StringWhereInput>;
 };
 
-export type ImageFilter = {
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Legal_Document = Document & Node & {
-  __typename?: 'Legal_document';
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-  body?: Maybe<Scalars['JSON']['output']>;
-  effective_at?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
+export type LegalDocument = Node & {
+  __typename?: 'LegalDocument';
+  body?: Maybe<Scalars['String']['output']>;
+  effectiveAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
   language: Scalars['String']['output'];
   type: Scalars['String']['output'];
 };
 
-export type Legal_DocumentConnection = Connection & {
-  __typename?: 'Legal_documentConnection';
-  edges?: Maybe<Array<Maybe<Legal_DocumentConnectionEdges>>>;
+/** A connection to a list of items. */
+export type LegalDocumentConnection = {
+  __typename?: 'LegalDocumentConnection';
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<LegalDocumentEdge>>>;
+  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
 };
 
-export type Legal_DocumentConnectionEdges = {
-  __typename?: 'Legal_documentConnectionEdges';
+/** An edge in a connection. */
+export type LegalDocumentEdge = {
+  __typename?: 'LegalDocumentEdge';
+  /** A cursor for use in pagination */
   cursor: Scalars['String']['output'];
-  node?: Maybe<Legal_Document>;
+  /** The item at the end of the edge */
+  node?: Maybe<LegalDocument>;
 };
 
-export type Legal_DocumentFilter = {
-  body?: InputMaybe<RichTextFilter>;
-  effective_at?: InputMaybe<DatetimeFilter>;
-  language?: InputMaybe<StringFilter>;
-  type?: InputMaybe<StringFilter>;
+export type LegalDocumentOrderByInput = {
+  effective_at?: InputMaybe<SortOrder>;
+  language?: InputMaybe<SortOrder>;
+  type?: InputMaybe<SortOrder>;
 };
 
-export type Legal_DocumentMutation = {
-  body?: InputMaybe<Scalars['JSON']['input']>;
-  effective_at?: InputMaybe<Scalars['String']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-  type?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Mutation = {
-  __typename?: 'Mutation';
-  addPendingDocument: DocumentNode;
-  createAuthor: Author;
-  createBlog: Blog;
-  createCategory: Category;
-  createDocument: DocumentNode;
-  createFolder: DocumentNode;
-  createHome: Home;
-  createLegal_document: Legal_Document;
-  createPost: Post;
-  createTag: Tag;
-  createTranslation_metadata: Translation_Metadata;
-  deleteDocument: DocumentNode;
-  updateAuthor: Author;
-  updateBlog: Blog;
-  updateCategory: Category;
-  updateDocument: DocumentNode;
-  updateHome: Home;
-  updateLegal_document: Legal_Document;
-  updatePost: Post;
-  updateTag: Tag;
-  updateTranslation_metadata: Translation_Metadata;
-};
-
-
-export type MutationAddPendingDocumentArgs = {
-  collection: Scalars['String']['input'];
-  relativePath: Scalars['String']['input'];
-  template?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type MutationCreateAuthorArgs = {
-  params: AuthorMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationCreateBlogArgs = {
-  params: BlogMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationCreateCategoryArgs = {
-  params: CategoryMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationCreateDocumentArgs = {
-  collection?: InputMaybe<Scalars['String']['input']>;
-  params: DocumentMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationCreateFolderArgs = {
-  collection?: InputMaybe<Scalars['String']['input']>;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationCreateHomeArgs = {
-  params: HomeMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationCreateLegal_DocumentArgs = {
-  params: Legal_DocumentMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationCreatePostArgs = {
-  params: PostMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationCreateTagArgs = {
-  params: TagMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationCreateTranslation_MetadataArgs = {
-  params: Translation_MetadataMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationDeleteDocumentArgs = {
-  collection?: InputMaybe<Scalars['String']['input']>;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationUpdateAuthorArgs = {
-  params: AuthorMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationUpdateBlogArgs = {
-  params: BlogMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationUpdateCategoryArgs = {
-  params: CategoryMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationUpdateDocumentArgs = {
-  collection?: InputMaybe<Scalars['String']['input']>;
-  params: DocumentUpdateMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationUpdateHomeArgs = {
-  params: HomeMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationUpdateLegal_DocumentArgs = {
-  params: Legal_DocumentMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationUpdatePostArgs = {
-  params: PostMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationUpdateTagArgs = {
-  params: TagMutation;
-  relativePath: Scalars['String']['input'];
-};
-
-
-export type MutationUpdateTranslation_MetadataArgs = {
-  params: Translation_MetadataMutation;
-  relativePath: Scalars['String']['input'];
+export type LegalDocumentWhereInput = {
+  AND?: InputMaybe<Array<LegalDocumentWhereInput>>;
+  NOT?: InputMaybe<Array<LegalDocumentWhereInput>>;
+  OR?: InputMaybe<Array<LegalDocumentWhereInput>>;
+  effective_at?: InputMaybe<DatetimeWhereInput>;
+  language?: InputMaybe<StringWhereInput>;
+  type?: InputMaybe<StringWhereInput>;
 };
 
 export type Node = {
-  id: Scalars['ID']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
 };
 
+/** Information about pagination in a connection. */
 export type PageInfo = {
   __typename?: 'PageInfo';
-  endCursor: Scalars['String']['output'];
+  /** When paginating forwards, the cursor to continue. */
+  endCursor?: Maybe<Scalars['String']['output']>;
+  /** When paginating forwards, are there more items? */
   hasNextPage: Scalars['Boolean']['output'];
+  /** When paginating backwards, are there more items? */
   hasPreviousPage: Scalars['Boolean']['output'];
-  startCursor: Scalars['String']['output'];
+  /** When paginating backwards, the cursor to continue. */
+  startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-export type Post = Document & Node & {
+export type Post = Node & {
   __typename?: 'Post';
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-  authors?: Maybe<Array<Maybe<PostAuthors>>>;
-  body?: Maybe<Scalars['JSON']['output']>;
-  categories?: Maybe<Array<Maybe<PostCategories>>>;
-  cover_image?: Maybe<Scalars['String']['output']>;
+  authors?: Maybe<Array<Maybe<Author>>>;
+  body?: Maybe<Scalars['String']['output']>;
+  categories?: Maybe<Array<Maybe<Category>>>;
+  coverImage?: Maybe<Scalars['URL']['output']>;
   description?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
+  id?: Maybe<Scalars['ID']['output']>;
   language: Scalars['String']['output'];
-  modified_at?: Maybe<Scalars['String']['output']>;
-  published_at: Scalars['String']['output'];
+  modifiedAt?: Maybe<Scalars['DateTime']['output']>;
+  publishedAt?: Maybe<Scalars['DateTime']['output']>;
   slug: Scalars['String']['output'];
   tags?: Maybe<Array<Maybe<PostTags>>>;
   title: Scalars['String']['output'];
 };
 
-export type PostAuthors = {
-  __typename?: 'PostAuthors';
-  author?: Maybe<PostAuthorsAuthor>;
-};
-
-export type PostAuthorsAuthor = Author;
-
-export type PostAuthorsAuthorFilter = {
-  author?: InputMaybe<AuthorFilter>;
-};
-
-export type PostAuthorsFilter = {
-  author?: InputMaybe<PostAuthorsAuthorFilter>;
-};
-
-export type PostAuthorsMutation = {
-  author?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PostCategories = {
-  __typename?: 'PostCategories';
-  category?: Maybe<PostCategoriesCategory>;
-};
-
-export type PostCategoriesCategory = Category;
-
-export type PostCategoriesCategoryFilter = {
-  category?: InputMaybe<CategoryFilter>;
-};
-
-export type PostCategoriesFilter = {
-  category?: InputMaybe<PostCategoriesCategoryFilter>;
-};
-
-export type PostCategoriesMutation = {
-  category?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PostConnection = Connection & {
+/** A connection to a list of items. */
+export type PostConnection = {
   __typename?: 'PostConnection';
-  edges?: Maybe<Array<Maybe<PostConnectionEdges>>>;
+  /** A list of edges. */
+  edges?: Maybe<Array<Maybe<PostEdge>>>;
+  /** Information to aid in pagination. */
   pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
 };
 
-export type PostConnectionEdges = {
-  __typename?: 'PostConnectionEdges';
+/** An edge in a connection. */
+export type PostEdge = {
+  __typename?: 'PostEdge';
+  /** A cursor for use in pagination */
   cursor: Scalars['String']['output'];
+  /** The item at the end of the edge */
   node?: Maybe<Post>;
 };
 
-export type PostFilter = {
-  authors?: InputMaybe<PostAuthorsFilter>;
-  body?: InputMaybe<RichTextFilter>;
-  categories?: InputMaybe<PostCategoriesFilter>;
-  cover_image?: InputMaybe<ImageFilter>;
-  description?: InputMaybe<StringFilter>;
-  language?: InputMaybe<StringFilter>;
-  modified_at?: InputMaybe<DatetimeFilter>;
-  published_at?: InputMaybe<DatetimeFilter>;
-  slug?: InputMaybe<StringFilter>;
-  tags?: InputMaybe<PostTagsFilter>;
-  title?: InputMaybe<StringFilter>;
+export type PostOrderByInput = {
+  description?: InputMaybe<SortOrder>;
+  language?: InputMaybe<SortOrder>;
+  modified_at?: InputMaybe<SortOrder>;
+  published_at?: InputMaybe<SortOrder>;
+  slug?: InputMaybe<SortOrder>;
+  title?: InputMaybe<SortOrder>;
 };
 
-export type PostMutation = {
-  authors?: InputMaybe<Array<InputMaybe<PostAuthorsMutation>>>;
-  body?: InputMaybe<Scalars['JSON']['input']>;
-  categories?: InputMaybe<Array<InputMaybe<PostCategoriesMutation>>>;
-  cover_image?: InputMaybe<Scalars['String']['input']>;
-  description?: InputMaybe<Scalars['String']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-  modified_at?: InputMaybe<Scalars['String']['input']>;
-  published_at?: InputMaybe<Scalars['String']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-  tags?: InputMaybe<Array<InputMaybe<PostTagsMutation>>>;
-  title?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PostTags = {
+export type PostTags = Node & {
   __typename?: 'PostTags';
-  tag?: Maybe<PostTagsTag>;
+  id?: Maybe<Scalars['ID']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
 };
 
-export type PostTagsFilter = {
-  tag?: InputMaybe<PostTagsTagFilter>;
-};
-
-export type PostTagsMutation = {
-  tag?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type PostTagsTag = Tag;
-
-export type PostTagsTagFilter = {
-  tag?: InputMaybe<TagFilter>;
+export type PostWhereInput = {
+  AND?: InputMaybe<Array<PostWhereInput>>;
+  NOT?: InputMaybe<Array<PostWhereInput>>;
+  OR?: InputMaybe<Array<PostWhereInput>>;
+  description?: InputMaybe<StringWhereInput>;
+  language?: InputMaybe<StringWhereInput>;
+  modified_at?: InputMaybe<DatetimeWhereInput>;
+  published_at?: InputMaybe<DatetimeWhereInput>;
+  slug?: InputMaybe<StringWhereInput>;
+  title?: InputMaybe<StringWhereInput>;
 };
 
 export type Query = {
   __typename?: 'Query';
-  author: Author;
-  authorConnection: AuthorConnection;
-  blog: Blog;
-  blogConnection: BlogConnection;
-  category: Category;
-  categoryConnection: CategoryConnection;
-  collection: Collection;
-  collections: Array<Collection>;
-  document: DocumentNode;
-  getOptimizedQuery?: Maybe<Scalars['String']['output']>;
-  home: Home;
-  homeConnection: HomeConnection;
-  legal_document: Legal_Document;
-  legal_documentConnection: Legal_DocumentConnection;
-  node: Node;
-  post: Post;
-  postConnection: PostConnection;
-  tag: Tag;
-  tagConnection: TagConnection;
-  translation_metadata: Translation_Metadata;
-  translation_metadataConnection: Translation_MetadataConnection;
-};
-
-
-export type QueryAuthorArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
+  authorConnection?: Maybe<AuthorConnection>;
+  authors: Array<Author>;
+  blogConnection?: Maybe<BlogConnection>;
+  blogs: Array<Blog>;
+  homeConnection?: Maybe<HomeConnection>;
+  homes: Array<Home>;
+  legalDocumentConnection?: Maybe<LegalDocumentConnection>;
+  legalDocuments: Array<LegalDocument>;
+  postConnection?: Maybe<PostConnection>;
+  posts: Array<Post>;
 };
 
 
 export type QueryAuthorConnectionArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<AuthorFilter>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryBlogArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
+export type QueryAuthorsArgs = {
+  orderBy?: InputMaybe<AuthorOrderByInput>;
+  where?: InputMaybe<AuthorWhereInput>;
 };
 
 
 export type QueryBlogConnectionArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<BlogFilter>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryCategoryArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryCategoryConnectionArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<CategoryFilter>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryCollectionArgs = {
-  collection?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryDocumentArgs = {
-  collection?: InputMaybe<Scalars['String']['input']>;
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryGetOptimizedQueryArgs = {
-  queryString: Scalars['String']['input'];
-};
-
-
-export type QueryHomeArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
+export type QueryBlogsArgs = {
+  orderBy?: InputMaybe<BlogOrderByInput>;
+  where?: InputMaybe<BlogWhereInput>;
 };
 
 
 export type QueryHomeConnectionArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<HomeFilter>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryLegal_DocumentArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
+export type QueryHomesArgs = {
+  orderBy?: InputMaybe<HomeOrderByInput>;
+  where?: InputMaybe<HomeWhereInput>;
 };
 
 
-export type QueryLegal_DocumentConnectionArgs = {
+export type QueryLegalDocumentConnectionArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<Legal_DocumentFilter>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryNodeArgs = {
-  id?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryPostArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
+export type QueryLegalDocumentsArgs = {
+  orderBy?: InputMaybe<LegalDocumentOrderByInput>;
+  where?: InputMaybe<LegalDocumentWhereInput>;
 };
 
 
 export type QueryPostConnectionArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<PostFilter>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
-export type QueryTagArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
+export type QueryPostsArgs = {
+  orderBy?: InputMaybe<PostOrderByInput>;
+  where?: InputMaybe<PostWhereInput>;
 };
 
+export enum SortOrder {
+  Asc = 'ASC',
+  Desc = 'DESC'
+}
 
-export type QueryTagConnectionArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<TagFilter>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryTranslation_MetadataArgs = {
-  relativePath?: InputMaybe<Scalars['String']['input']>;
-};
-
-
-export type QueryTranslation_MetadataConnectionArgs = {
-  after?: InputMaybe<Scalars['String']['input']>;
-  before?: InputMaybe<Scalars['String']['input']>;
-  filter?: InputMaybe<Translation_MetadataFilter>;
-  first?: InputMaybe<Scalars['Float']['input']>;
-  last?: InputMaybe<Scalars['Float']['input']>;
-  sort?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type RichTextFilter = {
+export type StringWhereInput = {
+  contains?: InputMaybe<Scalars['String']['input']>;
+  ends_with?: InputMaybe<Scalars['String']['input']>;
   eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type StringFilter = {
-  eq?: InputMaybe<Scalars['String']['input']>;
-  exists?: InputMaybe<Scalars['Boolean']['input']>;
+  gt?: InputMaybe<Scalars['String']['input']>;
+  gte?: InputMaybe<Scalars['String']['input']>;
   in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  startsWith?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type SystemInfo = {
-  __typename?: 'SystemInfo';
-  basename: Scalars['String']['output'];
-  breadcrumbs: Array<Scalars['String']['output']>;
-  collection: Collection;
-  extension: Scalars['String']['output'];
-  filename: Scalars['String']['output'];
-  hasReferences?: Maybe<Scalars['Boolean']['output']>;
-  path: Scalars['String']['output'];
-  relativePath: Scalars['String']['output'];
-  template: Scalars['String']['output'];
-  title?: Maybe<Scalars['String']['output']>;
-};
-
-
-export type SystemInfoBreadcrumbsArgs = {
-  excludeExtension?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-export type Tag = Document & Node & {
-  __typename?: 'Tag';
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-  description?: Maybe<Scalars['String']['output']>;
-  id: Scalars['ID']['output'];
-  language: Scalars['String']['output'];
-  name: Scalars['String']['output'];
-  slug: Scalars['String']['output'];
-};
-
-export type TagConnection = Connection & {
-  __typename?: 'TagConnection';
-  edges?: Maybe<Array<Maybe<TagConnectionEdges>>>;
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-};
-
-export type TagConnectionEdges = {
-  __typename?: 'TagConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<Tag>;
-};
-
-export type TagFilter = {
-  description?: InputMaybe<StringFilter>;
-  language?: InputMaybe<StringFilter>;
-  name?: InputMaybe<StringFilter>;
-  slug?: InputMaybe<StringFilter>;
-};
-
-export type TagMutation = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  language?: InputMaybe<Scalars['String']['input']>;
-  name?: InputMaybe<Scalars['String']['input']>;
-  slug?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Translation_Metadata = Document & Node & {
-  __typename?: 'Translation_metadata';
-  _sys: SystemInfo;
-  _values: Scalars['JSON']['output'];
-  id: Scalars['ID']['output'];
-  translations?: Maybe<Array<Maybe<Translation_MetadataTranslations>>>;
-};
-
-export type Translation_MetadataConnection = Connection & {
-  __typename?: 'Translation_metadataConnection';
-  edges?: Maybe<Array<Maybe<Translation_MetadataConnectionEdges>>>;
-  pageInfo: PageInfo;
-  totalCount: Scalars['Float']['output'];
-};
-
-export type Translation_MetadataConnectionEdges = {
-  __typename?: 'Translation_metadataConnectionEdges';
-  cursor: Scalars['String']['output'];
-  node?: Maybe<Translation_Metadata>;
-};
-
-export type Translation_MetadataFilter = {
-  translations?: InputMaybe<Translation_MetadataTranslationsFilter>;
-};
-
-export type Translation_MetadataMutation = {
-  translations?: InputMaybe<Array<InputMaybe<Translation_MetadataTranslationsMutation>>>;
-};
-
-export type Translation_MetadataTranslations = {
-  __typename?: 'Translation_metadataTranslations';
-  key?: Maybe<Scalars['String']['output']>;
-  value?: Maybe<Translation_MetadataTranslationsValue>;
-};
-
-export type Translation_MetadataTranslationsFilter = {
-  key?: InputMaybe<StringFilter>;
-  value?: InputMaybe<Translation_MetadataTranslationsValueFilter>;
-};
-
-export type Translation_MetadataTranslationsMutation = {
-  key?: InputMaybe<Scalars['String']['input']>;
-  value?: InputMaybe<Scalars['String']['input']>;
-};
-
-export type Translation_MetadataTranslationsValue = Post;
-
-export type Translation_MetadataTranslationsValueFilter = {
-  post?: InputMaybe<PostFilter>;
+  lt?: InputMaybe<Scalars['String']['input']>;
+  lte?: InputMaybe<Scalars['String']['input']>;
+  not?: InputMaybe<Scalars['String']['input']>;
+  not_contains?: InputMaybe<Scalars['String']['input']>;
+  not_ends_with?: InputMaybe<Scalars['String']['input']>;
+  not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  not_starts_with?: InputMaybe<Scalars['String']['input']>;
+  starts_with?: InputMaybe<Scalars['String']['input']>;
 };
