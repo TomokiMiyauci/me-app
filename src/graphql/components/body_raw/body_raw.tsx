@@ -33,8 +33,8 @@ import remarkGfm from "remark-gfm";
 //   };
 // }
 
-interface ResolvePath {
-  (path: string): string | undefined;
+interface Resolve {
+  (specifier: string): string | undefined;
 }
 
 export interface BodyRawProps {
@@ -43,11 +43,8 @@ export interface BodyRawProps {
 }
 
 export default function BodyRaw(props: BodyRawProps): JSX.Element {
-  // const a = createAComponent(props.resolveURL);
-
   return (
     <Markdown
-      components={{}}
       remarkPlugins={[remarkGfm]}
     >
       {props.fragment}

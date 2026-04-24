@@ -18,8 +18,9 @@ export type Scalars = {
   URL: { input: any; output: any; }
 };
 
-export type Author = {
+export type Author = Node & {
   __typename?: 'Author';
+  id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
 
@@ -52,10 +53,11 @@ export type AuthorWhereInput = {
   name?: InputMaybe<StringWhereInput>;
 };
 
-export type Blog = {
+export type Blog = Node & {
   __typename?: 'Blog';
   coverImage?: Maybe<Scalars['URL']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
   language: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
@@ -93,8 +95,9 @@ export type BlogWhereInput = {
   title?: InputMaybe<StringWhereInput>;
 };
 
-export type Category = {
+export type Category = Node & {
   __typename?: 'Category';
+  id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
 
@@ -109,10 +112,11 @@ export type DatetimeWhereInput = {
   not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
-export type Home = {
+export type Home = Node & {
   __typename?: 'Home';
   coverImage?: Maybe<Scalars['URL']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
   language: Scalars['String']['output'];
   title: Scalars['String']['output'];
 };
@@ -150,10 +154,11 @@ export type HomeWhereInput = {
   title?: InputMaybe<StringWhereInput>;
 };
 
-export type LegalDocument = {
+export type LegalDocument = Node & {
   __typename?: 'LegalDocument';
   body?: Maybe<Scalars['String']['output']>;
   effectiveAt?: Maybe<Scalars['DateTime']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
   language: Scalars['String']['output'];
   type: Scalars['String']['output'];
 };
@@ -191,6 +196,10 @@ export type LegalDocumentWhereInput = {
   type?: InputMaybe<StringWhereInput>;
 };
 
+export type Node = {
+  id?: Maybe<Scalars['ID']['output']>;
+};
+
 /** Information about pagination in a connection. */
 export type PageInfo = {
   __typename?: 'PageInfo';
@@ -204,13 +213,14 @@ export type PageInfo = {
   startCursor?: Maybe<Scalars['String']['output']>;
 };
 
-export type Post = {
+export type Post = Node & {
   __typename?: 'Post';
   authors?: Maybe<Array<Maybe<Author>>>;
   body?: Maybe<Scalars['String']['output']>;
   categories?: Maybe<Array<Maybe<Category>>>;
   coverImage?: Maybe<Scalars['URL']['output']>;
   description?: Maybe<Scalars['String']['output']>;
+  id?: Maybe<Scalars['ID']['output']>;
   language: Scalars['String']['output'];
   modifiedAt?: Maybe<Scalars['DateTime']['output']>;
   publishedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -246,8 +256,9 @@ export type PostOrderByInput = {
   title?: InputMaybe<SortOrder>;
 };
 
-export type PostTags = {
+export type PostTags = Node & {
   __typename?: 'PostTags';
+  id?: Maybe<Scalars['ID']['output']>;
   name?: Maybe<Scalars['String']['output']>;
 };
 

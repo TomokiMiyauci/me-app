@@ -1,11 +1,9 @@
 import type { JSX } from "react";
 import resolver from "@/lib/link.ts";
 import {
-  // AllPostsDocument,
-  // type AllPostsQuery,
+  AllPostsDocument,
+  type AllPostsQuery,
   PostBySlugDocument,
-  // TranslationBySlugDocument,
-  // type TranslationBySlugQuery,
 } from "./post.graphql.ts";
 import { notFound } from "react-app";
 import type { AppProps } from "@/lib/app.tsx";
@@ -15,7 +13,6 @@ import Layout from "@/pages/layout.tsx";
 import PostMeta from "./meta/meta.tsx";
 import { apolloClient, cloudinary } from "~lib";
 import BodyRaw from "@/graphql/components/body_raw/body_raw.tsx";
-// import { dirname, join, resolve } from "@std/path";
 
 export default async function Post(
   props: AppProps,
@@ -28,17 +25,17 @@ export default async function Post(
   }
 
   const decodedSlug = decodeURIComponent(slug);
-  const [result] = await Promise.all([
+  const [result, allDocuments] = await Promise.all([
     apolloClient.query({
       query: PostBySlugDocument,
       variables: { slug: decodedSlug, lang },
     }),
-    // apolloClient.query({ query: AllPostsDocument }),
+    apolloClient.query({ query: AllPostsDocument }),
   ]);
 
-  // if (!allDocuments.data) throw new Error("Failed to fetch post data");
+  if (!allDocuments.data) throw new Error("Failed to fetch post data");
 
-  // const map = createMap({ posts: allDocuments.data });
+  // const map = createMap(allDocuments.data);
 
   if (!result.data) throw new Error("Failed to fetch post data");
 
@@ -61,33 +58,15 @@ export default async function Post(
   // const normalized = normalizeTranslation(translationsQuery.data);
 
   const alternatives: [] = [];
-  // const basePath = postPage._sys.path;
 
-  // function toVirtualURL(path: string): URL {
-  //   const absolutePath = toAbsolute(basePath, path);
-  //   return new URL(`virtual:${absolutePath}`);
-  // }
+  // function resolve(specifier: string): string {
+  //   const mapped = map.get("specifier");
 
-  // function resolveURL(urlLike: string): string | undefined {
-  //   return urlLike;
-  //   // const url = URL.canParse(urlLike)
-  //   //   ? new URL(urlLike)
-  //   //   : toVirtualURL(urlLike);
+  //   if (mapped) {
+  //     console.log("hit");
+  //   }
 
-  //   // if (url.protocol === "virtual:") {
-  //   //   const mappted = map[url.toString()];
-
-  //   //   if (mappted) {
-  //   //     return resolver.resolve(Entry.Post, {
-  //   //       lang: mappted.language,
-  //   //       slug: mappted.slug,
-  //   //     }) ?? undefined;
-  //   //   }
-
-  //   //   return;
-  //   // }
-
-  //   // return url.toString();
+  //   return specifier;
   // }
 
   const { t } = i18n;
@@ -150,31 +129,26 @@ interface TranslationAlternation {
   lang: string;
 }
 
-// function createMap(
-//   { posts }: { posts: AllPostsQuery },
-// ): Record<string, Mapping> {
-//   const map: Record<string, Mapping> = {};
+function createMap(
+  { posts }: AllPostsQuery,
+): Map<string, Mapping> {
+  const map: Map<string, Mapping> = new Map();
 
-//   posts.postConnection.edges?.forEach((edge) => {
-//     const node = edge?.node;
-//     if (!node) return;
+  posts.forEach((post) => {
+    if (!post.id) throw new Error();
 
-//     const slug = node.slug;
-//     const language = node.language;
+    const slug = post.slug;
+    const language = post.language;
 
-//     if (!slug || !language) return;
+    map.set(post.id, {
+      slug,
+      language,
+      type: "Post",
+    });
+  });
 
-//     const id = new URL(`virtual:${join("/", node._sys.path)}`);
-
-//     map[id.toString()] = {
-//       slug,
-//       language,
-//       type: "Post",
-//     };
-//   });
-
-//   return map;
-// }
+  return map;
+}
 
 interface Mapping {
   slug: string;
